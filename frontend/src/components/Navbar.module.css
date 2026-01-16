@@ -1,10 +1,12 @@
 .navbar{
+    margin-top: 0.7%;
+    margin-bottom: 2%;
     position: sticky;
     top: 0;
     z-index: 1000;
     background-color: var(--background-color);
     color: var(--primary-text-color);
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    box-shadow: rgba(0, 0, 0, 0.14) 0px 4px 12px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -61,6 +63,17 @@
     display: flex;
 }
 
+/* Hide mobile elements on desktop */
+@media (min-width: 769px) {
+    .mobileCart {
+        display: none !important;
+    }
+    
+    .mobileMenuButton {
+        display: none !important;
+    }
+}
+
 /* Mobile Menu Button */
 .mobileMenuButton {
     display: none;
@@ -76,6 +89,33 @@
 .mobileMenuButton:hover {
     background-color: #eee;
     border-radius: 4px;
+}
+
+/* Mobile Cart Icon */
+.mobileCart {
+    display: none;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    text-decoration: none;
+    color: inherit;
+}
+
+.cartBadge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #ff4444;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: bold;
 }
 
 /* Mobile Dropdown Menu */
@@ -122,15 +162,33 @@
 
 /* Mobile Styles */
 @media (max-width: 768px) {
-    .navbar{
-    flex-direction: row-reverse;
+    .navbar {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
     }
-    .navbar .desktopMenuItem {
+
+    .navbar .desktopMenu {
         display: none !important;
     }
 
     .mobileMenuButton {
         display: flex;
+        order: 1;
+    }
+
+    .siteTitle {
+        order: 2;
+        margin: 0 auto;
+        flex: 1;
+        display: flex;
+        justify-content: center;
+    }
+
+    .mobileCart {
+        display: flex;
+        order: 3;
     }
 
     .mobileMenuOverlay {
@@ -138,13 +196,6 @@
     }
 
     .mobileMenu {
-        order: 2;
         display: block;
-    }
-    .siteTitle{
-    order: 1;
-    }
-    .cartIcon{
-    order: 3;
     }
 }

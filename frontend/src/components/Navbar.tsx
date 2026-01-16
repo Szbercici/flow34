@@ -35,8 +35,8 @@ const Navbar = () => {
           <CustomLink to="/login">Login</CustomLink>
         </li>
          <li className={styles.cartItem}>
-          <CustomLink to="/cart">
-            <ShoppingCartIcon size={35} color="black" />
+          <CustomLink to="/cart" className={styles.cartItem}>
+            <ShoppingCartIcon  size={35} color="black" />
             <div>{items.length}</div>
           </CustomLink>
         </li>
@@ -46,6 +46,12 @@ const Navbar = () => {
       <button className={styles.mobileMenuButton} onClick={toggleMenu} aria-label="Menu">
         {isMenuOpen ? <X size={32} /> : <Menu size={32} />}
       </button>
+
+      {/* Mobile Cart Icon */}
+      <Link to="/cart" className={styles.mobileCart} onClick={closeMenu}>
+        <ShoppingCartIcon size={35} color="black" />
+        <div className={styles.cartBadge}>{items.length}</div>
+      </Link>
 
       {/* Mobile Dropdown Menu */}
       {isMenuOpen && (

@@ -11,11 +11,6 @@
 }
 
 
-
-body {
-  margin: 0;
-}
-
 .container {
   width: 100%-8rem; 
   margin-right: auto; 
@@ -54,4 +49,20 @@ body {
 * {
   scrollbar-width: auto;
   scrollbar-color: #989898 #8282821d; /* csúszka színe | út színe */
+}
+input::placeholder, button {
+    user-select: none;
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* IE/Edge */
+    
+    /* Opcionális: megakadályozza a kék kijelölési keretet is mobilon */
+    -webkit-tap-highlight-color: transparent; 
+}
+
+
+@media (max-width: 768px) {
+  body {
+    overflow-y: hidden;
+  }
 }

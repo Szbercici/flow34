@@ -73,3 +73,8 @@ font-family: "Outfit", sans-serif;
  }
                 
 }
+@media (max-width: 768px) {
+  .register-container {
+    box-shadow: none;
+  }
+}
