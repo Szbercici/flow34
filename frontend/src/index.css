@@ -1,0 +1,57 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --primary-text-color: #212529; /* Sötét szöveg */
+  --secondary-text-color: #6c757d; /* Szürke szöveg */
+  --background-color: #ffffff; /* Fehér háttér */
+  --card-background-color: #f8f9fa; /* Világos szürke kártya háttér */
+  --border-color: #212529; /* Világos szürke szegély */
+  
+  /* További színek... */
+  --accent-color: #0d6efd; /* Kék (pl. linkekhez) */
+}
+
+
+
+body {
+  margin: 0;
+}
+
+.container {
+  width: 100%-8rem; 
+  margin-right: auto; 
+  margin-left: auto; 
+  padding-right: 4rem; 
+  padding-left: 4rem; 
+}
+
+/* --- WebKit alapú böngészők (Chrome, Edge, Safari, Opera) --- */
+
+/* A görgetősáv szélessége */
+::-webkit-scrollbar {
+  width: 20vw; /* Függőleges sáv szélessége */
+  height: 20vw; /* Vízszintes sáv magassága */
+}
+
+/* A görgetősáv "útja" (a háttér) */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+  border-radius: 5px;
+}
+
+/* A görgetősáv "csúszkája" (amit húzol) */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 50px;
+}
+
+/* Amikor ráviszed az egeret a csúszkára */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+/* --- Firefox (Szabványosabb megoldás) --- */
+/* A Firefox más szintaxist használ, jelenleg kevesebb testreszabhatósággal */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #989898 #8282821d; /* csúszka színe | út színe */
+}
