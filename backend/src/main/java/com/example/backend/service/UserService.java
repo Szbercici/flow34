@@ -43,15 +43,6 @@ public class UserService {
         userRepository.save(user);
     }
 
-    // LOGIN  RÉÉGI
-    /*
-    public boolean login(String username, String password) {
-        User user = userRepository.findByUsername(username);
-        if (user == null) return false;
-
-        return user.getPassword().equals(password); // később bcrypt!
-    }
-    */
 
     // MINDEN USER LISTÁZÁSA
     public List<User> getAll() {

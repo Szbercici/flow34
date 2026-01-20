@@ -1,0 +1,130 @@
+!!!!!! FELHASZNÁLÓ KEZELÉS: !!!!!!!!
+
+Felhasználó regisztrálása:
+
+ENDPOINT - POST -> /api/auth/register
+JSON:	{
+
+	"username": "string",
+	"email": "string,
+	"password": "string"
+
+	}
+
+-----------------------------------------
+
+Felhasználó bejelentkezése:
+
+ENDPOINT - POST -> api/auth/login
+JSON:	{
+
+  	"username": "string",
+ 	"password": "string"
+
+	}
+
+Működés:
+-Bejelentkezés után cookie-ba kerül:
+	access_token (rövid élettartam), refresh_token (hosszabb élettartam, kb. 14 nap)
+
+----------------------------------------
+
+Új ACCES token lekérése REFRESH tokentől:
+
+ENDPOINT - POST -> api/auth/refresh
+
+Feltétel: érvényes refresh token
+
+----------------------------------------
+
+Felhasználó logout:
+
+ENDPOINT - POST -> api/auth/logout
+
+Feltétel:
+Érvényes Acces token
+
+----------------------------------------
+
+!!!!!!!! FELHASZNÁLÓ ADATOK LEKÉRÉSE: !!!!!!!!
+
+Bejelentkezett felhasználók lekérése:
+ENDPOINT - GET ->  api/users/me
+
+JSON:	{
+
+ 	"id": number,
+  	"username": "string",
+  	"email": "string"
+
+	}
+Ha nincs tokenje, akkor 404 válasz.(magyarán nincs bejelentkezve)
+
+--------------------------------------
+
+Felhasználó lekérése username alapján: 
+
+ENDPOINT - GET -> api/users/{username}
+
+JSON: 	{
+
+  	"id": number,
+  	"username": "string",
+  	"email": "string"
+
+	}
+
+-------------------------------------
+
+Összes felhasználó lekérése (jelenleg publikus / vagy belső használat):
+
+ENDPOINT - GET -> api/users/all
+
+Válasz: UserDto lista (jelszavak kivételével!).
+
+-------------------------------------
+
+!!!!!!!! TERMÉKEK: !!!!!!!!
+
+Összes termék lekérése: 
+
+ENDPOINT - GET -> api/products
+
+JSON VÁLASZ: 
+[
+  {
+    "id": number,
+    "title": "string",
+    "price": number,
+    "description": "string",
+    "category": "string",
+    "image": "string",
+    "rating": { "rate": number, "count": number }
+  }
+]
+
+Megjegyzés:
+-Ameddig nincs kész a DB, addig in memory-ban / statikusan van eltárolva minden.(Koppány már igazán meegcsinálhatná)
+
+------------------------------------
+
+AUTH FONTOS MEGJEGYZÉSEK:
+- NEM KELL HEADER AUTH
+-Nem kell token localStorage-ben
+-Minden auth cookie alapú
+-Fetch hívásoknál:
+	js:
+	- fetch(url, {credentials: "include"});
+
+------------------------------------
+
+HTTP VÁLASZOK:
+
+200 -> Sikeres
+201 -> Létrehozva
+400 -> Hibás input
+401 -> Hibás login
+403 -> Nincs jogosultság/token
+
+
+
