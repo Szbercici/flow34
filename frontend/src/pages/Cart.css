@@ -1,0 +1,9 @@
+.cart-item {
+  gap : 20px;
+  display: flex;       /* Két oszlop egymás mellett */
+  padding: 20px;
+}
+.cart-item-image {
+  max-width: 10vw;    /* A kép ne legyen nagyobb, mint a konténer */
+  height: auto;       /* Arányosan méretezze a magasságot */
+}
