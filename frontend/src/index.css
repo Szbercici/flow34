@@ -10,6 +10,11 @@
   --accent-color: #0d6efd; /* Kék (pl. linkekhez) */
 }
 
+body {
+  overflow-x: hidden;
+  margin: 0;
+}
+
 
 .container {
   width: 100%-8rem; 
@@ -63,6 +68,6 @@ input::placeholder, button {
 
 @media (max-width: 768px) {
   body {
-    overflow-y: hidden;
+    overflow-x: hidden;
   }
 }

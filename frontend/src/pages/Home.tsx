@@ -11,7 +11,7 @@ return (
     
     <div className="container">
 
-      <Video_default />
+      <Video_default/>
        <h1>Taste the freshness</h1>
     </div>
 

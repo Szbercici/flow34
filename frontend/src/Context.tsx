@@ -28,7 +28,7 @@ export const ContextProvider = ({ children }: ProviderProps) => {
   const [items, setItems] = useState<CartItem[]>(() => {
     try {
       // Megpróbáljuk kiolvasni a "cart" nevű kulcsot
-      const savedCart = sessionStorage.getItem("cart");
+      const savedCart = localStorage.getItem("cart");
       
       // Ha van adat, visszaalakítjuk (JSON.parse) és azt használjuk
       return savedCart ? JSON.parse(savedCart) : [];
@@ -38,7 +38,7 @@ export const ContextProvider = ({ children }: ProviderProps) => {
     }
   });
   useEffect(() => {
-    sessionStorage.setItem("cart", JSON.stringify(items));
+    localStorage.setItem("cart", JSON.stringify(items));
   }, [items]);
 
   // 2. <--- ITT A FÜGGVÉNY IMPLEMENTÁCIÓJA
