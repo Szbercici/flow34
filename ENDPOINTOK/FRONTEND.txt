@@ -106,6 +106,10 @@ JSON VÁLASZ:
 Megjegyzés:
 -Ameddig nincs kész a DB, addig in memory-ban / statikusan van eltárolva minden.(Koppány már igazán meegcsinálhatná)
 
+PRODUCT KÉP LEKÉRÉSE:
+
+ENDPOINT - GET -> images/img.png
+
 ------------------------------------
 
 AUTH FONTOS MEGJEGYZÉSEK:

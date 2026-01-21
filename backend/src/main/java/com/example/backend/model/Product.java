@@ -2,7 +2,7 @@ package com.example.backend.model;
 
 public class Product {
     private Long id;
-    private String title;
+    private String name;
     private double price;
     private String description;
     private String category;
@@ -12,10 +12,10 @@ public class Product {
     public Product() {
     }
 
-    public Product(Long id, String title, double price, String description,
+    public Product(Long id, String name, double price, String description,
                    String category, String image, Rating rating) {
         this.id = id;
-        this.title = title;
+        this.name = name;
         this.price = price;
         this.description = description;
         this.category = category;
@@ -26,8 +26,8 @@ public class Product {
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
-    public String getTitle() { return title; }
-    public void setTitle(String title) { this.title = title; }
+    public String getTitle() { return name; }
+    public void setTitle(String title) { this.name = title; }
 
     public double getPrice() { return price; }
     public void setPrice(double price) { this.price = price; }

@@ -17,20 +17,52 @@ public class ProductService {
     public ProductService() {
         // Kezdő mock adatok (FakeStore jelleg)
         seed(new Product(null,
-                "Fjallraven - Foldsack No. 1 Backpack",
-                109.95,
-                "Your perfect pack for everyday use and walks in the forest.",
-                "men's clothing",
-                "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-                new Rating(3.9, 120)));
+                "Flow Watermelon",
+                12.99,
+                "Refreshing watermelon flavored hydration cubes with vitamins and zero sugar",
+                "Microdrink",
+                "uploads/images/melon.png",
+                new Rating(0, 0)));
 
         seed(new Product(null,
-                "Mens Casual Premium Slim Fit T-Shirts",
-                22.3,
-                "Slim-fitting style, contrast raglan long sleeve.",
-                "men's clothing",
-                "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879_.jpg",
-                new Rating(4.1, 259)));
+                "Flow Energy",
+                14.99,
+                "Classic energy drink flavor boosted with caffeine for focus and power.",
+                "Energy",
+                "uploads/images/energy.png",
+                new Rating(0, 0)));
+
+        seed(new Product(null,
+                "Flow Forest Fruit",
+                12.99,
+                "A berry mix sensation. Tasty hydration with natural forest fruit flavors.",
+                "Microdrink",
+                "uploads/images/erdei.png",
+                new Rating(0, 0)));
+
+        seed(new Product(null,
+                "Flow Lemon",
+                12.99,
+                "Zesty and fresh lemon flavor. Simple hydration rich in vitamins.",
+                "Microdrink",
+                "uploads/images/lemon.png",
+                new Rating(0, 0)));
+
+        seed(new Product(null,
+                "Flow Green Electrolyte (Limited)",
+                16.99,
+                "Limited edition green formula packed with essential electrolytes for active hydration.",
+                "Electrolytes",
+                "uploads/images/zold.png",
+                new Rating(0, 0)));
+
+        seed(new Product(null,
+                "Flow Cola",
+                12.99,
+                "The classic cola taste, reimagined as refreshing hydration cubes with zero sugar and essential vitamins.",
+                "Microdrink",
+                "uploads/images/cola.png",
+                new Rating(0, 0)));
     }
 
     private void seed(Product p) {
