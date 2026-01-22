@@ -18,6 +18,7 @@ font-family: "Outfit", sans-serif;
   border-radius: 5%;
   gap: 5vh;
   margin-top: 7%;
+   margin-bottom: 10%;
 }
 
 .login-container form {
