@@ -48,21 +48,32 @@ const About = () => {
             </div>
           </div>
         </div>
-         <div className={styles.textContent}>
-          <h2>We think that people don't know enough about healthy way of life, and hydration.  Our mission is to change that.</h2>
-         </div>
-      </div>
-      <Wave_end id={styles.wave_end} width="100%" height="100%" />  
-
-      <div className={styles.missionSection}>
         <div className={styles.textContent}>
-          <p className={styles.missionText}>
-            We created Flow for the conscious achievers: the gym-goers, the mountain-climbers, and the office-hustlers who refuse to compromise on their health or the planet's future. <br /> <br />By combining natural fruit extracts with sustainable, microplastic-free solutions, we're here to help you stay fueled, focused, and in the zone. <span style={{ fontWeight: 'bolder', color: '#cc3300' }}>No sugar, no plastic waste—just pure, active energy.</span>
-          </p>
+          <h2>
+            We think that people don't know enough about healthy way of life,
+            and hydration. Our mission is to change that.
+          </h2>
         </div>
       </div>
-
-      
+      <Wave_end id={styles.wave_end} width="100%" height="100%" />
+      <div className={styles.missionSection}>
+         
+        <div className={styles.textContent}>
+          <p className={styles.missionText}>
+            We created Flow for the conscious achievers: the gym-goers, the
+            mountain-climbers, and the office-hustlers who refuse to compromise
+            on their health or the planet's future. <br /> <br />
+            By combining natural fruit extracts with sustainable,
+            microplastic-free solutions, we're here to help you stay fueled,
+            focused, and in the zone.{" "}
+            <span style={{ fontWeight: "bolder", color: "#cc3300" }}>
+              No sugar, no plastic waste—just pure, active energy.
+            </span>
+          </p>
+        </div>
+          <Blob id={styles.blob3} width={200} height={200} />
+          <Blob id={styles.blob4} width={200} height={200} />
+      </div>
     </>
   );
 };
