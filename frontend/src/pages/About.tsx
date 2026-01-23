@@ -57,7 +57,6 @@ const About = () => {
       </div>
       <Wave_end id={styles.wave_end} width="100%" height="100%" />
       <div className={styles.missionSection}>
-         
         <div className={styles.textContent}>
           <p className={styles.missionText}>
             We created Flow for the conscious achievers: the gym-goers, the
@@ -71,8 +70,8 @@ const About = () => {
             </span>
           </p>
         </div>
-          <Blob id={styles.blob3} width={200} height={200} />
-          <Blob id={styles.blob4} width={200} height={200} />
+        <Blob id={styles.blob3} width={200} height={200} />
+        <Blob id={styles.blob4} width={200} height={200} />
       </div>
     </>
   );
