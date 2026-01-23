@@ -21,12 +21,12 @@ const Blob: React.FC<BlobProps> = ({ className, style, ...props }) => {
           <stop
             id="stop1"
             stopColor="rgba(55, 246.366, 248, 1)"
-            offset="0%"
+            offset="-1%"
           />
           <stop
             id="stop2"
             stopColor="rgba(31, 160.94, 251, 1)"
-            offset="100%"
+            offset="101%"
           />
         </linearGradient>
       </defs>

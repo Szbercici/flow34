@@ -1,6 +1,7 @@
 import React from 'react'
 import "./Product_show.css"; 
 import { Link } from 'react-router-dom';
+import { API_PRODUCTS_URL } from '../config/api';
 
 const Product_show = ({ product }) => {
 
@@ -8,7 +9,7 @@ const Product_show = ({ product }) => {
     <Link className="product-card" to={`/product/${product.name}`}> 
         <img 
             className="product-image" 
-            src={product.img} 
+            src={`${API_PRODUCTS_URL}/uploads/${product.img}`}
             alt={product.name} 
             
         />

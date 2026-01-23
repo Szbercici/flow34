@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { products } from '../components/Products_loader';
 import "./Product_page.css"; 
 import  {useCart}  from '../Context';
+import { API_PRODUCTS_URL } from "../config/api";
 
 const Product_page = () => {
     const name = useParams().Product_name;
@@ -20,7 +21,7 @@ const Product_page = () => {
                (Mert a styles.left-column kivonást jelentene JS-ben)
             */}
             <div className="left-column">
-                <img src={`/${currentProduct?.img}`} alt={currentProduct?.name} />
+                <img src={`${API_PRODUCTS_URL}/uploads/${currentProduct?.img}`} alt={currentProduct?.name} />
             </div>
 
             <div className="right-column">

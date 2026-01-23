@@ -1,11 +1,12 @@
 import React from "react";
-import  {products} from "../components/Products_loader";
 import Product_show from "../components/Product_show";
 import Scroll_container from "../components/Scroll_container"; 
 import Video_default from "../assets/Video_default";
+import { Products } from "../components/Product_loader_api";
 
 
 const Home = () => {
+  const { products} = Products();
 return (
   <>
     
