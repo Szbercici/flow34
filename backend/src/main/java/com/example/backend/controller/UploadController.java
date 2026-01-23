@@ -118,6 +118,4 @@ public class UploadController {
         return ResponseEntity.ok(images);
     }
 
-
-
 }

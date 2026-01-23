@@ -24,7 +24,9 @@ public class SecurityConfig {
                 .cors(cors -> {}) // CorsConfigurationSource bean kell (lent)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/api/uploads/images/**").permitAll()
                         .requestMatchers("/images/**").permitAll()
+                        .requestMatchers("/uploads/**").permitAll()
                         .requestMatchers("/api/products/**").permitAll()
                         .requestMatchers("/h2-console/**").permitAll()
                         .anyRequest().authenticated()
