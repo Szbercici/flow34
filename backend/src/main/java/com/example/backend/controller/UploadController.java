@@ -73,7 +73,7 @@ public class UploadController {
 
         try {
             URI uri = new URI(imageUrl);
-            String path = uri.getPath(); // pl: /images/abc.png
+            String path = uri.getPath(); // pl: /static/images/abc.png
 
             if (path == null || !path.startsWith("/images/")) {
                 return ResponseEntity.badRequest().build();
