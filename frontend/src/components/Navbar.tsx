@@ -6,11 +6,13 @@ import ShoppingCartIcon from "../assets/ShoppingCart";
 import { useContext } from 'react';
 import { Context } from '../Context'; 
 import { Menu, X } from 'lucide-react';
+import { useAuth } from "../AuthContext";
 
 
 const Navbar = () => {
   const { items } = useContext(Context)!;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { isAuthenticated, user } = useAuth();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -31,9 +33,15 @@ const Navbar = () => {
         <li className={styles.desktopMenuItem}>
           <CustomLink to="/about">About</CustomLink>
         </li>
-        <li className={styles.desktopMenuItem}>
-          <CustomLink to="/login">Login</CustomLink>
-        </li>
+        {!isAuthenticated ? (
+          <li className={styles.desktopMenuItem}>
+            <CustomLink to="/login">Login</CustomLink>
+          </li>
+        ) : (
+          <li className={styles.desktopMenuItem}>
+             <CustomLink to="/account/me">Hi, {user?.username}</CustomLink>
+          </li>
+        )}
          <li className={styles.cartItem}>
           <CustomLink to="/cart" className={styles.cartItem}>
             <ShoppingCartIcon  size={35} color="black" />
@@ -62,9 +70,15 @@ const Navbar = () => {
               <li>
                 <CustomLink to="/about" onClick={closeMenu}>About</CustomLink>
               </li>
-              <li>
-                <CustomLink to="/login" onClick={closeMenu}>Login</CustomLink>
-              </li>
+               {!isAuthenticated ? (
+                  <li className={styles.desktopMenuItem}>
+                <CustomLink to="/login">Login</CustomLink>
+                </li>
+                ) : (
+               <li className={styles.desktopMenuItem}>
+              <CustomLink to="/account/me">Hi, {user?.username}</CustomLink>
+          </li>
+        )}
             </ul>
           </div>
         </>

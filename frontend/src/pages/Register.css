@@ -7,6 +7,10 @@ font-family: "Outfit", sans-serif;
 
 }
 
+#login-link {
+ margin-bottom: 5%;
+}
+
 .register-container {
   display: flex;
   flex-direction: column;
