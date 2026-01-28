@@ -11,6 +11,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
 
 import java.io.IOException;
 import java.util.List;
@@ -29,18 +31,29 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
 
-        String token = readCookie(request, "access_token"); // <-- olvasás
+        String token = readCookie(request, "access_token");
 
-        if (token != null && jwtService.isValid(token) && SecurityContextHolder.getContext().getAuthentication() == null) {
+        if (token != null
+                && jwtService.isValid(token)
+                && SecurityContextHolder.getContext().getAuthentication() == null) {
+
             String username = jwtService.extractUsername(token);
+            String role = jwtService.extractRole(token); // "ADMIN" vagy "USER"
 
-            var auth = new UsernamePasswordAuthenticationToken(username, null, List.of());
+            List<SimpleGrantedAuthority> authorities = List.of(
+                    new SimpleGrantedAuthority("ROLE_" + (role == null ? "USER" : role))
+            );
+
+            UsernamePasswordAuthenticationToken auth =
+                    new UsernamePasswordAuthenticationToken(username, null, authorities);
+
             auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
             SecurityContextHolder.getContext().setAuthentication(auth);
         }
 
         filterChain.doFilter(request, response);
     }
+
 
     private String readCookie(HttpServletRequest request, String name) {
         Cookie[] cookies = request.getCookies();
@@ -51,4 +64,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         }
         return null;
     }
+
+
+
 }

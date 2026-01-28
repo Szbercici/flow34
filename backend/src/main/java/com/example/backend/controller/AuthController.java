@@ -48,7 +48,7 @@ public class AuthController {
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
         User user = userService.authenticate(request.getUsername(), request.getPassword());
 
-        String access = jwtService.generateAccessToken(user.getUsername());
+        String access = jwtService.generateAccessToken(user);
         String refresh = jwtService.generateRefreshToken(user.getUsername());
 
         ResponseCookie accessCookie = ResponseCookie.from("access_token", access)
@@ -89,7 +89,9 @@ public class AuthController {
         }
 
         String username = jwtService.extractUsername(refresh);
-        String newAccess = jwtService.generateAccessToken(username);
+        User user = userService.getByUsername(username); // FELKÉRJÜK A TELJES USER-T
+        String newAccess = jwtService.generateAccessToken(user);
+
 
         ResponseCookie accessCookie = ResponseCookie.from("access_token", newAccess)
                 .httpOnly(true)
@@ -102,6 +104,7 @@ public class AuthController {
         return ResponseEntity.ok()
                 .header(org.springframework.http.HttpHeaders.SET_COOKIE, accessCookie.toString())
                 .body("refreshed");
+
     }
 
     @PostMapping("/logout")

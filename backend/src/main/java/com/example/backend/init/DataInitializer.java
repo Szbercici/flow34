@@ -8,6 +8,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import static com.example.backend.model.Role.ADMIN;
+
 @Component
 public class DataInitializer implements CommandLineRunner {
 
@@ -28,6 +30,7 @@ public class DataInitializer implements CommandLineRunner {
             admin.setUsername("admin");
             admin.setEmail("admin@local.test");
             admin.setPassword(passwordEncoder.encode("admin123"));
+            admin.setRole(ADMIN);
 
 
             userRepository.save(admin);

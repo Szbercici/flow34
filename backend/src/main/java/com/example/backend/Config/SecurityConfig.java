@@ -3,6 +3,7 @@ package com.example.backend.Config;
 import com.example.backend.security.JwtAuthFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -23,11 +24,17 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable()) // Cookie authnál ez "nem a legbiztonságosabb", de devre oké; lent írok róla
                 .cors(cors -> {}) // CorsConfigurationSource bean kell (lent)
                 .authorizeHttpRequests(auth -> auth
+
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/uploads/images/**").permitAll()
                         .requestMatchers("/static/images/**").permitAll()
-                        .requestMatchers("/api/products/**").permitAll()
                         .requestMatchers("/h2-console/**").permitAll()
+
+                        //PRODUCTS
+                        .requestMatchers(HttpMethod.GET, "/api/products/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/products/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT,  "/api/products/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE,"/api/products/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .headers(h -> h.frameOptions(f -> f.sameOrigin())); // h2-console miatt

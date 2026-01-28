@@ -6,9 +6,6 @@ import jakarta.persistence.*;
 @Table(name = "users")
 public class User {
 
-
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,6 +15,10 @@ public class User {
     @Column(unique = true)
     private String email;
     private String password;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role = Role.USER;
+
 
     // Getterek és setterek
     public Long getId() { return id; }
@@ -31,4 +32,8 @@ public class User {
 
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
+
+    public Role getRole() { return Role.USER; }
+    public void setRole(Role role) { this.role = role; }
+
 }
