@@ -29,12 +29,11 @@ const Login = () => {
 
       if (response.ok) {
         const result = await response.json();
-        console.log("Sikeres belépés!", result);
+        
         // elmentjük a usert contextbe (id, username, email érkezik a backendből)
         setUser(result);
         window.location.href = "/";
       } else {
-        console.error("Hiba történt a belépésnél");
         alert("Hibás email vagy jelszó!");
       }
     } catch (error) {
