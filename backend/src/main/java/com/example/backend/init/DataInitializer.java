@@ -1,6 +1,7 @@
 package com.example.backend.init;
 
 
+import com.example.backend.model.Role;
 import com.example.backend.model.User;
 import com.example.backend.repository.UserRepository;
 
@@ -30,7 +31,7 @@ public class DataInitializer implements CommandLineRunner {
             admin.setUsername("admin");
             admin.setEmail("admin@local.test");
             admin.setPassword(passwordEncoder.encode("admin123"));
-            admin.setRole(ADMIN);
+            admin.setRole(Role.ADMIN);
 
 
             userRepository.save(admin);
