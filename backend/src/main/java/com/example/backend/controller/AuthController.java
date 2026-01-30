@@ -1,12 +1,12 @@
 package com.example.backend.controller;
 
-import com.example.backend.dto.TokenResponse;
 import com.example.backend.dto.UserDto;
 import com.example.backend.security.JwtService;
 import com.example.backend.model.User;
 import com.example.backend.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
+
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +18,7 @@ import java.time.Duration;
 @RestController
 @RequestMapping("/api/auth")
 @CrossOrigin(origins = "*")  // FRONTENDNEK KELL!!
-public class AuthController {
+public class  AuthController {
 
     private final UserService userService;
     private final JwtService jwtService;

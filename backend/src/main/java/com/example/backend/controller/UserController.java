@@ -34,12 +34,9 @@ public class UserController {
         return userService.getUserDtoByUsername(username);
     }
 
-
     @GetMapping("/me")
     public UserDto me(Authentication authentication) {
         return userService.getUserDtoByUsername(authentication.getName());
     }
-
-
 
 }

@@ -51,17 +51,13 @@ public class UploadController {
         if (!ALLOWED_EXT.contains(ext)) {
             return ResponseEntity.badRequest().body("Only jpg/jpeg/png/webp allowed");
         }
-
         // könyvtár létrehozás
         Files.createDirectories(IMAGE_DIR);
-
         // biztonságos, egyedi fájlnév
         String filename = UUID.randomUUID() + "." + ext;
         Path target = IMAGE_DIR.resolve(filename).normalize();
-
         // mentés (felülírás tiltás)
         Files.copy(file.getInputStream(), target, StandardCopyOption.REPLACE_EXISTING);
-
         // URL amit a frontend eltárol a product.image mezőbe
         String publicUrl = "http://localhost:8080/images/" + filename;
         return ResponseEntity.ok(publicUrl);
