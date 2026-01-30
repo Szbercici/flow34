@@ -54,7 +54,7 @@ const Register = () => {
         <h2>Join the flow. <br /> Create your account.</h2>
         
         {/* Hibaüzenet megjelenítése, ha van */}
-        {error && <p style={{ color: 'red', fontSize: '14px' }}>{error}</p>}
+        {error && <div style={{ color: 'red', fontSize: '20px' }}>{error}</div>}
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">

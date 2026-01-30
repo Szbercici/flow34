@@ -9,7 +9,7 @@ import Cart from "./pages/Cart";
 import Register from "./pages/Register";
 import ScrollToTop from "./components/Scrolltotop";
 import { AuthProvider } from "./AuthContext";
-import Account_me from "./pages/Account_Me";
+import Account_me from "./pages/Account_me";
 import Account_order from "./pages/Account_orders";
 
 function App() {

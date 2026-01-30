@@ -1,12 +1,112 @@
+.pageContainer {
+  display: flex;
+  width: 100%;
+}
+
+.content {
+  flex: 3   ;
+  padding: 30px;
+  background: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 50px;
+  margin: 20px;   
+  margin-right: 40px; 
+}
+
 .menu{
-    margin-top: 20%;
-    margin-left: 10%;
-    border-radius: 10%;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    background-color: var(--background-color);
-    width: 40%;
     display: flex;
     flex-direction: column;
-    align-items: start;
-    justify-self: start;
+    align-items: center;
+    justify-content: space-evenly ;
+    font-size: x-large;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background-color: var(--background-color);
+    height: 55vh;
+    text-align: center;
+    flex: 1;
+    border-radius: 40px;
+    width: 20%;
+    padding: 20px;
+    margin: 20px;
+    
+
+}
+
+
+.menu a{
+    width: 100%;
+    padding: 10px;
+    margin: 15px;
+    text-decoration: none;
+    color: var(--primary-text-color);
+    font-weight: 500;
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+}
+
+.menu a:hover{
+    background-color: var(--accent-color);
+    color: white;
+    transition: 0.3s;
+}
+
+
+/* ACTIVE route: stays accent, even on hover */
+.menu a:active {
+  background-color: var(--accent-color);
+  color: #fff;
+}
+
+
+.logoutBtn {
+  width: 80%;
+    background-color: var(--accent-color);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 20px;
+}
+
+.logoutBtn:hover {
+      transform: translateY(-2px);
+}
+.logoutBtn:active {
+      transform: translateY(0);
+}
+
+@media screen and (max-width: 768px) {
+  .pageContainer {
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .menu {
+    width: 70%;
+    height: auto;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+
+  }
+
+  .menu a {
+    width: 80%;
+    margin: 10px;
+  }
+
+  .content {
+    margin: 10px;
+    margin-right: 10px;
+    padding: 20px;
+    width: 85%;
+  }
+
+  .logoutBtn {
+    width: 40%;
+  }
+  
 }
