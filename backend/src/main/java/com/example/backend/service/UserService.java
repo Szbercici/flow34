@@ -10,6 +10,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.example.backend.dto.UserDto;
+import com.example.backend.model.User;
+import com.example.backend.repository.UserRepository;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 
@@ -74,18 +79,22 @@ public class UserService {
         return user;
     }
 
-    public UserDto getUserDtoByUsername(String username) {
+    public UserDto getMe(String username) {
         User user = userRepository.findByUsername(username);
-
         if (user == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
         }
 
-        return new UserDto(
-                user.getId(),
-                user.getUsername(),
-                user.getEmail()
-        );
+        return new UserDto(user.getId(), user.getUsername(), user.getEmail());
+    }
+
+    public UserDto getUserDtoByUsername(String username) {
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found: " + username);
+        }
+
+        return new UserDto(user.getId(), user.getUsername(), user.getEmail());
     }
 
 }

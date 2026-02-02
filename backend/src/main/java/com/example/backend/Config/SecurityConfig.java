@@ -21,25 +21,36 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, JwtAuthFilter jwtAuthFilter) throws Exception {
         http
-                .csrf(csrf -> csrf.disable()) // Cookie authnál ez "nem a legbiztonságosabb", de devre oké; lent írok róla
+                .csrf(csrf -> csrf.disable()) // Cookie authnál ez "nem a legbiztonságosabb", de devre oké
                 .cors(cors -> {}) // CorsConfigurationSource bean kell (lent)
                 .authorizeHttpRequests(auth -> auth
 
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/uploads/images/**").permitAll()
                         .requestMatchers("/static/images/**").permitAll()
-                        .requestMatchers("/h2-console/**").permitAll()
 
-                        //PRODUCTS
-                        .requestMatchers(HttpMethod.GET, "/api/products/**").hasRole("ADMIN")
+                        // PRODUCTS
+                        .requestMatchers(HttpMethod.GET, "/api/products/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/products/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT,  "/api/products/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE,"/api/products/**").hasRole("ADMIN")
+
+                        // USERS
+                        .requestMatchers(HttpMethod.GET, "/api/users/me").hasAnyRole("USER","ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/users/all").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/users/u/**").hasRole("ADMIN")
+
+
                         .anyRequest().authenticated()
+
                 )
                 .headers(h -> h.frameOptions(f -> f.sameOrigin())); // h2-console miatt
 
-        http.addFilterBefore(jwtAuthFilter, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(jwtAuthFilter, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class)
+                .httpBasic(b -> b.disable())
+                .formLogin(f -> f.disable());
+        ;
+
 
         return http.build();
     }

@@ -52,8 +52,16 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         }
 
         filterChain.doFilter(request, response);
+
     }
 
+    private String resolveToken(HttpServletRequest request) {
+        String auth = request.getHeader("Authorization");
+        if (auth != null && auth.startsWith("Bearer ")) {
+            return auth.substring(7);
+        }
+        return readCookie(request, "access_token");
+    }
 
     private String readCookie(HttpServletRequest request, String name) {
         Cookie[] cookies = request.getCookies();
