@@ -1,5 +1,8 @@
 package com.example.backend.model;
 
+import jakarta.persistence.Embeddable;
+
+@Embeddable
 public class Rating {
     private double rate;
     private int count;
