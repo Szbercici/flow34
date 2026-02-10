@@ -36,7 +36,7 @@ const Register = () => {
 
       if (response.ok) {
         console.log("Sikeres regisztráció!");
-        // Ide jöhet egy átirányítás a loginra
+        window.location.href = "/login";
       } else {
         const errorData = await response.json();
         setError(errorData.message || "Hiba történt a regisztráció során.");
