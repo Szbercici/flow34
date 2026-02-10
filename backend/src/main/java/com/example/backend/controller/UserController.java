@@ -4,8 +4,6 @@ import org.springframework.security.core.Authentication;
 import com.example.backend.service.UserService;
 import com.example.backend.dto.UserDto;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import org.springframework.web.bind.annotation.*;
 
@@ -42,9 +40,10 @@ public class UserController {
             return ResponseEntity.status(401).build();
         }
 
-        String username = authentication.getName(); // ez a principal (username)
+        String username = authentication.getName();
         return ResponseEntity.ok(userService.getMe(username));
     }
+
 
 
 }

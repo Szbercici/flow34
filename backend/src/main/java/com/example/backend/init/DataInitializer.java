@@ -50,7 +50,7 @@ public class DataInitializer implements CommandLineRunner {
                 BigDecimal.valueOf(12.99),
                 "Refreshing watermelon flavored hydration cubes with vitamins and zero sugar",
                 "Microdrink",
-                "/images/microdrink-melon.png"
+                "static/images/microdrink-melon.png"
         );
 
         seedProductIfMissing(
@@ -58,10 +58,9 @@ public class DataInitializer implements CommandLineRunner {
                 BigDecimal.valueOf(14.99),
                 "Classic energy drink flavor boosted with caffeine for focus and power.",
                 "Microdrink",
-                "/images/microdrink-energy.png"
+                "static/images/microdrink-energy.png"
         );
 
-        // ide jöhet a többi is ugyanígy
 
         seedProductIfMissing(
                 "Flow Forest Fruit",
@@ -141,7 +140,7 @@ public class DataInitializer implements CommandLineRunner {
         p.setCategory(category);
         p.setImg(img);
 
-        // ha a Rating nálad entity/embedded, ez lehet más (lásd lent)
+
         p.setRating(new Rating(0, 0));
 
         productRepository.save(p);
