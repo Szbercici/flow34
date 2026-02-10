@@ -2,6 +2,7 @@ package com.example.backend.service;
 
 import com.example.backend.model.Product;
 import com.example.backend.model.Rating;
+import com.example.backend.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -12,56 +13,42 @@ import java.util.concurrent.atomic.AtomicLong;
 @Service
 public class ProductService {
 
-    private final Map<Long, Product> products = new ConcurrentHashMap<>();
-    private final AtomicLong idCounter = new AtomicLong(0);
+    private final ProductRepository productRepository;
 
-    public ProductService() {
-        // Kezdő mock adatok
-
-    }
-
-    private void seed(Product p) {
-        long id = idCounter.incrementAndGet();
-        p.setId(id);
-        products.put(id, p);
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
     }
 
     public List<Product> getAllProducts() {
-        return products.values().stream()
-                .sorted(Comparator.comparing(Product::getId))
-                .toList();
+        return productRepository.findAll();
     }
 
     public Optional<Product> getById(Long id) {
-        return Optional.ofNullable(products.get(id));
+        return productRepository.findById(id);
     }
 
     public Product create(Product product) {
-        long id = idCounter.incrementAndGet();
-        product.setId(id);
-
         if (product.getRating() == null) {
             product.setRating(new Rating(0.0, 0));
         }
-
-        products.put(id, product);
-        return product;
+        return productRepository.save(product);
     }
 
     public Optional<Product> update(Long id, Product updated) {
-        Product existing = products.get(id);
-        if (existing == null) return Optional.empty();
+        return productRepository.findById(id).map(existing -> {
+            updated.setId(id);
 
-        updated.setId(id); // path ID a biztos
-        if (updated.getRating() == null) {
-            updated.setRating(existing.getRating());
-        }
+            if (updated.getRating() == null) {
+                updated.setRating(existing.getRating());
+            }
 
-        products.put(id, updated);
-        return Optional.of(updated);
+            return productRepository.save(updated);
+        });
     }
 
     public boolean delete(Long id) {
-        return products.remove(id) != null;
+        if (!productRepository.existsById(id)) return false;
+        productRepository.deleteById(id);
+        return true;
     }
 }

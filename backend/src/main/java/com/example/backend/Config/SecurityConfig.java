@@ -44,8 +44,8 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
 
                 )
-                .headers(h -> h.frameOptions(f -> f.sameOrigin())); // h2-console miatt
-
+                // .headers(h -> h.frameOptions(f -> f.sameOrigin())) // h2-console miatt
+                ;
         http.addFilterBefore(jwtAuthFilter, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class)
                 .httpBasic(b -> b.disable())
                 .formLogin(f -> f.disable());
