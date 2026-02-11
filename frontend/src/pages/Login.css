@@ -47,6 +47,25 @@ font-family: "Outfit", sans-serif;
  }
 }  
 
+.password-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.password-toggle{
+  opacity: 0.5;
+  margin-left: 17rem;
+  margin-top:1px;
+  position: absolute;
+}
+.password-toggle:active {
+  color: var(--accent-color);
+  opacity: 0.6;
+  
+}
+
+
 .login-button {
  
  display: inline-block;
