@@ -100,7 +100,7 @@ const Footer = () => {
       {/* Bottom Bar */}
       <div className={styles.bottomBar}>
         <p className={styles.copyright}>
-          &copy; {currentYear} Flow. All rights reserved.
+          &copy; {currentYear} Flow All rights reserved.
         </p>
         <div className={styles.bottomLinks}>
           <a href="#privacy">Privacy</a>

@@ -11,6 +11,7 @@ import ScrollToTop from "./components/Scrolltotop";
 import { AuthProvider } from "./AuthContext";
 import Account_me from "./pages/Account_me";
 import Account_order from "./pages/Account_orders";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
           <Route path="/product/:Product_name" element={<Product_page />} />
           <Route path="/account/orders" element={<Account_order />} />
           <Route path="/account/me" element={<Account_me />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
       </div>

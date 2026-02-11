@@ -21,9 +21,9 @@ return (
 
       <div className="container">
       <h1>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequatur quod assumenda temporibus eaque non praesentium architecto, ut asperiores sit nemo qui. Debitis enim quasi magnam dolorum odit quas sunt nemo?</h1> 
-    </div>
 
     <h1>Drink the flow form the flow.</h1>
+    </div>
         <Scroll_container products={products.filter(product => product.category === "Water Bottles")} />
     </>
   );
