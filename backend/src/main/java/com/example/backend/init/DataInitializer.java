@@ -39,9 +39,9 @@ public class DataInitializer implements CommandLineRunner {
             admin.setRole(Role.ADMIN);
 
             userRepository.save(admin);
-            System.out.println("✅ Admin user created");
+            System.out.println(":) Admin user created");
         } else {
-            System.out.println("ℹ️ Admin user already exists");
+            System.out.println(" :_( Admin user already exists");
         }
 
         // --- PRODUCT seed ---
@@ -129,7 +129,7 @@ public class DataInitializer implements CommandLineRunner {
 
     private void seedProductIfMissing(String name, BigDecimal price, String description, String category, String img) {
         if (productRepository.existsByName(name)) {
-            System.out.println("ℹ️ Product already exists: " + name);
+            System.out.println(" :_( Product already exists: " + name);
             return;
         }
 
@@ -144,6 +144,6 @@ public class DataInitializer implements CommandLineRunner {
         p.setRating(new Rating(0, 0));
 
         productRepository.save(p);
-        System.out.println("✅ Seeded product: " + name);
+        System.out.println(" :)Seeded product: " + name);
     }
 }
