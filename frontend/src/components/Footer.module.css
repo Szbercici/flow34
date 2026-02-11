@@ -224,11 +224,12 @@
   }
 
   .emailInput {
-    min-width: 100%;
+    min-width: 50%;
+    max-width: 90%;
   }
 
   .subscribeBtn {
-    min-width: 100%;
+    min-width: 90%;
   }
 
   .column h4 {
