@@ -10,13 +10,6 @@
   height: auto;       /* Arányosan méretezze a magasságot */
 }
 
-/* Mobil nézet: Ha kicsi a képernyő, kerüljenek egymás alá */
-@media (max-width: 768px) {
-  .product-container {
-    flex-direction: column; /* Egymás alá */
-  }
-}
-
 .left-column {
   padding: 4% 10% 10% 10%;
   flex: 1; /* Fele helyet foglal */
@@ -24,9 +17,10 @@
 
 .right-column {
   font-family: monospace;
-  font-size: large;
-   margin-top: 5%;
+  font-size: x-large;
+  margin-top: 5%;
   flex: 1; /* Fele helyet foglal */
+  padding-right: 5%;
 }
 
 .add-to-cart {
@@ -38,4 +32,24 @@
     cursor: pointer;
     font-size: 1rem;
     margin-top: 20px;
+     width: 30%;
+    height: 50px;
+    font-size: x-large;
+}
+
+/* Mobil nézet: Ha kicsi a képernyő, kerüljenek egymás alá */
+@media (max-width: 768px) {
+  .product-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; /* Egymás alá */
+    padding: 5%;
+    text-align: center;
+  }
+  .add-to-cart{
+    width: 60%;
+    height: 60px;
+    font-size: xx-large;5
+  }
 }

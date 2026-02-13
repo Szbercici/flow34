@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import './Register.css';
 import { API_BASE_URL } from '../config/api';
+import { Toaster, toast } from 'sonner';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -36,10 +39,11 @@ const Register = () => {
 
       if (response.ok) {
         console.log("Sikeres regisztráció!");
-        window.location.href = "/login";
+        toast.success("Registration successful!");
+        navigate("/login");
       } else {
         const errorData = await response.json();
-        setError(errorData.message || "Hiba történt a regisztráció során.");
+        setError(errorData.message || "Registration failed. Please try again.");
       }
     } catch (err) {
       setError("Hálózati hiba, próbáld újra később!");
@@ -50,6 +54,7 @@ const Register = () => {
 
   return (
     <div className="container">
+       <Toaster position="top-center" />
       <div className="register-container">
         <h2>Join the flow. <br /> Create your account.</h2>
         
@@ -63,6 +68,7 @@ const Register = () => {
           <div className="form-group">
             <input placeholder="Email" type="email" name="email" required />
           </div>
+          
           <div className="form-group">
             <input placeholder="Password" type="password" name="password" required />
           </div>

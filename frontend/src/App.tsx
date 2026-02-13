@@ -12,6 +12,7 @@ import { AuthProvider } from "./AuthContext";
 import Account_me from "./pages/Account_me";
 import Account_order from "./pages/Account_orders";
 import NotFound from "./pages/NotFound";
+import {Toaster} from "sonner";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         />
         <Navbar />
         <ScrollToTop />
+         <Toaster position="top-center" richColors closeButton />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />

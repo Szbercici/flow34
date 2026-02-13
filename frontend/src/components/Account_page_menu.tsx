@@ -2,6 +2,8 @@
 import React from 'react';
 import { logout, useAuth } from '../AuthContext';
 import styles from './Account_page_menu.module.css';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'sonner';
 
 interface AccountPageProps {
   children?: React.ReactNode;
@@ -9,6 +11,7 @@ interface AccountPageProps {
 
 const Account_page: React.FC<AccountPageProps> = ({ children }) => {
   const { setUser } = useAuth();
+  const navigate = useNavigate();
   
   return (
     <div className={styles.pageContainer}>
@@ -22,7 +25,13 @@ const Account_page: React.FC<AccountPageProps> = ({ children }) => {
           </a>
           <button 
             className={styles.logoutBtn} 
-            onClick={() => logout(setUser)}
+            onClick={async () => {
+              const success = await logout(setUser);
+              if (success) {
+                toast.success("Logged out successfully");
+                navigate("/login");
+              }
+            }}
           >
             Logout
           </button>

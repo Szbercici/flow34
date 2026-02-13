@@ -54,7 +54,7 @@ export const useAuth = () => {
   return ctx;
 };
 
-export const logout = async (setUser: (user: AuthUser | null) => void) => {
+export const logout = async (setUser: (user: AuthUser | null) => void): Promise<boolean> => {
   try {
     const resp = await fetch(`${API_BASE_URL}/api/auth/logout`, {
       method: "POST",
@@ -62,11 +62,12 @@ export const logout = async (setUser: (user: AuthUser | null) => void) => {
     });
     if (resp.ok) {
       setUser(null);
-      window.location.href = "/login";
+      return true;
     }
   } catch (error) {
     console.error("Hiba a kijelentkezés során:", error);
   }
+  return false;
 };
 
 

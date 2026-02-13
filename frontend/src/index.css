@@ -5,9 +5,64 @@
   --background-color: #ffffff; /* Fehér háttér */
   --card-background-color: #f8f9fa; /* Világos szürke kártya háttér */
   --border-color: #212529; /* Világos szürke szegély */
-  
   /* További színek... */
   --accent-color: #0d6efd; /* Kék (pl. linkekhez) */
+  --on-accent-color: #ffffff; /* Szöveg színe accent színen */
+
+  /* Scrollbar színek */
+  --scrollbar-track-bg: #f1f1f1;
+  --scrollbar-thumb-bg: #888888;
+  --scrollbar-thumb-hover-bg: #555555;
+  --scrollbar-color-thumb: #989898;
+  --scrollbar-color-track: #8282821d;
+
+  /* Navbar színek */
+  --navbar-hover-bg: #eeeeee;
+  --navbar-active-bg: #a6bbc2;
+  --navbar-toggle-hover-bg: #eeeeee;
+  --badge-bg-color: #ff4444;
+  --badge-text-color: #ffffff;
+  --overlay-background-color: rgba(0, 0, 0, 0.3);
+
+  /* Footer színek */
+  --footer-bg-gradient-start: #f8f9fa;
+  --footer-bg-gradient-end: #ffffff;
+  --footer-border-color: #e9ecef;
+  --footer-input-border-color: #dee2e6;
+  --footer-input-placeholder-color: #adb5bd;
+  --footer-subscribe-hover-bg: #0b5ed7;
+  --footer-subscribe-hover-shadow: rgba(13, 110, 253, 0.3);
+  --footer-bottom-border-color: #dee2e6;
+  --footer-bottom-bg: rgba(255, 255, 255, 0.5);
+
+  /* Űrlap / input színek */
+  --input-bg-color: #ffffff;
+  --input-border-color: #d6d6e7;
+  --input-text-color: rgb(35, 38, 59);
+  --input-shadow-color: rgb(119 122 175 / 30%);
+  --input-focus-border-color: #3c4fe0;
+  --input-focus-shadow-color: rgb(35 38 59 / 5%);
+
+  /* Primér gomb színek */
+  --primary-button-bg-color: #1e65d7;
+  --primary-button-hover-bg-color: #217ae0;
+  --primary-button-text-color: #ffffff;
+
+  /* About / hero színek */
+  --hero-bg-color: #97cef4;
+  --hero-heading-gradient-start: #0066cc;
+  --hero-heading-gradient-end: #224046;
+  --hero-body-text-color: #333333;
+  --feature-card-bg-color: #f0f8ff;
+  --feature-heading-color: #0066cc;
+  --feature-text-color: #555555;
+  --mission-text-bg-color: #f8f9ff;
+  --mission-text-border-color: #0066cc;
+  --mission-text-color: #1a1a1a;
+
+  /* Egyéb színek */
+  --muted-text-color: #555555;
+  --highlight-color: rgb(43, 191, 255);
 }
 
 body {
@@ -34,26 +89,26 @@ body {
 
 /* A görgetősáv "útja" (a háttér) */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+  background: var(--scrollbar-track-bg); 
   border-radius: 5px;
 }
 
 /* A görgetősáv "csúszkája" (amit húzol) */
 ::-webkit-scrollbar-thumb {
-  background: #888; 
+  background: var(--scrollbar-thumb-bg); 
   border-radius: 50px;
 }
 
 /* Amikor ráviszed az egeret a csúszkára */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; 
+  background: var(--scrollbar-thumb-hover-bg); 
 }
 
 /* --- Firefox (Szabványosabb megoldás) --- */
 /* A Firefox más szintaxist használ, jelenleg kevesebb testreszabhatósággal */
 * {
   scrollbar-width: auto;
-  scrollbar-color: #989898 #8282821d; /* csúszka színe | út színe */
+  scrollbar-color: var(--scrollbar-color-thumb) var(--scrollbar-color-track); /* csúszka színe | út színe */
 }
 input::placeholder, button {
     user-select: none;

@@ -3,9 +3,12 @@ import React, { useState } from "react"; // Hozzáadtuk a useState-et
 import { API_BASE_URL } from "../config/api";
 import { useAuth } from "../AuthContext";
 import Eye from "../assets/Eye";
+import { Toaster, toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { setUser } = useAuth();
+  const navigate = useNavigate();
   // State a jelszó láthatóságához
   const [showPassword, setShowPassword] = useState(false);
 
@@ -25,9 +28,10 @@ const Login = () => {
       if (response.ok) {
         const result = await response.json();
         setUser(result);
-        window.location.href = "/";
+        toast.success("Successful login");
+        navigate("/");
       } else {
-        alert("Hibás email vagy jelszó!");
+        toast.error("Login failed. Please check your credentials.");
       }
     } catch (error) {
       console.error("Hálózati hiba:", error);
