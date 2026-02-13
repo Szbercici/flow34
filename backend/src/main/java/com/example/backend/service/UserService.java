@@ -1,22 +1,15 @@
 package com.example.backend.service;
 
-import com.example.backend.model.User;
-import com.example.backend.repository.UserRepository;
 import com.example.backend.dto.UserDto;
 import com.example.backend.model.User;
-
-import org.springframework.stereotype.Service;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import com.example.backend.repository.UserRepository;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.example.backend.dto.UserDto;
-import com.example.backend.model.User;
-import com.example.backend.repository.UserRepository;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
-
 
 @Service
 public class UserService {
@@ -27,6 +20,13 @@ public class UserService {
     public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+    }
+
+    public Long getUserId(Authentication auth) {
+        String username = auth.getName();
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found: " + username))
+                .getId();
     }
 
     // REGISZTRÁCIÓ
@@ -48,20 +48,15 @@ public class UserService {
         userRepository.save(user);
     }
 
-
     // MINDEN USER LISTÁZÁSA
     public List<User> getAll() {
         return userRepository.findAll();
     }
 
-    // USER LEKÉRÉSE NÉV ALAPJÁN
+    // USER LEKÉRÉSE NÉV ALAPJÁN (login)
     public User authenticate(String username, String password) {
-
-        User user = userRepository.findByUsername(username);
-
-        if (user == null) {
-            throw new IllegalArgumentException("Invalid username or password");
-        }
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid username or password"));
 
         if (!passwordEncoder.matches(password, user.getPassword())) {
             throw new IllegalArgumentException("Invalid username or password");
@@ -70,31 +65,23 @@ public class UserService {
         return user;
     }
 
-    //SIMA USER LEKÉRÉSE
+    // SIMA USER LEKÉRÉSE
     public User getByUsername(String username) {
-        User user = userRepository.findByUsername(username);
-        if (user == null) {
-            throw new IllegalArgumentException("User not found");
-        }
-        return user;
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
     }
 
     public UserDto getMe(String username) {
-        User user = userRepository.findByUsername(username);
-        if (user == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
-        }
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
 
         return new UserDto(user.getId(), user.getUsername(), user.getEmail());
     }
 
     public UserDto getUserDtoByUsername(String username) {
-        User user = userRepository.findByUsername(username);
-        if (user == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found: " + username);
-        }
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found: " + username));
 
         return new UserDto(user.getId(), user.getUsername(), user.getEmail());
     }
-
 }
