@@ -17,10 +17,24 @@ const Account_page: React.FC<AccountPageProps> = ({ children }) => {
     <div className={styles.pageContainer}>
       {/* BAL OLDALI MENÜ - A TE MEGLÉVŐ MENÜD */}  
         <div className={styles.menu}>
-          <a href="/account/me" className={styles.menuItem}>
+          <a
+            href="/account/me"
+            className={styles.menuItem}
+            onClick={(e) => {
+              e.preventDefault();
+              navigate("/account/me");
+            }}
+          >
             My account
           </a>
-          <a href="/account/orders" className={styles.menuItem}>
+          <a
+            href="/account/orders"
+            className={styles.menuItem}
+            onClick={(e) => {
+              e.preventDefault();
+              navigate("/account/orders");
+            }}
+          >
             My orders
           </a>
           <button 

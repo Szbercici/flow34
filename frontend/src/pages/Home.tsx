@@ -3,6 +3,7 @@ import Product_show from "../components/Product_show";
 import Scroll_container from "../components/Scroll_container"; 
 import Video_default from "../assets/Video_default";
 import { Products } from "../components/Product_loader_api";
+import InfiniteText from "../components/Infinitetext";
 
 
 const Home = () => {
@@ -18,11 +19,10 @@ return (
 
 
     <Scroll_container products={products.filter(product => product.category === "Microdrink")} />
-
+    <InfiniteText />
       <div className="container">
-      <h1>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequatur quod assumenda temporibus eaque non praesentium architecto, ut asperiores sit nemo qui. Debitis enim quasi magnam dolorum odit quas sunt nemo?</h1> 
 
-    <h1>Drink the flow form the flow.</h1>
+    <h1>Drink form the flow.</h1>
     </div>
         <Scroll_container products={products.filter(product => product.category === "Water Bottles")} />
     </>
