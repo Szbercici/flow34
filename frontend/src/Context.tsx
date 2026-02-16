@@ -1,4 +1,5 @@
 import React, { useState, createContext, ReactNode, useContext, useEffect} from "react";
+import { API_BASE_URL } from "./config/api";
 
 // 0. Először definiáljuk, hogy néz ki egy Termék objektum
 export interface CartItem {
@@ -28,6 +29,9 @@ export const ContextProvider = ({ children }: ProviderProps) => {
   const [items, setItems] = useState<CartItem[]>(() => {
     try {
       // Megpróbáljuk kiolvasni a "cart" nevű kulcsot
+      fetch(`${API_BASE_URL}/api/cart`, {
+        credentials: "include",
+      })
       const savedCart = localStorage.getItem("cart");
       
       // Ha van adat, visszaalakítjuk (JSON.parse) és azt használjuk

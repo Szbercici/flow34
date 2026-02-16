@@ -16,8 +16,7 @@
 }
 
 .right-column {
-  font-family: monospace;
-  font-size: x-large;
+  font-size:    large;
   margin-top: 5%;
   flex: 1; /* Fele helyet foglal */
   padding-right: 5%;
@@ -34,7 +33,8 @@
     margin-top: 20px;
      width: 30%;
     height: 50px;
-    font-size: x-large;
+    font-size: large;
+     font-family: 'Lexend Exa', sans-serif;
 }
 
 /* Mobil nézet: Ha kicsi a képernyő, kerüljenek egymás alá */
@@ -50,6 +50,6 @@
   .add-to-cart{
     width: 60%;
     height: 60px;
-    font-size: xx-large;5
+    font-size: x-large;
   }
 }

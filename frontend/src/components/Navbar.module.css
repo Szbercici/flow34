@@ -93,6 +93,7 @@
 
 /* Mobile Cart Icon */
 .mobileCart {
+    top: 1px;
     display: none;
     position: relative;
     align-items: center;
@@ -103,12 +104,12 @@
 }
 
 .cartBadge {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-color: #ff4444;
+    position: relative;
+    top: -17px;
+    right: 6px;
+    background-color: #ff6464;
     color: white;
-    border-radius: 50%;
+    border-radius: 50%;     
     width: 20px;
     height: 20px;
     display: flex;

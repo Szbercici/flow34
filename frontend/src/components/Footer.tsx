@@ -53,32 +53,6 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Follow Us */}
-        <div className={styles.column}>
-          <h4>Follow Us</h4>
-          <ul className={styles.linksList}>
-            <li>
-              <a href="#instagram" target="_blank" rel="noopener noreferrer">
-                Instagram
-              </a>
-            </li>
-            <li>
-              <a href="#twitter" target="_blank" rel="noopener noreferrer">
-                Twitter
-              </a>
-            </li>
-            <li>
-              <a href="#facebook" target="_blank" rel="noopener noreferrer">
-                Facebook
-              </a>
-            </li>
-            <li>
-              <a href="#tiktok" target="_blank" rel="noopener noreferrer">
-                TikTok
-              </a>
-            </li>
-          </ul>
-        </div>
 
         {/* Newsletter */}
         <div className={styles.column}>

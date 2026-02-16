@@ -46,7 +46,7 @@ const Navbar = () => {
          <li className={styles.cartItem}>
           <CustomLink to="/cart" className={styles.cartItem} currentPath={location.pathname}>
             <ShoppingCartIcon  size={35} color="black" />
-            <div>{items.length}</div>
+           <div className={styles.cartBadge}>{items.length}</div>
           </CustomLink>
         </li>
       </ul>
