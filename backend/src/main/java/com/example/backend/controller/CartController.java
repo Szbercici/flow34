@@ -1,5 +1,6 @@
 package com.example.backend.controller;
 
+import com.example.backend.dto.AddCartItemRequest;
 import com.example.backend.dto.CartDto;
 import com.example.backend.service.CartService;
 import com.example.backend.service.UserService;
@@ -25,12 +26,11 @@ public class CartController {
     }
 
     @PostMapping("/cart/items")
-    public CartDto addToCart(Authentication auth,
-                             @RequestParam Long productId,
-                             @RequestParam int quantity) {
+    public CartDto addItem(@RequestBody AddCartItemRequest req, Authentication auth) {
         Long userId = userService.getUserId(auth);
-        return cartService.addItem(userId, productId, quantity);
+        return cartService.addItemToCart(userId, req.getProductId(), req.getQuantity());
     }
+
 
     @DeleteMapping("/cart/items/{productId}")
     public CartDto remove(Authentication auth, @PathVariable Long productId) {
