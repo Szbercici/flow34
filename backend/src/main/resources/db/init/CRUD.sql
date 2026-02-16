@@ -1,5 +1,7 @@
+--ha valami nem jo, akk 1esevel kell beolvasni a fuggvenyeket
+
 --users tabla
---CREATE
+--create
 CREATE OR REPLACE FUNCTION sp_create_user(
     p_username VARCHAR(100),
     p_password VARCHAR(255),
@@ -20,6 +22,7 @@ BEGIN
     RETURN v_user_id;
 END;
 $$ LANGUAGE plpgsql;
+
 
 --read all
 CREATE OR REPLACE FUNCTION sp_read_all_users()
@@ -46,6 +49,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+
 --read by id
 CREATE OR REPLACE FUNCTION sp_readById_users(p_user_id BIGINT)
 RETURNS TABLE (
@@ -70,6 +74,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+
 --delete: users tablaban NINCS torles, is_active lesz false
 CREATE OR REPLACE FUNCTION sp_delete_user(p_user_id BIGINT)
 RETURNS BOOLEAN AS $$
@@ -84,6 +89,7 @@ BEGIN
     RETURN v_affected > 0;
 END;
 $$ LANGUAGE plpgsql;
+
 
 --update: parameteres update, nem all adata
 CREATE OR REPLACE FUNCTION sp_update_user(
@@ -118,6 +124,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+
 --products tabla
 --create
 CREATE OR REPLACE FUNCTION sp_create_product(
@@ -141,6 +148,7 @@ BEGIN
     RETURN v_product_id;
 END;
 $$ LANGUAGE plpgsql;
+
 
 --read all
 CREATE OR REPLACE FUNCTION sp_read_all_products()
@@ -166,6 +174,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+
 --read by id
 CREATE OR REPLACE FUNCTION sp_readById_products(p_product_id BIGINT)
 RETURNS TABLE (
@@ -190,6 +199,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+
 --delete
 CREATE OR REPLACE FUNCTION sp_delete_product(p_product_id BIGINT)
 RETURNS BOOLEAN AS $$
@@ -203,6 +213,7 @@ BEGIN
     RETURN v_affected > 0;
 END;
 $$ LANGUAGE plpgsql;
+
 
 --update: parameteres update, nem all adata
 CREATE OR REPLACE FUNCTION sp_update_product(
@@ -241,6 +252,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+
 --cart tabla
 --create
 CREATE OR REPLACE FUNCTION sp_create_cart(p_user_id BIGINT)
@@ -255,6 +267,7 @@ BEGIN
     RETURN v_cart_id;
 END;
 $$ LANGUAGE plpgsql;
+
 
 --read all
 CREATE OR REPLACE FUNCTION sp_read_all_carts()
@@ -271,6 +284,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+
 --read by id
 CREATE OR REPLACE FUNCTION sp_readById_cart(p_cart_id BIGINT)
 RETURNS TABLE (
@@ -286,6 +300,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+
 --delete
 CREATE OR REPLACE FUNCTION sp_delete_cart(p_cart_id BIGINT)
 RETURNS BOOLEAN AS $$
@@ -299,6 +314,7 @@ BEGIN
     RETURN v_affected > 0;
 END;
 $$ LANGUAGE plpgsql;
+
 
 --update: parameteres update, nem all adata
 CREATE OR REPLACE FUNCTION sp_update_cart(
@@ -319,6 +335,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+
 --cart_items tabla
 --create
 CREATE OR REPLACE FUNCTION sp_create_cart_item(
@@ -338,6 +355,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+
 --read all
 CREATE OR REPLACE FUNCTION sp_read_all_cart_items()
 RETURNS TABLE (
@@ -354,6 +372,7 @@ BEGIN
     ORDER BY ci.created_at DESC;
 END;
 $$ LANGUAGE plpgsql;
+
 
 --read by id
 CREATE OR REPLACE FUNCTION sp_readById_cart_items(p_cart_item_id BIGINT)
@@ -372,6 +391,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+
 --delete
 CREATE OR REPLACE FUNCTION sp_delete_cart_item(p_cart_item_id BIGINT)
 RETURNS BOOLEAN AS $$
@@ -385,6 +405,7 @@ BEGIN
     RETURN v_affected > 0;
 END;
 $$ LANGUAGE plpgsql;
+
 
 --update: parameteres update, nem all adata
 CREATE OR REPLACE FUNCTION sp_update_cart_item(
@@ -405,6 +426,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+
 --order_table tabla
 --create
 CREATE OR REPLACE FUNCTION sp_create_order(
@@ -424,6 +446,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+
 --read all
 CREATE OR REPLACE FUNCTION sp_read_all_orders()
 RETURNS TABLE (
@@ -440,6 +463,7 @@ BEGIN
     ORDER BY o.created_at DESC;
 END;
 $$ LANGUAGE plpgsql;
+
 
 --read by id
 CREATE OR REPLACE FUNCTION sp_readById_order_table(p_order_id BIGINT)
@@ -458,6 +482,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+
 --delete
 CREATE OR REPLACE FUNCTION sp_delete_order(p_order_id BIGINT)
 RETURNS BOOLEAN AS $$
@@ -471,6 +496,7 @@ BEGIN
     RETURN v_affected > 0;
 END;
 $$ LANGUAGE plpgsql;
+
 
 --update: parameteres update, nem all adata
 CREATE OR REPLACE FUNCTION sp_update_order(
@@ -490,6 +516,7 @@ BEGIN
     RETURN v_affected > 0;
 END;
 $$ LANGUAGE plpgsql;
+
 
 --delivery_address tabla
 --create
@@ -512,6 +539,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+
 --read all
 CREATE OR REPLACE FUNCTION sp_read_all_delivery_addresses()
 RETURNS TABLE (
@@ -529,6 +557,7 @@ BEGIN
     ORDER BY da.id DESC;
 END;
 $$ LANGUAGE plpgsql;
+
 
 --read by id
 CREATE OR REPLACE FUNCTION sp_readById_delivery_address(p_address_id BIGINT)
@@ -548,6 +577,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+
 --delete
 CREATE OR REPLACE FUNCTION sp_delete_delivery_address(p_address_id BIGINT)
 RETURNS BOOLEAN AS $$
@@ -561,6 +591,7 @@ BEGIN
     RETURN v_affected > 0;
 END;
 $$ LANGUAGE plpgsql;
+
 
 --update: parameteres update, nem all adata
 CREATE OR REPLACE FUNCTION sp_update_delivery_address(
@@ -587,6 +618,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+
 --billing_details tabla
 --create
 CREATE OR REPLACE FUNCTION sp_create_billing_details(
@@ -608,6 +640,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+
 --read all
 CREATE OR REPLACE FUNCTION sp_read_all_billing_details()
 RETURNS TABLE (
@@ -625,6 +658,7 @@ BEGIN
     ORDER BY bd.id DESC;
 END;
 $$ LANGUAGE plpgsql;
+
 
 --read by id
 CREATE OR REPLACE FUNCTION sp_readById_billing_details(p_billing_id BIGINT)
@@ -644,6 +678,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+
 --delete
 CREATE OR REPLACE FUNCTION sp_delete_billing_details(p_billing_id BIGINT)
 RETURNS BOOLEAN AS $$
@@ -657,6 +692,7 @@ BEGIN
     RETURN v_affected > 0;
 END;
 $$ LANGUAGE plpgsql;
+
 
 --update: parameteres update, nem all adata
 CREATE OR REPLACE FUNCTION sp_update_billing_details(
@@ -683,6 +719,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+
 --contains tabla
 --create
 CREATE OR REPLACE FUNCTION sp_create_contains(p_name VARCHAR(100))
@@ -698,6 +735,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+
 --read all
 CREATE OR REPLACE FUNCTION sp_read_all_contains()
 RETURNS TABLE (
@@ -711,6 +749,7 @@ BEGIN
     ORDER BY c.name;
 END;
 $$ LANGUAGE plpgsql;
+
 
 --read by id
 CREATE OR REPLACE FUNCTION sp_readById_contains(p_contains_id BIGINT)
@@ -726,6 +765,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+
 --delete
 CREATE OR REPLACE FUNCTION sp_delete_contains(p_contains_id BIGINT)
 RETURNS BOOLEAN AS $$
@@ -739,6 +779,7 @@ BEGIN
     RETURN v_affected > 0;
 END;
 $$ LANGUAGE plpgsql;
+
 
 --update: parameteres update, nem all adata
 CREATE OR REPLACE FUNCTION sp_update_contains(
@@ -758,3 +799,4 @@ BEGIN
     RETURN v_affected > 0;
 END;
 $$ LANGUAGE plpgsql;
+
