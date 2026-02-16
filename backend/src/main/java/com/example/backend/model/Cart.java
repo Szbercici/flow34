@@ -21,8 +21,10 @@ public class Cart {
     @Column(name="user_id", nullable=false)
     private Long userId;
 
-    @Column(name="created_at")
-    private LocalDateTime createdAt;
+    @Column(name="created_at", nullable = false)
+    private LocalDateTime createdAt = LocalDateTime.now();
+
+
 
     public Cart(Long userId) {
         this.userId = userId;

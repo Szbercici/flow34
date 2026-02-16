@@ -5,14 +5,18 @@ import com.example.backend.dto.CartItemDto;
 import com.example.backend.model.Cart;
 import com.example.backend.model.CartItem;
 import com.example.backend.model.Product;
+import com.example.backend.model.User;
 import com.example.backend.repository.CartItemRepository;
 import com.example.backend.repository.CartRepository;
 import com.example.backend.repository.ProductRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -66,29 +70,39 @@ public class CartService {
         return new CartDto(cart.getId(), itemDtos, totalItems, totalPrice);
     }
 
-    public CartDto addItem(Long userId, Long productId, int qty) {
-        if (qty <= 0) throw new IllegalArgumentException("quantity must be > 0");
+
+
+    @Transactional
+    public CartDto addItemToCart(Long userId, Long productId, int quantity) {
+
+        if (quantity <= 0) {
+            throw new IllegalArgumentException("Quantity must be >= 1");
+        }
 
         Cart cart = getOrCreateCart(userId);
 
         Product product = productRepository.findById(productId)
-                .orElseThrow(() -> new RuntimeException("Product not found: " + productId));
+                .orElseThrow(() -> new RuntimeException("Product not found"));
 
-        CartItem item = cartItemRepository
-                .findByCartIdAndProductId(cart.getId(), productId)
-                .orElseGet(() -> {
-                    CartItem newItem = new CartItem();
-                    newItem.setCart(cart);
-                    newItem.setProduct(product);
-                    newItem.setQuantity(0);
-                    return newItem;
-                });
+        Optional<CartItem> existingItem =
+                cartItemRepository.findByCartIdAndProductId(cart.getId(), productId);
 
-        item.setQuantity(item.getQuantity() + qty);
-        cartItemRepository.save(item);
+        if (existingItem.isPresent()) {
+            CartItem item = existingItem.get();
+            item.setQuantity(item.getQuantity() + quantity);
+            cartItemRepository.save(item);
+        } else {
+            CartItem item = new CartItem();
+            item.setCart(cart);
+            item.setProduct(product);
+            item.setQuantity(quantity);
+            cartItemRepository.save(item);
+        }
 
-        return getCartDto(userId); // friss kosár DTO vissza
+        return getCartDto(userId);
     }
+
+
 
     public CartDto removeItem(Long userId, Long productId) {
         Cart cart = getOrCreateCart(userId);
