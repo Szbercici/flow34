@@ -9,6 +9,7 @@
   --accent-color: #0d6efd; /* Kék (pl. linkekhez) */
   --accent-color2: #97CEF4; /* Sötétebb kék (pl. gombokhoz) */
   --on-accent-color: #ffffff; /* Szöveg színe accent színen */
+  --cart-item-bg: #ffffff; /* Világos kék a kosárban */
 
   /* Scrollbar színek */
   --scrollbar-track-bg: #f1f1f1;
@@ -34,7 +35,7 @@
   --footer-subscribe-hover-bg: #0b5ed7;
   --footer-subscribe-hover-shadow: rgba(13, 110, 253, 0.3);
   --footer-bottom-border-color: #dee2e6;
-  --footer-bottom-bg: rgba(255, 255, 255, 0.5);
+  --footer-bottom-bg: rgba(255, 255, 255, 0.473);
 
   /* Űrlap / input színek */
   --input-bg-color: #ffffff;

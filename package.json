@@ -1,8 +1,4 @@
 {
-  "dependencies": {
-    "cors": "^2.8.6",
-    "react-fast-marquee": "^1.6.5"
-  },
   "devDependencies": {
     "@types/node": "^25.2.3"
   }
