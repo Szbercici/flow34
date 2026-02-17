@@ -1,11 +1,13 @@
 package com.example.backend.controller;
 
-import com.example.backend.dto.AddCartItemRequest;
 import com.example.backend.dto.CartDto;
+import com.example.backend.dto.CartItemInput;
 import com.example.backend.service.CartService;
 import com.example.backend.service.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -25,10 +27,10 @@ public class CartController {
         return cartService.getCartDto(userId);
     }
 
-    @PostMapping("/cart/items")
-    public CartDto addItem(@RequestBody AddCartItemRequest req, Authentication auth) {
+    @PutMapping("/cart")
+    public CartDto syncCart(@RequestBody List<CartItemInput> items, Authentication auth) {
         Long userId = userService.getUserId(auth);
-        return cartService.addItemToCart(userId, req.getProductId(), req.getQuantity());
+        return cartService.syncCart(userId, items);
     }
 
 

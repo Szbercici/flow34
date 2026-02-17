@@ -54,7 +54,7 @@ public class  AuthController {
         ResponseCookie accessCookie = ResponseCookie.from("access_token", access)
                 .httpOnly(true)
                 .secure(false) // localhoston false, élesben true
-                .sameSite("Lax") // devre oké; ha nagyon akarsz: "Strict"
+                .sameSite("Lax")
                 .path("/")
                 .maxAge(Duration.ofHours(1))
                 .build();
