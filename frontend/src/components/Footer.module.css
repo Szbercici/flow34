@@ -1,5 +1,5 @@
 .footer {
-  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  background: var(--footer-bg-gradient-start);
   border-top: 1px solid #e9ecef;
   margin-top: 4rem;
   padding: 3rem 0 1rem 0;
@@ -162,7 +162,7 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: var(--footer-bottom-background-color);
   backdrop-filter: blur(5px);
 }
 

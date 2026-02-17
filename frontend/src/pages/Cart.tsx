@@ -11,7 +11,7 @@ const Cart = () => {
   // 1. Végösszeg kiszámítása (price * quantity)
   const totalPrice = items.reduce(
     (acc, item) => acc + item.price * (item.quantity || 1),
-    0
+    0,
   );
 
   // 2. Üres kosár kezelése
@@ -19,7 +19,9 @@ const Cart = () => {
     return (
       <div className="container empty-cart">
         <h2>Your cart is empty 😢</h2>
-        <Link to="/" className="back-button">Back to the store</Link>
+        <Link to="/" className="back-button">
+          Back to the store
+        </Link>
       </div>
     );
   }
@@ -28,7 +30,7 @@ const Cart = () => {
     <div className="container cart-page">
       <h1>Cart contents</h1>
       <Blob className="cart-blob" />
-      
+
       <div className="cart-list">
         {items.map((product) => (
           <div key={product.id} className="cart-item">
@@ -40,7 +42,9 @@ const Cart = () => {
               />
               <div>
                 <h2>{product.name}</h2>
-                <p className="item-price">{product.price.toString} € / db</p>
+                <p className="item-price">
+                  {(product.price ?? 0).toLocaleString()} € / db
+                </p>
               </div>
             </div>
 
@@ -51,11 +55,8 @@ const Cart = () => {
               >
                 -
               </button>
-              <span className="quantity">{product.quantity}</span>
-              <button 
-                className="btn-plus"
-                onClick={() => addToCart(product)}
-              >
+              <span className="quantity">{product.quantity ?? 1}</span>
+              <button className="btn-plus" onClick={() => addToCart(product)}>
                 +
               </button>
             </div>
@@ -71,12 +72,17 @@ const Cart = () => {
       <div className="cart-summary">
         <div className="summary-row">
           <span>Total:</span>
-          <span className="total-amount">{totalPrice.toLocaleString()} €  </span>
+          <span className="total-amount">{totalPrice.toLocaleString()} € </span>
         </div>
-        <button className="checkout-button" onClick={() => alert("Irány a fizetés!")}>
+        <button
+          className="checkout-button"
+          onClick={() => alert("Irány a fizetés!")}
+        >
           Proceed to Checkout
         </button>
-        <Link to="/" className="continue-shopping">Continue shopping</Link>
+        <Link to="/" className="continue-shopping">
+          Continue shopping
+        </Link>
       </div>
     </div>
   );

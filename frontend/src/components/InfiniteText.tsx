@@ -5,7 +5,7 @@ const InfiniteText = () => {
     <div style={{ padding: '70px 0', background: 'var(.)', color: 'transparent', WebkitTextStroke: '1px var(--accent-color)' }}>
       <Marquee 
         speed={60}        
-        gradient={true}
+        
         pauseOnHover={false} 
         autoFill={true}
       >

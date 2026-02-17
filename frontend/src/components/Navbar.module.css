@@ -15,6 +15,7 @@
     width: 100%;       
     padding: 0 3.8%;     
     box-sizing: border-box; 
+    background-color: var(--navbar-color);
 }
 
 .siteTitle{
@@ -51,11 +52,11 @@
 }
 .navbar a:hover
 {
-    background-color: #eee;
+    background-color: var(--navbar-hover-bg);
 }
 
 .navbar a:active{
-    background-color: #a6bbc2;
+    background-color: var(--navbar-active-bg);
 }
 
 /* Desktop Menu */

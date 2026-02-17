@@ -54,7 +54,7 @@ const Navbar = () => {
             className={styles.cartItem}
             currentPath={location.pathname}
           >
-            <ShoppingCartIcon size={35} color="black" />
+            <ShoppingCartIcon size={35} color="var(--cart-icon-color)" />
             <div className={styles.cartBadge}>{items.length}</div>
           </CustomLink>
         </li>
@@ -71,7 +71,7 @@ const Navbar = () => {
 
       {/* Mobile Cart Icon */}
       <Link to="/cart" className={styles.mobileCart} onClick={closeMenu}>
-        <ShoppingCartIcon size={35} color="black" />
+        <ShoppingCartIcon size={35} color="var(--cart-icon-color)" />
         <div className={styles.cartBadge}>{items.length}</div>
       </Link>
 
@@ -124,19 +124,24 @@ function CustomLink({
   children,
   onClick,
   currentPath,
+  className,
   ...props
 }: React.ComponentProps<typeof Link> & {
   onClick?: () => void;
   currentPath: string;
 }) {
   const path = currentPath;
+  const activeClass = path === to ? styles.active : "";
 
   return (
-    <li className={path === to ? styles.active : ""}>
-      <Link to={to} onClick={onClick} {...props}>
-        {children}
-      </Link>
-    </li>
+    <Link
+      to={to}
+      onClick={onClick}
+      className={[className, activeClass].filter(Boolean).join(" ")}
+      {...props}
+    >
+      {children}
+    </Link>
   );
 }
 

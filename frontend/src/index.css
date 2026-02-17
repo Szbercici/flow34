@@ -4,12 +4,15 @@
   --secondary-text-color: #6c757d; /* Szürke szöveg */
   --background-color: #ffffff; /* Fehér háttér */
   --card-background-color: #f8f9fa; /* Világos szürke kártya háttér */
-  --border-color: #212529; /* Világos szürke szegély */
   /* További színek... */
+  --cart-icon-color: black;
   --accent-color: #0d6efd; /* Kék (pl. linkekhez) */
-  --accent-color2: #97CEF4; /* Sötétebb kék (pl. gombokhoz) */
+  --brand-blue: #0066cc; /* Kanonikus márkakék, összevonás céljára */
+  /* A világoskék közös definícióját `--hero-bg-color` használja */
   --on-accent-color: #ffffff; /* Szöveg színe accent színen */
-  --cart-item-bg: #ffffff; /* Világos kék a kosárban */
+  --navbar-color: #f8f9fa; /* Világos szürke navbar háttér */
+  /* --cart-item-bg és --input-bg-color összevonva: */
+  /* Használja a --background-color változót (fehér) */
 
   /* Scrollbar színek */
   --scrollbar-track-bg: #f1f1f1;
@@ -21,13 +24,13 @@
   /* Navbar színek */
   --navbar-hover-bg: #eeeeee;
   --navbar-active-bg: #a6bbc2;
-  --navbar-toggle-hover-bg: #eeeeee;
   --badge-bg-color: #ff4444;
   --badge-text-color: #ffffff;
   --overlay-background-color: rgba(0, 0, 0, 0.3);
 
   /* Footer színek */
-  --footer-bg-gradient-start: #f8f9fa;
+  /* A footer gradient kezdő színe megegyezik a kártya háttérrel */
+  /* --footer-bg-gradient-start összevonva a --card-background-color változóval */
   --footer-bg-gradient-end: #ffffff;
   --footer-border-color: #e9ecef;
   --footer-input-border-color: #dee2e6;
@@ -36,9 +39,11 @@
   --footer-subscribe-hover-shadow: rgba(13, 110, 253, 0.3);
   --footer-bottom-border-color: #dee2e6;
   --footer-bottom-bg: rgba(255, 255, 255, 0.473);
+  --footer-bottom-background-color: #fcfeff;
+
 
   /* Űrlap / input színek */
-  --input-bg-color: #ffffff;
+  /* input háttér összevonva: használd --background-color */
   --input-border-color: #d6d6e7;
   --input-text-color: rgb(35, 38, 59);
   --input-shadow-color: rgb(119 122 175 / 30%);
@@ -52,24 +57,84 @@
 
   /* About / hero színek */
   --hero-bg-color: #97cef4;
-  --hero-heading-gradient-start: #0066cc;
+  --hero-heading-gradient-start: var(--brand-blue);
   --hero-heading-gradient-end: #224046;
   --hero-body-text-color: #333333;
   --feature-card-bg-color: #f0f8ff;
-  --feature-heading-color: #0066cc;
-  --feature-text-color: #555555;
-  --mission-text-bg-color: #f8f9ff;
-  --mission-text-border-color: #0066cc;
+  --feature-heading-color: var(--brand-blue);
+  /* --feature-text-color összevonva: használja --muted-text-color */
+  --mission-text-bg-color: #f0f8ff;
+  --mission-text-border-color: var(--brand-blue);
   --mission-text-color: #1a1a1a;
 
   /* Egyéb színek */
   --muted-text-color: #555555;
   --highlight-color: rgb(43, 191, 255);
+
 }
+/* Dark theme: applied when <html> has class="dark" (DarkModeProvider toggles it) */
+:root.dark {
+  --cart-icon-color: rgb(209, 211, 227);
+
+  --primary-text-color: #e5e9ed;
+  --secondary-text-color: #9aa7b2;
+  --background-color: #171f31;
+  --card-background-color: #10161d;
+  --border-color: #24303b;
+  --accent-color: #3aa0ff;
+  --on-accent-color: #06202b;
+  --navbar-hover-bg: rgba(255,255,255,0.02);
+  --navbar-active-bg: rgba(255,255,255,0.03);
+  --badge-bg-color: #ff6b6b;
+  --navbar-color: #1b294f;
+  --footer-bottom-background-color: #1b294f;
+
+  --scrollbar-track-bg: #071018;
+  --scrollbar-thumb-bg: #1f2a33;
+  --scrollbar-thumb-hover-bg: #2b3943;
+  --scrollbar-color-thumb: #2b3943;
+  --scrollbar-color-track: #071018;
+
+  --footer-bg-gradient-start: #1b294f;
+  --footer-bg-gradient-end: #08121a;
+  --footer-border-color: #1e2a36;
+  --footer-input-border-color: #28343e;
+  --footer-input-placeholder-color: #7b8a93;
+  --footer-subscribe-hover-bg: #2566b8;
+  --footer-subscribe-hover-shadow: rgba(37, 102, 184, 0.25);
+  --footer-bottom-border-color: rgba(255,255,255,0.04);
+  --footer-bottom-bg: rgba(0,0,0,0.25);
+
+  --input-border-color: #28343e;
+  --input-text-color: #dbe9f7;
+  --input-shadow-color: rgba(119,122,175,0.06);
+  --input-focus-border-color: #4da6ff;
+
+  --primary-button-bg-color: #1e65d7;
+  --primary-button-hover-bg-color: #2a78ea;
+  --primary-button-text-color: #ffffff;
+
+  --hero-bg-color: #07192a;
+  --hero-heading-gradient-start: var(--brand-blue);
+  --hero-heading-gradient-end: #11292f;
+  --hero-body-text-color: #dfeaf6;
+  --feature-card-bg-color: #071726;
+  --feature-heading-color: var(--brand-blue);
+  --mission-text-bg-color: #1e223f;
+  --mission-text-border-color: var(--brand-blue);
+  --mission-text-color: #dbe9f7;
+
+  --muted-text-color: #9aa7b2;
+  --highlight-color: #3ac6ff;
+}
+
+
 
 body {
   overflow-x: hidden;
   margin: 0;
+  background-color: var(--background-color);
+  color: var(--primary-text-color);
 }
 
 
