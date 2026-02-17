@@ -65,27 +65,30 @@
     useEffect(() => {
       localStorage.setItem("cart", JSON.stringify(items));
 
-      const syncWithServer = async () => {
-    if (user) {
-      try {
-        const payload = items.map(item => ({
+   const syncWithServer = async () => {
+  if (user) {
+    try {
+      // 1. Elkészítjük a tiszta listát (tömböt)
+      const payload = items
+        .filter(item => item.id !== undefined) // Kiszűrjük a hibásakat
+        .map(item => ({
           productId: item.id,
           quantity: item.quantity
-          
         }));
-        await fetch(`${API_BASE_URL}/api/cart/items`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ payload }), 
-          credentials: "include",
-        });
-        
-        console.log("Sikeres szinkronizálás a rövidített adatokkal.");
-      } catch (error) {
-        console.error("Szerver hiba:", error);
-      }
+
+      await fetch(`${API_BASE_URL}/api/cart`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload), 
+        credentials: "include",
+      });
+      
+      console.log("Sikeres szinkronizálás tiszta listaként.");
+    } catch (error) {
+      console.error("Szerver hiba:", error);
     }
-  };
+  }
+};
 
       syncWithServer();
     }, [items, user]);
