@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import styles from "./Navbar.module.css";
 import { Link, useLocation } from "react-router-dom";
-import { MyLogo } from '../assets/Logo';
+import { MyLogo } from "../assets/Logo";
 import ShoppingCartIcon from "../assets/ShoppingCart";
-import { useContext } from 'react';
-import { Context } from '../Context'; 
-import { Menu, X } from 'lucide-react';
+import { useContext } from "react";
+import { CartContext } from "../CartContext";
+import { Menu, X } from "lucide-react";
 import { useAuth } from "../AuthContext";
 
-
 const Navbar = () => {
-  const { items } = useContext(Context)!;
+  const { items } = useContext(CartContext)!;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { isAuthenticated, user } = useAuth();
   const location = useLocation();
@@ -28,31 +27,45 @@ const Navbar = () => {
       <Link to="/" className={styles.siteTitle} onClick={closeMenu}>
         <MyLogo width={75} height={77} />
       </Link>
-      
+
       {/* Desktop Menu */}
       <ul className={styles.desktopMenu}>
         <li className={styles.desktopMenuItem}>
-          <CustomLink to="/about" currentPath={location.pathname}>About</CustomLink>
+          <CustomLink to="/about" currentPath={location.pathname}>
+            About
+          </CustomLink>
         </li>
         {!isAuthenticated ? (
           <li className={styles.desktopMenuItem}>
-            <CustomLink to="/login" currentPath={location.pathname}>Login</CustomLink>
+            <CustomLink to="/login" currentPath={location.pathname}>
+              Login
+            </CustomLink>
           </li>
         ) : (
           <li className={styles.desktopMenuItem}>
-             <CustomLink to="/account/me" currentPath={location.pathname}>Hi, {user?.username}</CustomLink>
+            <CustomLink to="/account/me" currentPath={location.pathname}>
+              Hi, {user?.username}
+            </CustomLink>
           </li>
         )}
-         <li className={styles.cartItem}>
-          <CustomLink to="/cart" className={styles.cartItem} currentPath={location.pathname}>
-            <ShoppingCartIcon  size={35} color="black" />
-           <div className={styles.cartBadge}>{items.length}</div>
+        <li className={styles.cartItem}>
+          <CustomLink
+            to="/cart"
+            className={styles.cartItem}
+            currentPath={location.pathname}
+          >
+            <ShoppingCartIcon size={35} color="black" />
+            <div className={styles.cartBadge}>{items.length}</div>
           </CustomLink>
         </li>
       </ul>
 
       {/* Mobile Menu Button */}
-      <button className={styles.mobileMenuButton} onClick={toggleMenu} aria-label="Menu">
+      <button
+        className={styles.mobileMenuButton}
+        onClick={toggleMenu}
+        aria-label="Menu"
+      >
         {isMenuOpen ? <X size={32} /> : <Menu size={32} />}
       </button>
 
@@ -69,17 +82,35 @@ const Navbar = () => {
           <div className={styles.mobileMenu}>
             <ul className={styles.mobileMenuList}>
               <li>
-                <CustomLink to="/about" onClick={closeMenu} currentPath={location.pathname}>About</CustomLink>
+                <CustomLink
+                  to="/about"
+                  onClick={closeMenu}
+                  currentPath={location.pathname}
+                >
+                  About
+                </CustomLink>
               </li>
-               {!isAuthenticated ? (
-                  <li className={styles.desktopMenuItem}>
-                <CustomLink to="/login" currentPath={location.pathname} onClick={closeMenu} >Login</CustomLink>
+              {!isAuthenticated ? (
+                <li className={styles.desktopMenuItem}>
+                  <CustomLink
+                    to="/login"
+                    currentPath={location.pathname}
+                    onClick={closeMenu}
+                  >
+                    Login
+                  </CustomLink>
                 </li>
-                ) : (
-               <li className={styles.desktopMenuItem}>
-              <CustomLink to="/account/me" currentPath={location.pathname} onClick={closeMenu} >My account</CustomLink>
-          </li>
-        )}
+              ) : (
+                <li className={styles.desktopMenuItem}>
+                  <CustomLink
+                    to="/account/me"
+                    currentPath={location.pathname}
+                    onClick={closeMenu}
+                  >
+                    My account
+                  </CustomLink>
+                </li>
+              )}
             </ul>
           </div>
         </>
@@ -94,7 +125,10 @@ function CustomLink({
   onClick,
   currentPath,
   ...props
-}: React.ComponentProps<typeof Link> & { onClick?: () => void; currentPath: string }) {
+}: React.ComponentProps<typeof Link> & {
+  onClick?: () => void;
+  currentPath: string;
+}) {
   const path = currentPath;
 
   return (

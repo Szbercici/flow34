@@ -23,7 +23,7 @@ const About = () => {
         <div className={styles.textContent}>
           <h2>
             In a world that never stops moving, staying hydrated shouldn't be a
-            chore—it should be your most refreshing ritual.
+            chore -it should be your most refreshing ritual.
           </h2>
         </div>
 

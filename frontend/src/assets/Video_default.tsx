@@ -19,9 +19,9 @@ const Video_default = () => {
         playsInline    // Fontos iOS-re (hogy ne ugorjon teljes képernyőre)
         style={{
              maxWidth: '100%',
-             height: '40vw',
              objectFit: 'cover', // Ezzel tölti ki a teret torzítás nélkül
-             borderRadius: "50% 20% / 10% 40%"
+             borderRadius: "50% 20% / 10% 40%",
+             height: "32vw"
         }}
       />
     </div>

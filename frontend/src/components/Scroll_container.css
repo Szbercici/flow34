@@ -1,4 +1,7 @@
 /* Scrollbar.css */
+.grab-scroll-container {
+  cursor: grab; 
+}
 
 .flow-scroll-container {
   display: flex;
@@ -6,6 +9,7 @@
   overflow-x: auto; 
   overflow-y: hidden;
   padding: 20px 40% 20px 40%; 
+  height: 100%;
   
   scroll-snap-type: x proximity; 
   scroll-behavior: smooth;
@@ -20,12 +24,11 @@
 }
 .flow-product-wrapper div{
     scroll-snap-align: center;
-  
-  
 }
 
 /* A sáv teljes szélessége/magassága */
 .flow-scroll-container::-webkit-scrollbar {
   height: 150px; /* Vízszintesen ez a vastagsága */
+  width: 12px;  
 }
 
