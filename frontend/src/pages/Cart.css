@@ -61,7 +61,7 @@
   align-items: center;
   gap: 15px;
   /* A kedvenc árnyékod */
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px
+  box-shadow: var(--shadow-color) 0px 6px 12px -2px, var(--shadow-color2) 0px 3px 7px -3px
 }
 
 /* Kép és alapinfók (Név, darabár) */
@@ -78,6 +78,18 @@
   height: 80px;
   object-fit: cover;
   border-radius: 10px;
+}
+
+.placeholder {
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
+  background-color: #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 0.8rem;
 }
 
 .cart-info h2 {
