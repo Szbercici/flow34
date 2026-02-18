@@ -106,21 +106,21 @@
 }
 
 .emailInput {
-
+  color: var(--input-text-color);
   flex: 1;
   padding: 0.6rem 0.5rem;
-  border: 1px solid #dee2e6;
+  border: 1px solid var(--input-border-color);
   border-radius: 4px;
   font-size: 0.9rem;
   font-family: inherit;
   transition: border-color 0.3s ease;
-  background-color: white;
+ background-color: var(--background-color);
 }
 
 .emailInput:focus {
   outline: none;
-  border-color: var(--accent-color);
-  box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.1);
+  border-color: var(--input-focus-border-color);
+  box-shadow: 0 1px 0 0 var(--input-focus-shadow-color);
 }
 
 .emailInput::placeholder {

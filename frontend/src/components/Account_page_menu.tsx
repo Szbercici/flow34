@@ -5,6 +5,8 @@ import { useDarkMode } from "../DarkModeContext";
 import styles from "./Account_page_menu.module.css";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import MoonIcon from "../assets/MoonIcon";
+import SunIcon from "../assets/SunIcon";
 
 interface AccountPageProps {
   children?: React.ReactNode;
@@ -40,6 +42,14 @@ const Account_page: React.FC<AccountPageProps> = ({ children }) => {
         >
           My orders
         </a>
+         <div
+          className={styles.darkToggle}
+          onClick={toggle}
+          aria-pressed={darkMode}
+          title="Toggle dark mode (preference saved)"
+        >
+          {darkMode ? <SunIcon size={25} color="white" /> : <MoonIcon size={25} color="black" />}
+        </div>
         <button
           className={styles.logoutBtn}
           onClick={async () => {
@@ -51,15 +61,6 @@ const Account_page: React.FC<AccountPageProps> = ({ children }) => {
           }}
         >
           Logout
-        </button>
-        <button
-          type="button"
-          className={styles.darkToggle}
-          onClick={toggle}
-          aria-pressed={darkMode}
-          title="Toggle dark mode (preference saved)"
-        >
-          Dark mode: {darkMode ? "On" : "Off"}
         </button>
       </div>
 

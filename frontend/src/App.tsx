@@ -27,8 +27,8 @@ function App() {
           rel="stylesheet"
         />
         <Navbar />
+        <Toaster position="top-center" richColors closeButton />
         <ScrollToTop />
-         <Toaster position="top-center" richColors closeButton />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />

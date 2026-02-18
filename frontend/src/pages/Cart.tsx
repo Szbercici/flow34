@@ -6,11 +6,13 @@ import { API_BASE_URL } from "../config/api";
 import Blob from "../assets/Blob";
 
 const Cart = () => {
-  const { items, addToCart, removeFromCart } = useCart();
 
+  
+  const { items, addToCart, removeFromCart } = useCart();
+  
   // 1. Végösszeg kiszámítása (price * quantity)
   const totalPrice = items.reduce(
-    (acc, item) => acc + item.price * (item.quantity || 1),
+    (acc, item) => acc + (Number(item.price ?? 0) * (Number(item.quantity ?? "1") || 1)),
     0,
   );
 
@@ -28,7 +30,7 @@ const Cart = () => {
 
   return (
     <div className="container cart-page">
-      <h1>Cart contents</h1>
+      <h2>Cart contents</h2>
       <Blob className="cart-blob" />
 
       <div className="cart-list">

@@ -3,7 +3,7 @@
   import { useAuth } from "./AuthContext";
   import { toast } from "sonner";
   export const CartContext = createContext<ContextType | undefined>(undefined);
-  
+
   export interface CartItem {
     id: number;
     name: string;
@@ -28,7 +28,6 @@
     removeFromCart: (product: CartItem) => void;
     addToCart: (product: CartItem) => void;
   }
-
   export const ContextProvider = ({ children }: { children: ReactNode }) => {
     const { user } = useAuth();
 
@@ -67,7 +66,7 @@
 
    const syncWithServer = async () => {
   if (user) {
-    try {
+    try {       
       // 1. Elkészítjük a tiszta listát (tömböt)
       const payload = items
         .filter(item => item.id !== undefined) // Kiszűrjük a hibásakat
@@ -75,14 +74,13 @@
           productId: item.id,
           quantity: item.quantity
         }));
-
       await fetch(`${API_BASE_URL}/api/cart`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload), 
         credentials: "include",
+        body: JSON.stringify(payload),    
       });
-      
+      console.log("Server items:", payload);
       console.log("Sikeres szinkronizálás tiszta listaként.");
     } catch (error) {
       console.error("Szerver hiba:", error);
