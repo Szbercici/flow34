@@ -126,7 +126,7 @@
 }
 
 .feature {
-    background-color: var(--feature-card-bg-color);
+    background-color: var(--navbar-color);
     color: var(--primary-text-color);
     padding: 30px;
     border-radius: 12px;

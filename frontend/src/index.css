@@ -4,6 +4,8 @@
   --secondary-text-color: #6c757d; /* Szürke szöveg */
   --background-color: #ffffff; /* Fehér háttér */
   --card-background-color: #f8f9fa; /* Világos szürke kártya háttér */
+  --shadow-color: rgba(50, 50, 93, 0.25);  /* Enyhe árnyék */
+  --shadow-color2:  rgba(0, 0, 0, 0.3); /* Még enyhébb árnyék */
   /* További színek... */
   --cart-icon-color: black;
   --accent-color: #0d6efd; /* Kék (pl. linkekhez) */
@@ -88,6 +90,8 @@
   --badge-bg-color: #ff6b6b;
   --navbar-color: #1b294f;
   --footer-bottom-background-color: #1b294f;
+   --shadow-color: rgba(56, 56, 163, 0.614);  /* Enyhe árnyék */
+  --shadow-color2:  rgba(0, 0, 0, 0.3); /* Még enyhébb árnyék */
 
   --scrollbar-track-bg: #071018;
   --scrollbar-thumb-bg: #1f2a33;

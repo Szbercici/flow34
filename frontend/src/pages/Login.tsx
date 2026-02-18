@@ -55,12 +55,12 @@ const Login = () => {
               required
             />
           </div>
-          
+
           <div className="form-group password-wrapper">
             <input
               placeholder="Password"
               // Itt dől el a típus a state alapján!
-              type={showPassword ? "text" : "password"} 
+              type={showPassword ? "text" : "password"}
               name="password"
               required
             />
@@ -68,10 +68,10 @@ const Login = () => {
             <div
               className="password-toggle"
               onMouseDown={() => setShowPassword(!showPassword)} // Amikor lenyomod
-              onMouseUp={() => setShowPassword(showPassword)}   // Amikor felengeded
+              onMouseUp={() => setShowPassword(showPassword)} // Amikor felengeded
               onMouseLeave={() => setShowPassword(showPassword)} // Ha lehúzod az egeret, akkor is rejtse el
             >
-              <Eye size={24}/>
+              <Eye size={24} />
             </div>
           </div>
 
@@ -80,7 +80,9 @@ const Login = () => {
           </button>
         </form>
 
-        <a href="/register">Don't have an account? Sign up here.</a>
+        <a className="link" onClick={() => navigate("/register")}>
+          Don't have an account? Sign up here.
+        </a>
       </div>
     </div>
   );

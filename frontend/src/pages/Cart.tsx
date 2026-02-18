@@ -35,11 +35,15 @@ const Cart = () => {
         {items.map((product) => (
           <div key={product.id} className="cart-item">
             <div className="cart-info">
-              <img
-                src={`${API_BASE_URL}/${product.img}`}
-                alt={product.name}
-                className="cart-item-image"
-              />
+              {product.img ? (
+                <img
+                  src={`${API_BASE_URL}/${product.img}`}
+                  alt={product.name}
+                  className="cart-item-image"
+                />
+              ) : (
+                <div className="cart-item-image placeholder">No Image</div>
+              )}
               <div>
                 <h2>{product.name}</h2>
                 <p className="item-price">
