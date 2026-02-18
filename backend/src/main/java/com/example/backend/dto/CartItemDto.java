@@ -3,10 +3,11 @@ package com.example.backend.dto;
 import java.math.BigDecimal;
 
 public record CartItemDto(
-        Long productId,
+
+        Long id,
         String name,
         String img,
-        BigDecimal unitPrice,
+        BigDecimal price,
         int quantity,
         BigDecimal lineTotal
 ) {}

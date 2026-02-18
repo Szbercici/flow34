@@ -29,8 +29,12 @@ public class SecurityConfig {
                         .requestMatchers("/api/uploads/images/**").permitAll()
                         .requestMatchers("/static/images/**").permitAll()
 
+                        // ADMIN ENGEDÉLY MINDENHEZ
+
+
                         // PRODUCTS
-                        .requestMatchers(HttpMethod.GET, "/api/products/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/products", "/api/products/**").permitAll()
+
                         .requestMatchers(HttpMethod.POST, "/api/products/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT,  "/api/products/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE,"/api/products/**").hasRole("ADMIN")
@@ -39,6 +43,11 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/users/me").hasAnyRole("USER","ADMIN")
                         .requestMatchers(HttpMethod.GET, "/api/users/all").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/api/users/u/**").hasRole("ADMIN")
+
+                        // THEME CHANGE
+                        .requestMatchers(HttpMethod.GET, "/api/users/me/**").hasAnyRole("USER","ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/users/me/**").hasAnyRole("USER","ADMIN")
+
 
                         // CART
                         .requestMatchers(HttpMethod.GET, "/api/cart/**").hasAnyRole("USER","ADMIN")
