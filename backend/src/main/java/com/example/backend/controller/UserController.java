@@ -1,5 +1,6 @@
 package com.example.backend.controller;
 
+import com.example.backend.dto.UpdateThemeRequest;
 import org.springframework.security.core.Authentication;
 import com.example.backend.service.UserService;
 import com.example.backend.dto.UserDto;
@@ -8,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/users")
@@ -43,6 +45,26 @@ public class UserController {
         String username = authentication.getName();
         return ResponseEntity.ok(userService.getMe(username));
     }
+
+    //USER THEME
+    @GetMapping("/me/theme")
+    public Map<String, String> getMyTheme(Authentication auth) {
+        Long userId = userService.getUserId(auth);
+        String theme = userService.getMyTheme(userId);
+        return Map.of("theme", theme);
+    }
+
+    @PutMapping("/me/theme")
+    public Map<String, String> updateMyTheme(
+            @RequestBody UpdateThemeRequest req,
+            Authentication auth
+    ) {
+        Long userId = userService.getUserId(auth);
+        String theme = userService.updateMyTheme(userId, req.getTheme());
+        return Map.of("theme", theme);
+    }
+
+
 
 
 

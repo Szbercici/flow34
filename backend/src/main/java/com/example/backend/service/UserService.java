@@ -8,6 +8,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.transaction.annotation.Transactional;
+import com.example.backend.model.Theme;
 
 import java.util.List;
 
@@ -84,4 +86,35 @@ public class UserService {
 
         return new UserDto(user.getId(), user.getUsername(), user.getEmail());
     }
+
+    //THEME ÁLLÍTÁSA
+    @Transactional(readOnly = true)
+    public String getMyTheme(Long userId) {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"))
+                .getTheme()
+                .name(); // "light" / "dark"
+    }
+
+    @Transactional
+    public String updateMyTheme(Long userId, String themeRaw) {
+        if (themeRaw == null) throw new IllegalArgumentException("theme is required");
+
+        Theme theme;
+        try {
+            theme = Theme.valueOf(themeRaw.trim().toLowerCase());
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("theme must be 'light' or 'dark'");
+        }
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        user.setTheme(theme);
+        userRepository.save(user);
+
+        return user.getTheme().name();
+    }
+
+
 }
