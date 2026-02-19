@@ -1,27 +1,28 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Cart.css";
+import styles from "./Cart.module.css";
 import { useCart } from "../CartContext";
 import { API_BASE_URL } from "../config/api";
 import Blob from "../assets/Blob";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
-
-  
   const { items, addToCart, removeFromCart } = useCart();
-  
+  const navigate = useNavigate();
+
   // 1. Végösszeg kiszámítása (price * quantity)
   const totalPrice = items.reduce(
-    (acc, item) => acc + (Number(item.price ?? 0) * (Number(item.quantity ?? "1") || 1)),
+    (acc, item) =>
+      acc + Number(item.price ?? 0) * (Number(item.quantity ?? "1") || 1),
     0,
   );
 
   // 2. Üres kosár kezelése
   if (items.length === 0) {
     return (
-      <div className="container empty-cart">
+      <div className={`${styles.container} ${styles["empty-cart"]}`}>
         <h2>Your cart is empty 😢</h2>
-        <Link to="/" className="back-button">
+        <Link to="/" className={styles["back-button"]}>
           Back to the store
         </Link>
       </div>
@@ -29,45 +30,58 @@ const Cart = () => {
   }
 
   return (
-    <div className="container cart-page">
+    <div className={`${styles.container} ${styles["cart-page"]}`}>
       <h2>Cart contents</h2>
-      <Blob className="cart-blob" />
+      <Blob className={styles["cart-blob"]} />
 
-      <div className="cart-list">
+      <div className={styles["cart-list"]}>
         {items.map((product) => (
-          <div key={product.id} className="cart-item">
-            <div className="cart-info">
+          <div key={product.id} className={styles["cart-item"]}>
+            <div className={styles["cart-info"]}>
               {product.img ? (
                 <img
+                  onClick={() => navigate(`/product/${product.name}`)}
                   src={`${API_BASE_URL}/${product.img}`}
                   alt={product.name}
-                  className="cart-item-image"
+                  className={`${styles["cart-item-image"]} ${styles.clickable}`}
                 />
               ) : (
-                <div className="cart-item-image placeholder">No Image</div>
+                <div
+                  className={`${styles["cart-item-image"]} ${styles.placeholder}`}
+                >
+                  No Image
+                </div>
               )}
               <div>
-                <h2>{product.name}</h2>
-                <p className="item-price">
+                <h2
+                  className={styles.clickable}
+                  onClick={() => navigate(`/product/${product.name}`)}
+                >
+                  {product.name}
+                </h2>
+                <p className={styles["item-price"]}>
                   {(product.price ?? 0).toLocaleString()} € / db
                 </p>
               </div>
             </div>
 
-            <div className="cart-controls">
+            <div className={styles["cart-controls"]}>
               <button
-                className="btn-minus"
+                className={styles["btn-minus"]}
                 onClick={() => removeFromCart(product)}
               >
                 -
               </button>
-              <span className="quantity">{product.quantity ?? 1}</span>
-              <button className="btn-plus" onClick={() => addToCart(product)}>
+              <span className={styles.quantity}>{product.quantity ?? 1}</span>
+              <button
+                className={styles["btn-plus"]}
+                onClick={() => addToCart(product)}
+              >
                 +
               </button>
             </div>
 
-            <div className="item-total">
+            <div className={styles["item-total"]}>
               {(product.price * (product.quantity || 1)).toLocaleString()} €
             </div>
           </div>
@@ -75,20 +89,25 @@ const Cart = () => {
       </div>
 
       {/* 3. Összegző rész */}
-      <div className="cart-summary">
-        <div className="summary-row">
+      <div className={styles["cart-summary"]}>
+        <div className={styles["summary-row"]}>
           <span>Total:</span>
-          <span className="total-amount">{totalPrice.toLocaleString()} € </span>
+          <span className={styles["total-amount"]}>
+            {totalPrice.toLocaleString()} €{" "}
+          </span>
         </div>
         <button
-          className="checkout-button"
-          onClick={() => alert("Irány a fizetés!")}
+          className={styles["checkout-button"]}
+          onClick={() => navigate("/cart/checkout")}
         >
           Proceed to Checkout
         </button>
-        <Link to="/" className="continue-shopping">
+        <div
+          onClick={() => navigate("/")}
+          className={`${styles["continue-shopping"]} ${styles.clickable}`}
+        >
           Continue shopping
-        </Link>
+        </div>
       </div>
     </div>
   );

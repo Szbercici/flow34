@@ -20,6 +20,7 @@
 }
 
 .back-button {
+  font-family: 'Lexend Exa', sans-serif;
   text-decoration: none;
   background-color: var(--accent-color);
   color: white;
@@ -52,7 +53,7 @@
 .cart-item {
   position: relative;
   background-color: var(--background-color);
-  width: 30%; /* Mobilon majdnem teljes szélesség */
+  width: 40%;
   max-width: 900px;
   padding: 15px;
   border-radius: 12px;
@@ -60,8 +61,7 @@
   flex-direction: column; /* Mobilon egymás alá rakjuk az infókat */
   align-items: center;
   gap: 15px;
-  /* A kedvenc árnyékod */
-  box-shadow: var(--shadow-color) 0px 6px 12px -2px, var(--shadow-color2) 0px 3px 7px -3px
+  box-shadow: var(--shadow-color) 0px 6px 12px -2px, var(--shadow-color2) 0px 3px 7px -3px;
 }
 
 /* Kép és alapinfók (Név, darabár) */
@@ -78,6 +78,11 @@
   height: 80px;
   object-fit: cover;
   border-radius: 10px;
+}
+
+.clickable {
+  cursor: pointer;
+  transition: color 0.2s ease;
 }
 
 .placeholder {
@@ -144,15 +149,13 @@
 
 /* ÖSSZEGZŐ RÉSZ A LAP ALJÁN */
 .cart-summary {
-  width: 50%;
+  width: 95%;
   max-width: 900px;
-  padding: 25px;
-  margin-bottom: 40px;
-  margin-top: 40px;
+  padding: 20px;
+  margin: 24px 0 40px 0;
   background-color: var(--navbar-color);
-  border-radius: 15px;
-  box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
-
+  border-radius: 12px;
+  box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px;
 }
 
 .summary-row {
@@ -182,6 +185,12 @@
   cursor: pointer;
   margin-bottom: 15px;
 }
+.checkout-button:active {
+  transform: scale(0.99);
+}
+.checkout-button:hover {
+  background-color: var(--accent-color);
+}
 
 .continue-shopping {
   justify-self: center;
@@ -197,17 +206,17 @@
 @media screen and (max-width: 768px) {
 
   .cart-item-image{
-    width: 40%;
-    height: 40%;
+    width: 64px;
+    height: 64px;
   }
 
   .cart-blob{
-    width: 200%;
-    top: -90px;
+    width: 160%;
+    top: -60px;
   }
   
   .cart-item {
-    width: 90%;
+    width: 100%;
     flex-direction: column;
     align-items: center;
   }
@@ -225,11 +234,10 @@
   .cart-controls button{
     width: 40px;
     height: 40px;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
   .cart-summary{
-    width: 107.5%;
+    width: 95%;
   }
 
-  
 }

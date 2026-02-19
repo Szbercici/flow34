@@ -2,9 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./Footer.module.css";
 import { MyLogo } from "../assets/Logo";
+import { useAuth } from "../AuthContext";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const { user } = useAuth();
 
   return (
     <footer className={styles.footer}>
@@ -26,10 +28,10 @@ const Footer = () => {
               <Link to="/about">About Us</Link>
             </li>
             <li>
-              <Link to="/cart">Shop</Link>
+              <Link to="/">Shop</Link>
             </li>
             <li>
-              <Link to="/login">Account</Link>
+              <Link to={user ? "/account/me" : "/login"}>My Account</Link>
             </li>
           </ul>
         </div>
