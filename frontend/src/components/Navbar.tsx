@@ -48,6 +48,11 @@ const Navbar = () => {
             </CustomLink>
           </li>
         )}
+        <li className={styles.desktopMenuItem}>
+          <CustomLink to="/products" currentPath={location.pathname}>
+            Products
+          </CustomLink>
+        </li>
         <li className={styles.cartItem}>
           <CustomLink
             to="/cart"
@@ -111,6 +116,11 @@ const Navbar = () => {
                   </CustomLink>
                 </li>
               )}
+              <li className={styles.desktopMenuItem}>
+            <CustomLink to="/products" currentPath={location.pathname}>
+               Products
+            </CustomLink>
+            </li>
             </ul>
           </div>
         </>

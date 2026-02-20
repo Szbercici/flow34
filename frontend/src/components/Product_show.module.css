@@ -1,0 +1,85 @@
+.productCard {
+    font-family: system-ui, -apple-system, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    background-color: var(--background-color);
+    border-radius: 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    overflow: visible;
+    border: 1px solid #f0f0f0;
+    padding-bottom: 1rem;
+    transition: none;
+}
+
+.productImage {
+    width: 100%;
+    max-height: 240px;
+    object-fit: contain;
+    border-radius: 12px 12px 0 0;
+    background-color: #fafafa;
+    padding: 1rem 0;
+}
+
+.termekNev {
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-align: center;
+    margin: 0.75rem 0.75rem 0.5rem 0.75rem;
+    color: var(--primary-text-color);
+    line-height: 1.4;
+    min-height: auto;
+    display: block;
+    padding: 0 0.5rem;
+}
+
+.shopShow {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    margin: 0.75rem 0 0 0;
+    text-align: center;
+}
+
+/* Responsive adjustments for grid layout */
+@media (max-width: 768px) {
+    .productCard {
+        max-width: 280px;
+    }
+
+    .productImage {
+        max-height: 220px;
+    }
+
+    .termekNev {
+        font-size: 0.9rem;
+    }
+
+    .shopShow {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .productCard {
+        max-width: 100%;
+    }
+
+    .productImage {
+        max-height: 200px;
+    }
+
+    .termekNev {
+        font-size: 0.85rem;
+    }
+
+    .shopShow {
+        font-size: 1rem;
+    }
+}

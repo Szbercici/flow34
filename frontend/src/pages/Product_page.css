@@ -52,4 +52,7 @@
     height: 60px;
     font-size: x-large;
   }
+  .right-column {
+     margin-top: 0;
+  }
 }

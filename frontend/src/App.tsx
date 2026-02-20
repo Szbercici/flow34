@@ -13,6 +13,7 @@ import Account_order from "./pages/Account_orders";
 import NotFound from "./pages/NotFound";
 import {Toaster} from "sonner";
 import Checkout from "./pages/Checkout";
+import Products from "./pages/Produtcs_all";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/cart/checkout" element={<Checkout />} />
           <Route path="/product/:Product_name" element={<Product_page />} />
+          <Route path="/products" element={<Products />} />
           <Route path="/account/orders" element={<Account_order />} />
           <Route path="/account/me" element={<Account_me />} />
           <Route path="*" element={<NotFound />} />

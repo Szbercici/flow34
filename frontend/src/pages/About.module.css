@@ -49,6 +49,7 @@
 }
 
 .page {
+    overflow-y: hidden;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -187,6 +188,58 @@
     top: -3px;
 }
 
+/* Scroll storytelling helpers */
+.storySection {
+    opacity: 0.25;
+    transform: translateY(40px);
+    transition: opacity 600ms cubic-bezier(.2,.9,.2,1), transform 600ms cubic-bezier(.2,.9,.2,1);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0;
+}
+
+.active {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+.storyText {
+    transition: opacity 700ms ease, transform 700ms ease;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.active .storyText {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.blobAnimated {
+    transition: transform 700ms cubic-bezier(.2,.9,.2,1), opacity 700ms ease;
+    transform: translateY(30px) scale(0.95) rotate(6deg);
+    opacity: 0.6;
+}
+
+.active .blobAnimated {
+    transform: translateY(0) scale(1) rotate(0deg);
+    opacity: 1;
+}
+
+.heroBlob {
+    transition: transform 900ms ease, opacity 900ms ease;
+}
+
+.intro .storyText {
+    font-size: 2.6rem;
+}
+
+/* When a story section becomes active, prevent vertical scrolling inside the centered content */
+.active .contentSection {
+    overflow-y: hidden;
+}
+
 
 
 /* Mobile Screens (480px and below) */
@@ -267,4 +320,9 @@
         top: -5px;
         height: 100px;
     }
+    .intro .storyText{
+        font-size: 2em;
+        margin-left: 7.5%;
+    }
+
 }

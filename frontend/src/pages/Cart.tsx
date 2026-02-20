@@ -5,17 +5,27 @@ import { useCart } from "../CartContext";
 import { API_BASE_URL } from "../config/api";
 import Blob from "../assets/Blob";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
+import { useAuth } from "../AuthContext";
 
 const Cart = () => {
   const { items, addToCart, removeFromCart } = useCart();
   const navigate = useNavigate();
-
+  const { user } = useAuth();
   // 1. Végösszeg kiszámítása (price * quantity)
   const totalPrice = items.reduce(
     (acc, item) =>
       acc + Number(item.price ?? 0) * (Number(item.quantity ?? "1") || 1),
     0,
   );
+  function toCheckout() {
+    if (!user) {
+      navigate("/login");
+      toast.error("Please login to checkout."); 
+    } else {
+      navigate("/cart/checkout");
+    }
+  }
 
   // 2. Üres kosár kezelése
   if (items.length === 0) {
@@ -60,7 +70,7 @@ const Cart = () => {
                   {product.name}
                 </h2>
                 <p className={styles["item-price"]}>
-                  {(product.price ?? 0).toLocaleString()} € / db
+                  {(product.price ?? 0).toLocaleString()} € / unit
                 </p>
               </div>
             </div>
@@ -98,7 +108,7 @@ const Cart = () => {
         </div>
         <button
           className={styles["checkout-button"]}
-          onClick={() => navigate("/cart/checkout")}
+          onClick={toCheckout}
         >
           Proceed to Checkout
         </button>

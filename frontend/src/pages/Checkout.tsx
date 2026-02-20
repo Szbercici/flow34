@@ -9,7 +9,7 @@ const Checkout = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const { items } = useCart();
+  const { items, setItems } = useCart();
 
   // Végösszeg kiszámítása
   const totalPrice = items.reduce(
@@ -28,7 +28,7 @@ const Checkout = () => {
     const data = Object.fromEntries(formData.entries());
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/checkout`, {
+      const response = await fetch(`${API_BASE_URL}/api/orders`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...data, items }),
@@ -36,6 +36,7 @@ const Checkout = () => {
       if (response.ok) {
         toast.success("Order placed successfully!");
         navigate("/");
+        setItems([]);
       } else {
         const errorData = await response.json();
         toast.error(errorData.message || "Checkout failed.");
@@ -45,11 +46,6 @@ const Checkout = () => {
     } finally {
       setLoading(false);
     }
-
-    // Egyelőre csak egy alert vagy toast
-    toast.success("Order placed successfully!");
-    setLoading(false);
-    // navigate("/");
   };
 
   return (
@@ -93,15 +89,6 @@ const Checkout = () => {
                 required
               />
             </div>
-
-            <button
-              type="submit"
-              className={styles["checkout-button"]}
-              disabled={loading}
-              onSubmit={handleSubmit}
-            >
-              {loading ? "Processing..." : "Place Order"}
-            </button>
           </form>
         </div>
         {/* Jobb oldal: Cart tartalom és végösszeg (30%) */}
@@ -148,6 +135,17 @@ const Checkout = () => {
           </div>
         </div>
       </div>
+      <button
+        type="submit"
+        className={styles["checkout-button"]}
+        disabled={loading}
+        onClick={() => {
+          const form = document.querySelector("form");
+          if (form) form.requestSubmit();
+        }}
+      >
+        {loading ? "Processing..." : "Place order"}
+      </button>
     </div>
   );
 };

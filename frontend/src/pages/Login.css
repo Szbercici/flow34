@@ -18,7 +18,7 @@ font-family: "Outfit", sans-serif;
   border-radius: 5%;
   gap: 5vh;
   margin-top: 5%;
-   margin-bottom: 10%;
+  margin-bottom: 15%;
 }
 
 .login-container form {
@@ -49,7 +49,7 @@ font-family: "Outfit", sans-serif;
  overflow: hidden;
  transition: all 100ms ease-in-out;
  :focus {
-     border-color: var(--input-focus-border-color);
+     border-color: var(--highlight-color);
      box-shadow: 0 1px 0 0 var(--input-focus-shadow-color);
  }
 }  

@@ -224,12 +224,14 @@
   }
 
   .emailInput {
-    min-width: 50%;
-    max-width: 90%;
+    align-self: center;
+    min-width: 90%;
   }
 
   .subscribeBtn {
-    min-width: 90%;
+    align-self: center;
+    margin-left: 1px;
+    min-width: 100%;
   }
 
   .column h4 {

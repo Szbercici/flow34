@@ -2,17 +2,45 @@ import { MyLogo } from "../assets/Logo";
 import Blob from "../assets/Blob";
 import styles from "./About.module.css";
 import Wave from "../assets/Wave";
-import { Weight } from "lucide-react";
+import { useEffect } from "react";
 import Wave_end from "../assets/Wave_end";
 
 const About = () => {
+  useEffect(() => {
+    const sections = document.querySelectorAll(`.${styles.storySection}`);
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add(styles.active);
+          } else {
+            entry.target.classList.remove(styles.active);
+          }
+        });
+      },
+      { threshold: 0.35 },
+    );
+    sections.forEach((s) => obs.observe(s));
+    return () => obs.disconnect();
+  }, []);
+
   return (
     <>
       <div className="container">
         <div className={styles.hero}>
           <MyLogo width={350} height={350} />
-          <Blob id={styles.blob1} width={300} height={300} />
-          <Blob id={styles.blob2} width={300} height={300} />
+          <Blob
+            id={styles.blob1}
+            width={300}
+            height={300}
+            className={styles.heroBlob}
+          />
+          <Blob
+            id={styles.blob2}
+            width={300}
+            height={300}
+            className={styles.heroBlob}
+          />
           <h1>Fuel the flow.</h1>
         </div>
       </div>
@@ -20,40 +48,54 @@ const About = () => {
       <Wave id={styles.wave} width="100%" height="100%" />
 
       <div className={styles.page}>
-        <div className={styles.textContent}>
-          <h2>
-            In a world that never stops moving, staying hydrated shouldn't be a
-            chore -it should be your most refreshing ritual.
-          </h2>
-        </div>
-
-        <div className={styles.contentSection}>
-          <Blob id={styles.blobContent1} width={200} height={200} />
+        <section className={`${styles.storySection} ${styles.intro}`}>
           <div className={styles.textContent}>
-            <div className={styles.features}>
-              <div className={styles.feature}>
-                <h3>Eco-Friendly</h3>
-                <p>Saying no to single-use plastics, one sip at a time.</p>
-              </div>
-              <div className={styles.feature}>
-                <h3>Natural Power</h3>
-                <p>Real botanicals, zero sugar, maximum hydration.</p>
-              </div>
-              <div className={styles.feature}>
-                <h3>Active Living</h3>
-                <p>
-                  Designed to keep up with you, wherever your journey leads.
-                </p>
+            <h2 className={styles.storyText}>
+              In a world that never stops moving, staying hydrated shouldn't be
+              a chore - it should be your most refreshing ritual.
+            </h2>
+          </div>
+        </section>
+
+       
+          <div className={styles.contentSection}>
+             <section className={styles.storySection}>
+            <Blob
+              id={styles.blobContent1}
+              width={200}
+              height={200}
+              className={styles.blobAnimated}
+            />
+            <div className={styles.textContent}>
+              <div className={styles.features}>
+                <div className={styles.feature}>
+                  <h3>Eco-Friendly</h3>
+                  <p>Saying no to single-use plastics, one sip at a time.</p>
+                </div>
+                <div className={styles.feature}>
+                  <h3>Natural Power</h3>
+                  <p>Real botanicals, zero sugar, maximum hydration.</p>
+                </div>
+                <div className={styles.feature}>
+                  <h3>Active Living</h3>
+                  <p>
+                    Designed to keep up with you, wherever your journey leads.
+                  </p>
+                </div>
               </div>
             </div>
+          </section>
           </div>
-        </div>
-        <div className={styles.textContent}>
-          <h2>
-            We think that people don't know enough about healthy way of life,
-            and hydration. Our mission is to change that.
-          </h2>
-        </div>
+        
+
+        <section className={styles.storySection}>
+          <div className={styles.textContent}>
+            <h2 className={styles.storyText}>
+              We think that people don't know enough about healthy way of life,
+              and hydration. Our mission is to change that.
+            </h2>
+          </div>
+        </section>
       </div>
       <Wave_end id={styles.wave_end} width="100%" height="100%" />
       <div className={styles.missionSection}>

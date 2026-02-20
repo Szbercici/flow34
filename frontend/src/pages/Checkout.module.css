@@ -4,7 +4,7 @@
   align-items: center;
   font-family: "Outfit", sans-serif;
   min-height: 70vh;
-  padding: 20px;
+  padding-top: 20px;
   width: 100%;
   touch-action: pan-y;
   overflow-x: hidden;
@@ -27,6 +27,13 @@
   border-radius: 10px;
   box-shadow: var(--shadow-color) 0px 6px 12px -2px, var(--shadow-color2) 0px 3px 7px -3px;
 }
+.form-section h2 {
+  font-family:'Lexend Exa', sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-text-color);
+}
+
 .cart-section {
   flex: 0 0 30%;
   display: flex;
@@ -72,7 +79,7 @@
   display: inline-block;
   outline: none;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1;
   border-radius: 5px;
   transition-property: background-color,border-color,color,box-shadow,filter;
@@ -80,7 +87,6 @@
   border: 1px solid transparent;
   letter-spacing: 2px;
   min-width: 160px;
-  text-transform: uppercase;
   white-space: normal;
   font-weight: 700;
   text-align: center;
@@ -90,7 +96,9 @@
   height: 48px;
   align-self: flex-start;
   margin: 1%;
-  margin-top: 5%;;
+  margin-top: 5%;
+  align-self: center;
+ font-family: 'Lexend Exa', sans-serif;  
 }
 
 .checkout-button:hover {
@@ -203,23 +211,7 @@
   .cart-section {
     flex: 1;
   }
-  
-}
-
-@media (max-width: 768px) {
-  .checkout-layout {
-    flex-direction: column;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .form-section {
-    flex: 1;
-    width: 80%;
-    box-shadow: var(--shadow-color) 0px 0px 0px 0px, var(--shadow-color2) 0px 0px 0px 0px;
-  }
-  .cart-section {
-    flex: 1;
+  .checkout-button {
+    margin-top : 10%;
   }
 }
