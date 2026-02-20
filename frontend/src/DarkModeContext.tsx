@@ -15,7 +15,6 @@ export const DarkModeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const { user } = useAuth();
 
   const [darkMode, setDarkMode] = useState<boolean>(() => {
-  // Első körben a localStorage-ból olvassuk ki, mert ez azonnali
   try {
     return localStorage.getItem(STORAGE_KEY) === "true";
   } catch {

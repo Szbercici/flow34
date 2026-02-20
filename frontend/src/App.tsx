@@ -12,6 +12,7 @@ import Account_me from "./pages/Account_me";
 import Account_order from "./pages/Account_orders";
 import NotFound from "./pages/NotFound";
 import {Toaster} from "sonner";
+import Checkout from "./pages/Checkout";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/cart/checkout" element={<Checkout />} />
           <Route path="/product/:Product_name" element={<Product_page />} />
           <Route path="/account/orders" element={<Account_order />} />
           <Route path="/account/me" element={<Account_me />} />
