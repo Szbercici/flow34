@@ -2,12 +2,12 @@
 -- PostgreSQL database dump
 --
 
-\restrict uRmEAAj1Tkbxe6PrxAy8flh59ydStvVOwEjovMMZzw9L6ogEOwgK37dX1TzChMM
+\restrict MbQ0vHf3uFETDfqeCJHMHHnc77ObyxkeaPsfaeYJKi5mJ6HEVtfpmaQBeuO75Mn
 
 -- Dumped from database version 18.1
 -- Dumped by pg_dump version 18.1
 
--- Started on 2026-02-11 11:29:46
+-- Started on 2026-02-16 09:52:26
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -311,172 +311,6 @@ ALTER TABLE public.users ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
 
 
 --
--- TOC entry 5105 (class 0 OID 16624)
--- Dependencies: 232
--- Data for Name: billing_details; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.billing_details (id, user_id, postcode, city, road, house_number) FROM stdin;
-\.
-
-
---
--- TOC entry 5099 (class 0 OID 16598)
--- Dependencies: 226
--- Data for Name: cart; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.cart (id, created_at, user_id) FROM stdin;
-\.
-
-
---
--- TOC entry 5107 (class 0 OID 16708)
--- Dependencies: 234
--- Data for Name: cart_items; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.cart_items (id, cart_id, product_id, quantity, created_at) FROM stdin;
-\.
-
-
---
--- TOC entry 5095 (class 0 OID 16577)
--- Dependencies: 222
--- Data for Name: contains; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.contains (id, name) FROM stdin;
-\.
-
-
---
--- TOC entry 5103 (class 0 OID 16616)
--- Dependencies: 230
--- Data for Name: delivery_address; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.delivery_address (id, user_id, postcode, city, road, house_number) FROM stdin;
-\.
-
-
---
--- TOC entry 5101 (class 0 OID 16607)
--- Dependencies: 228
--- Data for Name: order_table; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.order_table (id, user_id, cart_id, address, created_at) FROM stdin;
-\.
-
-
---
--- TOC entry 5097 (class 0 OID 16585)
--- Dependencies: 224
--- Data for Name: products; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.products (id, img, name, type, price, stock_count, category, contains_id, description, rate, count) FROM stdin;
-12	static/images/microdrink-melon.png	Flow Watermelon	\N	12.99	0	Microdrink	\N	Refreshing watermelon flavored hydration cubes with vitamins and zero sugar	0	0
-13	static/images/microdrink-energy.png	Flow Energy	\N	14.99	0	Microdrink	\N	Classic energy drink flavor boosted with caffeine for focus and power.	0	0
-14	static/images/microdrink-forest-fruit.png	Flow Forest Fruit	\N	12.99	0	Microdrink	\N	A berry mix sensation. Tasty hydration with natural forest fruit flavors.	0	0
-15	static/images/microdrink-lemon.png	Flow Lemon	\N	12.99	0	Microdrink	\N	Zesty and fresh lemon flavor. Simple hydration rich in vitamins.	0	0
-16	static/images/microdrink-cucumber.png	Flow Green Electrolyte (Limited)	\N	16.99	0	Microdrink	\N	Limited edition green formula packed with essential electrolytes for active hydration.	0	0
-17	static/images/microdrink-cola.png	Flow Cola	\N	12.99	0	Microdrink	\N	The classic cola taste, reimagined as refreshing hydration cubes with zero sugar and essential vitamins.	0	0
-18	static/images/metal-water-bottle.png	Metal Water bottle	\N	12.99	0	Water Bottles	\N	Durable and stylish metal water bottle to keep you hydrated on the go.	0	0
-19	static/images/blue-water-bottle.png	Water bottle blue	\N	8.99	0	Water Bottles	\N	Lightweight and convenient plastic water bottle for everyday use.	0	0
-20	static/images/purple-water-bottle.png	Water bottle purple	\N	12.99	0	Water Bottles	\N	Lightweight and functional water bottle in a vibrant purple color.	0	0
-21	static/images/red-water-bottle.png	Water bottle red	\N	10.99	0	Water Bottles	\N	Lightweight and functional water bottle in a vibrant red color.	0	0
-\.
-
-
---
--- TOC entry 5093 (class 0 OID 16554)
--- Dependencies: 220
--- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.users (id, username, password, token, gender, phone_number, last_login, created_at, is_active, email, role) FROM stdin;
-1	admin	$2a$10$/pojulwu/rot8vUvDfMqp.ku67Ty5DNGsmPUAR7HQ9a478AW1pr9S	\N	\N	\N	\N	2026-01-27 21:59:20.35256	t	admin@local.test	ADMIN
-2	user	$2a$10$A8K0Em1pSAowfF7S3FD7AuJeEQJ3Q9R9uaW7ESj5KyKxE7N1eGmTi	\N	\N	\N	\N	2026-01-27 22:07:26.585363	t	asdasdkf	USER
-3		$2a$10$fUYjyHcW4twNLoscp6k5ZOZ.xTpgE0aG51tQm0688O8vKk.2kPHbS	\N	\N	\N	\N	2026-01-28 10:04:57.614612	t		USER
-4	proba1	$2a$10$tUffJqBwysJb7Qj6RKfqpOHbJsJbpxpRW3vZZEdkwFINjtl1LEXkW	\N	\N	\N	\N	2026-01-28 10:22:54.610714	t	\N	USER
-\.
-
-
---
--- TOC entry 5113 (class 0 OID 0)
--- Dependencies: 231
--- Name: billing_details_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.billing_details_id_seq', 1, false);
-
-
---
--- TOC entry 5114 (class 0 OID 0)
--- Dependencies: 225
--- Name: cart_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.cart_id_seq', 1, false);
-
-
---
--- TOC entry 5115 (class 0 OID 0)
--- Dependencies: 233
--- Name: cart_items_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.cart_items_id_seq', 1, false);
-
-
---
--- TOC entry 5116 (class 0 OID 0)
--- Dependencies: 221
--- Name: contains_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.contains_id_seq', 1, false);
-
-
---
--- TOC entry 5117 (class 0 OID 0)
--- Dependencies: 229
--- Name: delivery_address_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.delivery_address_id_seq', 1, false);
-
-
---
--- TOC entry 5118 (class 0 OID 0)
--- Dependencies: 227
--- Name: order_table_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.order_table_id_seq', 1, false);
-
-
---
--- TOC entry 5119 (class 0 OID 0)
--- Dependencies: 223
--- Name: products_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.products_id_seq', 21, true);
-
-
---
--- TOC entry 5120 (class 0 OID 0)
--- Dependencies: 219
--- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.users_id_seq', 4, true);
-
-
---
 -- TOC entry 4929 (class 2606 OID 16630)
 -- Name: billing_details billing_details_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
@@ -711,11 +545,11 @@ ALTER TABLE ONLY public.products
     ADD CONSTRAINT fk_product_contains FOREIGN KEY (contains_id) REFERENCES public.contains(id);
 
 
--- Completed on 2026-02-11 11:29:47
+-- Completed on 2026-02-16 09:52:27
 
 --
 -- PostgreSQL database dump complete
 --
 
-\unrestrict uRmEAAj1Tkbxe6PrxAy8flh59ydStvVOwEjovMMZzw9L6ogEOwgK37dX1TzChMM
+\unrestrict MbQ0vHf3uFETDfqeCJHMHHnc77ObyxkeaPsfaeYJKi5mJ6HEVtfpmaQBeuO75Mn
 
