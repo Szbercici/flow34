@@ -1,77 +1,8 @@
-.productCard {
-    background-color: #ffffff;
-    border-radius: 32px; /* Extra kerek sarkok mint a képen */
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: none;
-    position: relative;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-}
-
-.productCard:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-}
-
-.imageWrapper {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    background-color: #f8f8f8;
-    border-radius: 24px;
-    overflow: hidden;
-}
-
-.productImage {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-/* A lebegő kék gomb */
-.floatingCartButton {
-    position: absolute;
-    bottom: -25px;
-    right: 20px;
-    width: 60px;
-    height: 60px;
-    background-color: #2b61ff; /* Élénk kék */
-    border-radius: 50%;
-    border: 4px solid #ffffff; /* Fehér keret a gomb körül */
+.productsGrid{
+    margin: 5%;
     display: flex;
     align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(43, 97, 255, 0.3);
-    transition: scale 0.2s ease;
-    z-index: 2;
-}
-
-.floatingCartButton:hover {
-    scale: 1.1;
-    background-color: #1a4cd6;
-}
-
-.productInfo {
-    padding: 35px 15px 15px 15px; /* Nagyobb felső padding a belógó gomb miatt */
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.price {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: #1a1a1a;
-    letter-spacing: -0.5px;
-}
-
-.title {
-    font-size: 1.1rem;
-    color: #7a7a7a;
-    font-weight: 400;
-    text-transform: capitalize;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    flex-direction:row;
 }
