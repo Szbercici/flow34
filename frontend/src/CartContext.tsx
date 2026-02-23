@@ -27,6 +27,7 @@
     items: CartItem[]; // Átírtuk number-ről listára!
     removeFromCart: (product: CartItem) => void;
     addToCart: (product: CartItem) => void;
+    clearCart: () => void;
   }
   export const ContextProvider = ({ children }: { children: ReactNode }) => {
     const { user } = useAuth();
@@ -133,8 +134,13 @@
       });
     };
 
+    const clearCart = () => {
+      setItems([]);
+      localStorage.setItem("cart", JSON.stringify([]));
+    };
+
     return (
-      <CartContext.Provider value={{ items, addToCart, removeFromCart }}>
+      <CartContext.Provider value={{ items, addToCart, removeFromCart,clearCart }}>
         {children}
       </CartContext.Provider>
     );

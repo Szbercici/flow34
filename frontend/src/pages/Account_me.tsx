@@ -6,7 +6,7 @@ import { href, useNavigate } from 'react-router-dom';
 const Account_me = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
-      if (user == null) {
+      if (!user) {
       navigate('/login'); 
       }
 

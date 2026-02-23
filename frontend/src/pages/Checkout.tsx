@@ -9,7 +9,7 @@ const Checkout = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const { items, setItems } = useCart();
+  const { items, clearCart } = useCart();
 
   // Végösszeg kiszámítása
   const totalPrice = items.reduce(
@@ -27,26 +27,30 @@ const Checkout = () => {
     const formData = new FormData(event.currentTarget);
     const data = Object.fromEntries(formData.entries());
 
-    try {
-      const response = await fetch(`${API_BASE_URL}/api/orders`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...data, items }),
-      });
-      if (response.ok) {
-        toast.success("Order placed successfully!");
-        navigate("/");
-        setItems([]);
-      } else {
-        const errorData = await response.json();
-        toast.error(errorData.message || "Checkout failed.");
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/orders`, {
+          method: "POST",
+           headers: { 
+        "Content-Type": "application/json",
+        },
+          credentials: "include",
+          body: JSON.stringify({ ...data, items }),
+        });
+        if (response.ok) {
+          toast.success("Order placed successfully!");
+          clearCart();
+          navigate("/");
+        } else {
+          const errorData = await response.json();
+          toast.error(errorData.message || "Checkout failed.");
+        }
+      } catch (err) {
+        setError("Network error, please try again later!");
+        console.log("Checkout error:", err);
+      } finally {
+        setLoading(false);
       }
-    } catch (err) {
-      setError("Network error, please try again later!");
-    } finally {
-      setLoading(false);
-    }
-  };
+    };
 
   return (
     <div className={styles.container}>

@@ -12,9 +12,14 @@ interface AccountPageProps {
   children?: React.ReactNode;
 }
 
+
 const Account_page: React.FC<AccountPageProps> = ({ children }) => {
   const { setUser } = useAuth();
   const navigate = useNavigate();
+  const user = useAuth();
+  if(!user){
+    navigate("/login")
+  }
   // Use centralized DarkMode context for preference and actions
   const { darkMode, toggle } = useDarkMode();
 
