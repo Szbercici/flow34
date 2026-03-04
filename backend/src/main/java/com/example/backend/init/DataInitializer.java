@@ -125,6 +125,62 @@ public class DataInitializer implements CommandLineRunner {
                 "Water Bottles",
                 "static/images/red-water-bottle.png"
         );
+        seedProductIfMissing(
+                "Daily Scoop Cactus",
+                BigDecimal.valueOf(12.99),
+                "",
+                "Daily Scoop",
+                "static/images/daily-scoop-cactus.png"
+        );
+        seedProductIfMissing(
+                "Daily Scoop Lemon",
+                BigDecimal.valueOf(12.99),
+                "",
+                "Daily Scoop",
+                "static/images/daily-scoop-lemon.png"
+        );
+        seedProductIfMissing(
+                "Daily Scoop Punch",
+                BigDecimal.valueOf(12.99),
+                "",
+                "Daily Scoop",
+                "static/images/daily-scoop-punch.png"
+        );
+        seedProductIfMissing(
+                "Daily Scoop Unflavored",
+                BigDecimal.valueOf(10.99),
+                "",
+                "Daily Scoop",
+                "static/images/daily-scoop-unflavored.png"
+        );
+        seedProductIfMissing(
+                "Runner Berry",
+                BigDecimal.valueOf(11.99),
+                "",
+                "Runner",
+                "static/images/runner-berry.png"
+        );
+        seedProductIfMissing(
+                "Runner Citrus",
+                BigDecimal.valueOf(11.99),
+                "",
+                "Runner",
+                "static/images/runner-citrus.png"
+        );
+        seedProductIfMissing(
+                "Runner Orange",
+                BigDecimal.valueOf(11.99),
+                "",
+                "Runner",
+                "static/images/runner-orange.png"
+        );
+        seedProductIfMissing(
+                "Runner Tutti Frutty",
+                BigDecimal.valueOf(12.50),
+                "",
+                "Runner",
+                "static/images/runner-tuttifrutty.png"
+        );
     }
 
     private void seedProductIfMissing(String name, BigDecimal price, String description, String category, String img) {
