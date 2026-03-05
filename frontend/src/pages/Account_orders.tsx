@@ -71,7 +71,7 @@ const Account_orders = () => {
               <div key={order.orderId} className={styles.orderCard}>
                 <div className={styles.orderHeader}>
                   <h3 className={styles.orderId}>Order #{order.orderId}</h3>
-                  <span className={styles.orderStatus}>Completed</span>
+                  <span className={styles.orderStatus}>In progress</span>
                 </div>
                 <div className={styles.orderDetails}>
                   <div className={styles.detailRow}>

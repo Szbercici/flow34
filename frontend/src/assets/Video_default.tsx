@@ -21,7 +21,7 @@ const Video_default = () => {
              maxWidth: '100%',
              objectFit: 'cover', // Ezzel tölti ki a teret torzítás nélkül
              borderRadius: "50% 20% / 10% 40%",
-             height: "32vw"
+             height: "50vh"
         }}
       />
     </div>

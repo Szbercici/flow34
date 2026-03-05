@@ -10,7 +10,6 @@
   overflow-y: hidden;
   padding: 20px 40% 20px 40%; 
   height: 100%;
-  
   scroll-snap-type: x proximity; 
   scroll-behavior: smooth;
 }
@@ -39,6 +38,7 @@
   .flow-product-wrapper {
   padding-left: 0%;
   padding-right: 0%;
+  padding-bottom: 20%;
   
   
 }

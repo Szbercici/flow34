@@ -117,7 +117,7 @@ const Navbar = () => {
                 </li>
               )}
               <li className={styles.desktopMenuItem}>
-            <CustomLink to="/products" currentPath={location.pathname}>
+            <CustomLink onClick={closeMenu} to="/products" currentPath={location.pathname}>
                Products
             </CustomLink>
             </li>

@@ -22,9 +22,11 @@
 }
 
 .ordersGrid {
-  display: grid;
+  display: flex;
   gap: 1rem;
   grid-template-columns: 1fr;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 @media (min-width: 768px) {
@@ -40,6 +42,7 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   position: relative;
   transition: box-shadow 0.2s ease-in-out;
+  width: 80%;
 }
 
 .orderCard::before {
@@ -152,11 +155,24 @@
 
   .orderCard {
     padding: 1rem;
+    min-width: 250%;
   }
 
   .orderHeader {
-    flex-direction: column;
     gap: 0.5rem;
-    align-items: flex-start;
+  }
+  .container{
+    width: 50%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 5%;
+    margin-left: 7.5%;
+  }
+  .ordersGrid{
+    width: 50%;
+    flex-direction:row;
+    flex-wrap: wrap;
+    
+    justify-content: start;
   }
 }
