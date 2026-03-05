@@ -16,9 +16,25 @@
 /* A kép beállításai */
 .swiperSlide img {
     position: block;
-    margin: 0 auto;                 /* Régi jó módszer a kép középre rakására */
-    max-width: 100%;
+                 /* Régi jó módszer a kép középre rakására */
+    max-width: 90%;
     height: auto;
     object-fit: contain;
-    border-radius: "50% 20% / 10% 40%";
+    border-radius: 15px;
+}
+
+@media screen and (max-width: 768px) {      
+
+    .swiperSlide {
+    height: 34vh;
+    width: 100%;
+}
+.swiperSlide img {
+    border-radius: 0px;
+    width: 100%;
+    position: relative;
+}
+
+
+
 }

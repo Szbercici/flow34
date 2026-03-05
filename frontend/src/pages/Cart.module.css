@@ -239,5 +239,13 @@
   .cart-summary{
     width: 87%;
   }
+  .empty-cart {
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 30%;
+  margin-top: 30% ;
+  font-size: large;
+}
+
 
 }

@@ -22,19 +22,28 @@ const Scroll_container: React.FC<ScrollContainerProps> = ({ products }) => {
   if (!products || products.length === 0) return null;
 
   return (
-    <div className="flow-scroll-container" style={{ padding: '20px 0' }}>
-      <Swiper
-        // Modulok aktiválása
-        modules={[FreeMode, Scrollbar]}
-        
-        // Beállítások a "húzogatós" élményhez
-        spaceBetween={110}      // Távolság a termékek között
-        slidesPerView={"auto"}  // Fontos: így a CSS-ben megadott szélességet használja
-        freeMode={false}         // Ne ugorjon kártyáról kártyára, hanem szabadon csússzon
-        grabCursor={true}       // Mutassa a "megfogható" kurzort
-        scrollbar={{ draggable: true, hide: false }} // Megjelenít egy húzható csíkot alul
-        className="mySwiper"
-      >
+              <div className="flow-scroll-container" style={{ padding: '20px' }}>
+             <Swiper
+         modules={[FreeMode, Scrollbar]}
+         slidesPerView={"auto"}
+         freeMode={false}
+         grabCursor={true}
+         scrollbar={{ draggable: true, hide: false }}
+         
+         // ALAPBEÁLLÍTÁS (Mobil: 0px+)
+         spaceBetween={10}
+         slidesOffsetBefore={20}
+         slidesOffsetAfter={250}
+         
+         // BREAKPOINT (Asztali gép: 1024px+)
+         breakpoints={{
+           1024: {
+             spaceBetween: 110,
+             slidesOffsetBefore: 100,
+             slidesOffsetAfter: 100,
+           },
+         }}
+       >
         {products.map((product: Product) => (
           <SwiperSlide 
             key={product.id} 
