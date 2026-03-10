@@ -1,13 +1,6 @@
 --
--- PostgreSQL database dump
+-- PostgreSQL database schema
 --
-
-\restrict MbQ0vHf3uFETDfqeCJHMHHnc77ObyxkeaPsfaeYJKi5mJ6HEVtfpmaQBeuO75Mn
-
--- Dumped from database version 18.1
--- Dumped by pg_dump version 18.1
-
--- Started on 2026-02-16 09:52:26
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -21,265 +14,27 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
---
--- TOC entry 870 (class 1247 OID 16546)
--- Name: gender_type; Type: TYPE; Schema: public; Owner: postgres
---
 
-CREATE TYPE public.gender_type AS ENUM (
-    'male',
-    'female',
-    'other'
-);
+-- ENUM only when not already exist
 
+DO $$ BEGIN
+    CREATE TYPE public.gender_type AS ENUM ('male', 'female', 'other');
+EXCEPTION WHEN duplicate_object THEN NULL;
+END $$;
 
-ALTER TYPE public.gender_type OWNER TO postgres;
-
---
--- TOC entry 867 (class 1247 OID 16540)
--- Name: user_status; Type: TYPE; Schema: public; Owner: postgres
---
-
-CREATE TYPE public.user_status AS ENUM (
-    'admin',
-    'user'
-);
-
-
-ALTER TYPE public.user_status OWNER TO postgres;
+DO $$ BEGIN
+    CREATE TYPE public.user_status AS ENUM ('admin', 'user');
+EXCEPTION WHEN duplicate_object THEN NULL;
+END $$;
 
 SET default_tablespace = '';
-
 SET default_table_access_method = heap;
 
---
--- TOC entry 232 (class 1259 OID 16624)
--- Name: billing_details; Type: TABLE; Schema: public; Owner: postgres
---
 
-CREATE TABLE public.billing_details (
-    id bigint NOT NULL,
-    user_id bigint NOT NULL,
-    postcode integer,
-    city character varying(100),
-    road character varying(100),
-    house_number character varying(20)
-);
+-- TABLES only when not already exist
 
-
-ALTER TABLE public.billing_details OWNER TO postgres;
-
---
--- TOC entry 231 (class 1259 OID 16623)
--- Name: billing_details_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-ALTER TABLE public.billing_details ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
-    SEQUENCE NAME public.billing_details_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1
-);
-
-
---
--- TOC entry 226 (class 1259 OID 16598)
--- Name: cart; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.cart (
-    id bigint NOT NULL,
-    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    user_id bigint NOT NULL
-);
-
-
-ALTER TABLE public.cart OWNER TO postgres;
-
---
--- TOC entry 225 (class 1259 OID 16597)
--- Name: cart_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-ALTER TABLE public.cart ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
-    SEQUENCE NAME public.cart_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1
-);
-
-
---
--- TOC entry 234 (class 1259 OID 16708)
--- Name: cart_items; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.cart_items (
-    id bigint NOT NULL,
-    cart_id bigint NOT NULL,
-    product_id bigint NOT NULL,
-    quantity integer DEFAULT 1 NOT NULL,
-    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    CONSTRAINT chk_quantity_positive CHECK ((quantity > 0))
-);
-
-
-ALTER TABLE public.cart_items OWNER TO postgres;
-
---
--- TOC entry 233 (class 1259 OID 16707)
--- Name: cart_items_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-ALTER TABLE public.cart_items ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
-    SEQUENCE NAME public.cart_items_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1
-);
-
-
---
--- TOC entry 222 (class 1259 OID 16577)
--- Name: contains; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.contains (
-    id bigint NOT NULL,
-    name character varying(100) NOT NULL
-);
-
-
-ALTER TABLE public.contains OWNER TO postgres;
-
---
--- TOC entry 221 (class 1259 OID 16576)
--- Name: contains_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-ALTER TABLE public.contains ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
-    SEQUENCE NAME public.contains_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1
-);
-
-
---
--- TOC entry 230 (class 1259 OID 16616)
--- Name: delivery_address; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.delivery_address (
-    id bigint NOT NULL,
-    user_id bigint NOT NULL,
-    postcode integer,
-    city character varying(100),
-    road character varying(100),
-    house_number character varying(20)
-);
-
-
-ALTER TABLE public.delivery_address OWNER TO postgres;
-
---
--- TOC entry 229 (class 1259 OID 16615)
--- Name: delivery_address_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-ALTER TABLE public.delivery_address ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
-    SEQUENCE NAME public.delivery_address_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1
-);
-
-
---
--- TOC entry 228 (class 1259 OID 16607)
--- Name: order_table; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.order_table (
-    id bigint NOT NULL,
-    user_id bigint,
-    cart_id bigint,
-    address character varying(255),
-    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
-);
-
-
-ALTER TABLE public.order_table OWNER TO postgres;
-
---
--- TOC entry 227 (class 1259 OID 16606)
--- Name: order_table_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-ALTER TABLE public.order_table ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
-    SEQUENCE NAME public.order_table_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1
-);
-
-
---
--- TOC entry 224 (class 1259 OID 16585)
--- Name: products; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.products (
-    id bigint NOT NULL,
-    img character varying(255),
-    name character varying(150) NOT NULL,
-    type character varying(100),
-    price numeric(10,2) NOT NULL,
-    stock_count integer DEFAULT 0 NOT NULL,
-    category character varying(100),
-    contains_id bigint,
-    description character varying(150),
-    rate double precision DEFAULT 0 NOT NULL,
-    count integer DEFAULT 0
-);
-
-
-ALTER TABLE public.products OWNER TO postgres;
-
---
--- TOC entry 223 (class 1259 OID 16584)
--- Name: products_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-ALTER TABLE public.products ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
-    SEQUENCE NAME public.products_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1
-);
-
-
---
--- TOC entry 220 (class 1259 OID 16554)
--- Name: users; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.users (
-    id bigint NOT NULL,
+CREATE TABLE IF NOT EXISTS public.users (
+    id bigint NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE CACHE 1),
     username character varying(100) NOT NULL,
     password character varying(255) NOT NULL,
     token character varying(255),
@@ -291,265 +46,218 @@ CREATE TABLE public.users (
     email character varying(150),
     role character varying(50)
 );
-
-
 ALTER TABLE public.users OWNER TO postgres;
 
---
--- TOC entry 219 (class 1259 OID 16553)
--- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-ALTER TABLE public.users ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
-    SEQUENCE NAME public.users_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1
+CREATE TABLE IF NOT EXISTS public.contains (
+    id bigint NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE CACHE 1),
+    name character varying(100) NOT NULL
 );
+ALTER TABLE public.contains OWNER TO postgres;
+
+CREATE TABLE IF NOT EXISTS public.products (
+    id bigint NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE CACHE 1),
+    img character varying(255),
+    name character varying(150) NOT NULL,
+    type character varying(100),
+    price numeric(10,2) NOT NULL,
+    stock_count integer DEFAULT 0 NOT NULL,
+    category character varying(100),
+    contains_id bigint,
+    description character varying(150),
+    rate double precision DEFAULT 0 NOT NULL,
+    count integer DEFAULT 0
+);
+ALTER TABLE public.products OWNER TO postgres;
+
+CREATE TABLE IF NOT EXISTS public.cart (
+    id bigint NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE CACHE 1),
+    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    user_id bigint NOT NULL
+);
+ALTER TABLE public.cart OWNER TO postgres;
+
+CREATE TABLE IF NOT EXISTS public.cart_items (
+    id bigint NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE CACHE 1),
+    cart_id bigint NOT NULL,
+    product_id bigint NOT NULL,
+    quantity integer DEFAULT 1 NOT NULL,
+    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    CONSTRAINT chk_quantity_positive CHECK ((quantity > 0))
+);
+ALTER TABLE public.cart_items OWNER TO postgres;
+
+CREATE TABLE IF NOT EXISTS public.order_table (
+    id bigint NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE CACHE 1),
+    user_id bigint,
+    cart_id bigint,
+    address character varying(255),
+    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+ALTER TABLE public.order_table OWNER TO postgres;
+
+CREATE TABLE IF NOT EXISTS public.delivery_address (
+    id bigint NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE CACHE 1),
+    user_id bigint NOT NULL,
+    postcode integer,
+    city character varying(100),
+    road character varying(100),
+    house_number character varying(20)
+);
+ALTER TABLE public.delivery_address OWNER TO postgres;
+
+CREATE TABLE IF NOT EXISTS public.billing_details (
+    id bigint NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE CACHE 1),
+    user_id bigint NOT NULL,
+    postcode integer,
+    city character varying(100),
+    road character varying(100),
+    house_number character varying(20)
+);
+ALTER TABLE public.billing_details OWNER TO postgres;
+
+
+-- PRIMARY KEY-K only when not already exist
+
+DO $$ BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'users_pkey') THEN
+        ALTER TABLE ONLY public.users ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+    END IF;
+END $$;
+
+DO $$ BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'contains_pkey') THEN
+        ALTER TABLE ONLY public.contains ADD CONSTRAINT contains_pkey PRIMARY KEY (id);
+    END IF;
+END $$;
+
+DO $$ BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'products_pkey') THEN
+        ALTER TABLE ONLY public.products ADD CONSTRAINT products_pkey PRIMARY KEY (id);
+    END IF;
+END $$;
+
+DO $$ BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'cart_pkey') THEN
+        ALTER TABLE ONLY public.cart ADD CONSTRAINT cart_pkey PRIMARY KEY (id);
+    END IF;
+END $$;
+
+DO $$ BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'cart_items_pkey') THEN
+        ALTER TABLE ONLY public.cart_items ADD CONSTRAINT cart_items_pkey PRIMARY KEY (id);
+    END IF;
+END $$;
+
+DO $$ BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'order_table_pkey') THEN
+        ALTER TABLE ONLY public.order_table ADD CONSTRAINT order_table_pkey PRIMARY KEY (id);
+    END IF;
+END $$;
 
+DO $$ BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'delivery_address_pkey') THEN
+        ALTER TABLE ONLY public.delivery_address ADD CONSTRAINT delivery_address_pkey PRIMARY KEY (id);
+    END IF;
+END $$;
 
---
--- TOC entry 4929 (class 2606 OID 16630)
--- Name: billing_details billing_details_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
+DO $$ BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'billing_details_pkey') THEN
+        ALTER TABLE ONLY public.billing_details ADD CONSTRAINT billing_details_pkey PRIMARY KEY (id);
+    END IF;
+END $$;
 
-ALTER TABLE ONLY public.billing_details
-    ADD CONSTRAINT billing_details_pkey PRIMARY KEY (id);
 
+-- constraint(UNIQUE)
 
---
--- TOC entry 4932 (class 2606 OID 16720)
--- Name: cart_items cart_items_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
+DO $$ BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'users_username_key') THEN
+        ALTER TABLE ONLY public.users ADD CONSTRAINT users_username_key UNIQUE (username);
+    END IF;
+END $$;
 
-ALTER TABLE ONLY public.cart_items
-    ADD CONSTRAINT cart_items_pkey PRIMARY KEY (id);
+DO $$ BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'users_phone_number_key') THEN
+        ALTER TABLE ONLY public.users ADD CONSTRAINT users_phone_number_key UNIQUE (phone_number);
+    END IF;
+END $$;
 
+DO $$ BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'uq_cart_product') THEN
+        ALTER TABLE ONLY public.cart_items ADD CONSTRAINT uq_cart_product UNIQUE (cart_id, product_id);
+    END IF;
+END $$;
 
---
--- TOC entry 4919 (class 2606 OID 16605)
--- Name: cart cart_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
 
-ALTER TABLE ONLY public.cart
-    ADD CONSTRAINT cart_pkey PRIMARY KEY (id);
+-- INDEX-ek only when not already exist
 
+CREATE INDEX IF NOT EXISTS idx_billing_user_id ON public.billing_details USING btree (user_id);
+CREATE INDEX IF NOT EXISTS idx_cart_items_cart_id ON public.cart_items USING btree (cart_id);
+CREATE INDEX IF NOT EXISTS idx_cart_items_product_id ON public.cart_items USING btree (product_id);
+CREATE INDEX IF NOT EXISTS idx_delivery_user_id ON public.delivery_address USING btree (user_id);
+CREATE INDEX IF NOT EXISTS idx_order_cart_id ON public.order_table USING btree (cart_id);
+CREATE INDEX IF NOT EXISTS idx_order_user_id ON public.order_table USING btree (user_id);
+CREATE INDEX IF NOT EXISTS idx_products_contains_id ON public.products USING btree (contains_id);
+CREATE UNIQUE INDEX IF NOT EXISTS ux_cart_user_id ON public.cart USING btree (user_id);
 
---
--- TOC entry 4914 (class 2606 OID 16583)
--- Name: contains contains_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
 
-ALTER TABLE ONLY public.contains
-    ADD CONSTRAINT contains_pkey PRIMARY KEY (id);
+-- FOREIGN KEY-k only when not already exist
 
-
---
--- TOC entry 4926 (class 2606 OID 16622)
--- Name: delivery_address delivery_address_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.delivery_address
-    ADD CONSTRAINT delivery_address_pkey PRIMARY KEY (id);
-
-
---
--- TOC entry 4924 (class 2606 OID 16614)
--- Name: order_table order_table_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.order_table
-    ADD CONSTRAINT order_table_pkey PRIMARY KEY (id);
-
-
---
--- TOC entry 4917 (class 2606 OID 16596)
--- Name: products products_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.products
-    ADD CONSTRAINT products_pkey PRIMARY KEY (id);
-
-
---
--- TOC entry 4936 (class 2606 OID 16722)
--- Name: cart_items uq_cart_product; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.cart_items
-    ADD CONSTRAINT uq_cart_product UNIQUE (cart_id, product_id);
-
-
---
--- TOC entry 4908 (class 2606 OID 16575)
--- Name: users users_phone_number_key; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.users
-    ADD CONSTRAINT users_phone_number_key UNIQUE (phone_number);
-
-
---
--- TOC entry 4910 (class 2606 OID 16569)
--- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.users
-    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
-
-
---
--- TOC entry 4912 (class 2606 OID 16571)
--- Name: users users_username_key; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.users
-    ADD CONSTRAINT users_username_key UNIQUE (username);
-
-
---
--- TOC entry 4930 (class 1259 OID 16687)
--- Name: idx_billing_user_id; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX idx_billing_user_id ON public.billing_details USING btree (user_id);
-
-
---
--- TOC entry 4933 (class 1259 OID 16733)
--- Name: idx_cart_items_cart_id; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX idx_cart_items_cart_id ON public.cart_items USING btree (cart_id);
-
-
---
--- TOC entry 4934 (class 1259 OID 16734)
--- Name: idx_cart_items_product_id; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX idx_cart_items_product_id ON public.cart_items USING btree (product_id);
-
-
---
--- TOC entry 4927 (class 1259 OID 16686)
--- Name: idx_delivery_user_id; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX idx_delivery_user_id ON public.delivery_address USING btree (user_id);
-
-
---
--- TOC entry 4921 (class 1259 OID 16683)
--- Name: idx_order_cart_id; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX idx_order_cart_id ON public.order_table USING btree (cart_id);
-
-
---
--- TOC entry 4922 (class 1259 OID 16682)
--- Name: idx_order_user_id; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX idx_order_user_id ON public.order_table USING btree (user_id);
-
-
---
--- TOC entry 4915 (class 1259 OID 16680)
--- Name: idx_products_contains_id; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX idx_products_contains_id ON public.products USING btree (contains_id);
-
-
---
--- TOC entry 4920 (class 1259 OID 16706)
--- Name: ux_cart_user_id; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE UNIQUE INDEX ux_cart_user_id ON public.cart USING btree (user_id);
-
-
---
--- TOC entry 4942 (class 2606 OID 16675)
--- Name: billing_details fk_billing_user; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.billing_details
-    ADD CONSTRAINT fk_billing_user FOREIGN KEY (user_id) REFERENCES public.users(id);
-
-
---
--- TOC entry 4943 (class 2606 OID 16723)
--- Name: cart_items fk_cart_items_cart; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.cart_items
-    ADD CONSTRAINT fk_cart_items_cart FOREIGN KEY (cart_id) REFERENCES public.cart(id) ON DELETE CASCADE;
-
-
---
--- TOC entry 4944 (class 2606 OID 16728)
--- Name: cart_items fk_cart_items_product; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.cart_items
-    ADD CONSTRAINT fk_cart_items_product FOREIGN KEY (product_id) REFERENCES public.products(id);
-
-
---
--- TOC entry 4938 (class 2606 OID 16701)
--- Name: cart fk_cart_user; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.cart
-    ADD CONSTRAINT fk_cart_user FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE CASCADE;
-
-
---
--- TOC entry 4941 (class 2606 OID 16670)
--- Name: delivery_address fk_delivery_user; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.delivery_address
-    ADD CONSTRAINT fk_delivery_user FOREIGN KEY (user_id) REFERENCES public.users(id);
-
-
---
--- TOC entry 4939 (class 2606 OID 16650)
--- Name: order_table fk_order_cart; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.order_table
-    ADD CONSTRAINT fk_order_cart FOREIGN KEY (cart_id) REFERENCES public.cart(id);
-
-
---
--- TOC entry 4940 (class 2606 OID 16645)
--- Name: order_table fk_order_user; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.order_table
-    ADD CONSTRAINT fk_order_user FOREIGN KEY (user_id) REFERENCES public.users(id);
-
-
---
--- TOC entry 4937 (class 2606 OID 16665)
--- Name: products fk_product_contains; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
+DO $$ BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'fk_product_contains') THEN
 ALTER TABLE ONLY public.products
     ADD CONSTRAINT fk_product_contains FOREIGN KEY (contains_id) REFERENCES public.contains(id);
+END IF;
+END $$;
 
+DO $$ BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'fk_cart_user') THEN
+ALTER TABLE ONLY public.cart
+    ADD CONSTRAINT fk_cart_user FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE CASCADE;
+END IF;
+END $$;
 
--- Completed on 2026-02-16 09:52:27
+DO $$ BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'fk_cart_items_cart') THEN
+ALTER TABLE ONLY public.cart_items
+    ADD CONSTRAINT fk_cart_items_cart FOREIGN KEY (cart_id) REFERENCES public.cart(id) ON DELETE CASCADE;
+END IF;
+END $$;
 
---
--- PostgreSQL database dump complete
---
+DO $$ BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'fk_cart_items_product') THEN
+ALTER TABLE ONLY public.cart_items
+    ADD CONSTRAINT fk_cart_items_product FOREIGN KEY (product_id) REFERENCES public.products(id);
+END IF;
+END $$;
 
-\unrestrict MbQ0vHf3uFETDfqeCJHMHHnc77ObyxkeaPsfaeYJKi5mJ6HEVtfpmaQBeuO75Mn
+DO $$ BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'fk_order_user') THEN
+ALTER TABLE ONLY public.order_table
+    ADD CONSTRAINT fk_order_user FOREIGN KEY (user_id) REFERENCES public.users(id);
+END IF;
+END $$;
 
+DO $$ BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'fk_order_cart') THEN
+ALTER TABLE ONLY public.order_table
+    ADD CONSTRAINT fk_order_cart FOREIGN KEY (cart_id) REFERENCES public.cart(id);
+END IF;
+END $$;
+
+DO $$ BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'fk_delivery_user') THEN
+ALTER TABLE ONLY public.delivery_address
+    ADD CONSTRAINT fk_delivery_user FOREIGN KEY (user_id) REFERENCES public.users(id);
+END IF;
+END $$;
+
+DO $$ BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'fk_billing_user') THEN
+ALTER TABLE ONLY public.billing_details
+    ADD CONSTRAINT fk_billing_user FOREIGN KEY (user_id) REFERENCES public.users(id);
+END IF;
+END $$;
+
+DO $$ BEGIN
+    RAISE NOTICE ':) :) :) SCHEMA LOADING DONE :) :) :)';
+END $$;
