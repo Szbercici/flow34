@@ -27,7 +27,7 @@ public class SecurityConfig {
 
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/uploads/images/**").permitAll()
-                        .requestMatchers("/static/images/**").permitAll()
+                        .requestMatchers("/images/**").permitAll()
 
                         // ADMIN ENGEDÉLY MINDENHEZ
 

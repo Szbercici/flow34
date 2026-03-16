@@ -50,7 +50,7 @@ public class DataInitializer implements CommandLineRunner {
                 BigDecimal.valueOf(12.99),
                 "Refreshing watermelon flavored hydration cubes with vitamins and zero sugar",
                 "Microdrink",
-                "static/images/microdrink-melon.png"
+                "images/microdrink-melon.png"
         );
 
         seedProductIfMissing(
@@ -58,7 +58,7 @@ public class DataInitializer implements CommandLineRunner {
                 BigDecimal.valueOf(14.99),
                 "Classic energy drink flavor boosted with caffeine for focus and power.",
                 "Microdrink",
-                "static/images/microdrink-energy.png"
+                "images/microdrink-energy.png"
         );
 
 
@@ -67,7 +67,7 @@ public class DataInitializer implements CommandLineRunner {
                 BigDecimal.valueOf(12.99),
                 "A berry mix sensation. Tasty hydration with natural forest fruit flavors.",
                 "Microdrink",
-                "static/images/microdrink-forest-fruit.png"
+                "images/microdrink-forest-fruit.png"
         );
 
         seedProductIfMissing(
@@ -75,7 +75,7 @@ public class DataInitializer implements CommandLineRunner {
                 BigDecimal.valueOf(12.99),
                 "Zesty and fresh lemon flavor. Simple hydration rich in vitamins.",
                 "Microdrink",
-                "static/images/microdrink-lemon.png"
+                "images/microdrink-lemon.png"
         );
 
         seedProductIfMissing(
@@ -83,7 +83,7 @@ public class DataInitializer implements CommandLineRunner {
                 BigDecimal.valueOf(16.99),
                 "Limited edition green formula packed with essential electrolytes for active hydration.",
                 "Microdrink",
-                "static/images/microdrink-cucumber.png"
+                "images/microdrink-cucumber.png"
         );
 
         seedProductIfMissing(
@@ -91,7 +91,7 @@ public class DataInitializer implements CommandLineRunner {
                 BigDecimal.valueOf(12.99),
                 "The classic cola taste, reimagined as refreshing hydration cubes with zero sugar and essential vitamins.",
                 "Microdrink",
-                "static/images/microdrink-cola.png"
+                "images/microdrink-cola.png"
         );
 
         seedProductIfMissing(
@@ -99,7 +99,7 @@ public class DataInitializer implements CommandLineRunner {
                 BigDecimal.valueOf(12.99),
                 "Durable and stylish metal water bottle to keep you hydrated on the go.",
                 "Water Bottles",
-                "static/images/metal-water-bottle.png"
+                "images/metal-water-bottle.png"
         );
 
         seedProductIfMissing(
@@ -107,7 +107,7 @@ public class DataInitializer implements CommandLineRunner {
                 BigDecimal.valueOf(8.99),
                 "Lightweight and convenient plastic water bottle for everyday use.",
                 "Water Bottles",
-                "static/images/blue-water-bottle.png"
+                "images/blue-water-bottle.png"
         );
 
         seedProductIfMissing(
@@ -115,7 +115,7 @@ public class DataInitializer implements CommandLineRunner {
                 BigDecimal.valueOf(12.99),
                 "Lightweight and functional water bottle in a vibrant purple color.",
                 "Water Bottles",
-                "static/images/purple-water-bottle.png"
+                "images/purple-water-bottle.png"
         );
 
         seedProductIfMissing(
@@ -123,63 +123,63 @@ public class DataInitializer implements CommandLineRunner {
                 BigDecimal.valueOf(10.99),
                 "Lightweight and functional water bottle in a vibrant red color.",
                 "Water Bottles",
-                "static/images/red-water-bottle.png"
+                "images/red-water-bottle.png"
         );
         seedProductIfMissing(
                 "Daily Scoop Cactus",
                 BigDecimal.valueOf(12.99),
                 "",
                 "Daily Scoop",
-                "static/images/daily-scoop-cactus.png"
+                "images/daily-scoop-cactus.png"
         );
         seedProductIfMissing(
                 "Daily Scoop Lemon",
                 BigDecimal.valueOf(12.99),
                 "",
                 "Daily Scoop",
-                "static/images/daily-scoop-lemon.png"
+                "images/daily-scoop-lemon.png"
         );
         seedProductIfMissing(
                 "Daily Scoop Punch",
                 BigDecimal.valueOf(12.99),
                 "",
                 "Daily Scoop",
-                "static/images/daily-scoop-punch.png"
+                "images/daily-scoop-punch.png"
         );
         seedProductIfMissing(
                 "Daily Scoop Unflavored",
                 BigDecimal.valueOf(10.99),
                 "",
                 "Daily Scoop",
-                "static/images/daily-scoop-unflavored.png"
+                "images/daily-scoop-unflavored.png"
         );
         seedProductIfMissing(
                 "Runner Berry",
                 BigDecimal.valueOf(11.99),
                 "",
                 "Runner",
-                "static/images/runner-berry.png"
+                "images/runner-berry.png"
         );
         seedProductIfMissing(
                 "Runner Citrus",
                 BigDecimal.valueOf(11.99),
                 "",
                 "Runner",
-                "static/images/runner-citrus.png"
+                "images/runner-citrus.png"
         );
         seedProductIfMissing(
                 "Runner Orange",
                 BigDecimal.valueOf(11.99),
                 "",
                 "Runner",
-                "static/images/runner-orange.png"
+                "images/runner-orange.png"
         );
         seedProductIfMissing(
                 "Runner Tutti Frutty",
                 BigDecimal.valueOf(12.50),
                 "",
                 "Runner",
-                "static/images/runner-tuttifrutty.png"
+                "images/runner-tuttifrutty.png"
         );
     }
 
