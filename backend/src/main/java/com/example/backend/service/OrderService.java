@@ -1,41 +1,39 @@
 package com.example.backend.service;
 
-import com.example.backend.dto.OrderListDto;
-import com.example.backend.repository.OrderRepository;
+import com.example.backend.dto.*;
+import com.example.backend.model.Order;
+import com.example.backend.model.OrderItem;
+import com.example.backend.model.Product;
 import com.example.backend.model.User;
 import com.example.backend.repository.OrderRepository;
-import com.example.backend.repository.OrderSummaryProjection;
+import com.example.backend.repository.ProductRepository;
 import com.example.backend.repository.UserRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
-import org.springframework.http.HttpStatus;
-import com.example.backend.dto.CreateOrderItemRequest;
-import com.example.backend.dto.CreateOrderRequest;
-import com.example.backend.dto.CreateOrderResponse;
-import com.example.backend.model.Order;
-import com.example.backend.model.OrderItem;
-import com.example.backend.repository.OrderSummaryProjection;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
 public class OrderService {
 
+    private final ProductRepository productRepository;
     private final OrderRepository orderRepository;
     private final UserRepository userRepository;
 
-    public OrderService(OrderRepository orderRepository,UserRepository userRepository) {
+    public OrderService(OrderRepository orderRepository,
+                        UserRepository userRepository,
+                        ProductRepository productRepository) {
         this.orderRepository = orderRepository;
         this.userRepository = userRepository;
+        this.productRepository = productRepository;
     }
 
     @Transactional
     public CreateOrderResponse createOrder(Long userId, CreateOrderRequest req) {
-
         Order order = new Order();
         order.setUserId(userId);
         order.setAddress(req.getAddress());
@@ -46,38 +44,57 @@ public class OrderService {
             oi.setOrder(order);
             oi.setProductId(item.getProductId());
             oi.setQuantity(item.getQuantity());
-            oi.setPrice(item.getPrice()); // később érdemes szerveroldalon termékárból számolni
+            oi.setPrice(item.getPrice());
 
             order.getItems().add(oi);
         }
 
         Order saved = orderRepository.save(order);
-
         return new CreateOrderResponse(true, saved.getId());
     }
 
     @Transactional(readOnly = true)
-    public List<OrderListDto> getMyOrders(Long userId) {
+    public OrderFrontendDto getOrderForFrontend(Long userId, Long orderId) {
+        Order order = orderRepository.findByIdAndUserId(orderId, userId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found"));
 
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
 
-        String fullName = buildUserName(user);
+        List<OrderItemFrontendDto> items = order.getItems().stream()
+                .map(item -> {
+                    Product product = productRepository.findById(item.getProductId())
+                            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
 
-        List<OrderSummaryProjection> rows = orderRepository.findOrderSummariesByUserId(userId);
-
-        return rows.stream()
-                .map(r -> new OrderListDto(
-                        r.getOrderId(),
-                        fullName,
-                        r.getCreatedAt(),
-                        r.getTotalPrice()
-                ))
+                    return new OrderItemFrontendDto(
+                            product.getId(),
+                            product.getName(),
+                            product.getImg(),
+                            item.getPrice(),
+                            item.getQuantity(),
+                            item.getPrice().multiply(BigDecimal.valueOf(item.getQuantity()))
+                    );
+                })
                 .toList();
+
+        return new OrderFrontendDto(
+                user.getUsername(),
+                "",
+                user.getEmail(),
+                order.getAddress(),
+                items
+        );
     }
 
-    private String buildUserName(User user) {
-        String name = user.getUsername() != null ? user.getUsername().trim() : "";
-        return name.isEmpty() ? user.getUsername() : name;
+    @Transactional(readOnly = true)
+    public List<OrderSimpleDto> getMyOrders(Long userId) {
+        return orderRepository.findAll().stream()
+                .filter(o -> o.getUserId().equals(userId))
+                .map(o -> new OrderSimpleDto(
+                        o.getId(),
+                        o.getAddress(),
+                        o.getCreatedAt()
+                ))
+                .toList();
     }
 }

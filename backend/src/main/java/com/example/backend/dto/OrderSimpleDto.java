@@ -1,20 +1,18 @@
 package com.example.backend.dto;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@AllArgsConstructor
-@NoArgsConstructor
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
-public class OrderListDto {
+@AllArgsConstructor
+@NoArgsConstructor
+public class OrderSimpleDto {
     private Long orderId;
-    private String userName;
+    private String address;
     private LocalDateTime createdAt;
-    private BigDecimal totalPrice;
 }

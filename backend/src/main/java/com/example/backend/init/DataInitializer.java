@@ -44,6 +44,19 @@ public class DataInitializer implements CommandLineRunner {
             System.out.println(" :_( Admin user already exists");
         }
 
+        if (!userRepository.existsByUsername("proba1")) {
+            User admin = new User();
+            admin.setUsername("proba1");
+            admin.setEmail("proba1@local.test");
+            admin.setPassword(passwordEncoder.encode("admin123"));
+            admin.setRole(Role.USER);
+
+            userRepository.save(admin);
+            System.out.println(":) Proba1 user created");
+        } else {
+            System.out.println(" :_( Proba1 user already exists");
+        }
+
         // --- PRODUCT seed ---
         seedProductIfMissing(
                 "Flow Watermelon",

@@ -2,12 +2,13 @@ package com.example.backend.controller;
 
 import com.example.backend.dto.CreateOrderRequest;
 import com.example.backend.dto.CreateOrderResponse;
-import com.example.backend.dto.OrderListDto;
+import com.example.backend.dto.OrderSimpleDto;
 import com.example.backend.service.OrderService;
 import com.example.backend.service.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.example.backend.dto.OrderFrontendDto;
 
 import java.util.List;
 
@@ -35,8 +36,17 @@ public class OrderController {
     }
 
     @GetMapping
-    public ResponseEntity<List<OrderListDto>> getMyOrders(Authentication auth) {
+    public ResponseEntity<List<OrderSimpleDto>> getMyOrders(Authentication auth) {
         Long userId = userService.getUserId(auth);
         return ResponseEntity.ok(orderService.getMyOrders(userId));
+    }
+
+    @GetMapping("/{orderId}")
+    public ResponseEntity<OrderFrontendDto> getOrderDetails(
+            @PathVariable Long orderId,
+            Authentication auth
+    ) {
+        Long userId = userService.getUserId(auth);
+        return ResponseEntity.ok(orderService.getOrderForFrontend(userId, orderId));
     }
 }
