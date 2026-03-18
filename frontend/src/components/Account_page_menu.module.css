@@ -7,7 +7,7 @@
   flex: 3   ;
   padding: 30px;
   background: var(--background-color);
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
   border-radius: 50px;
   margin: 20px;   
   margin-right: 40px; 
@@ -19,7 +19,7 @@
     align-items: center;
     justify-content: space-evenly ;
     font-size: x-large;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
     background-color: var(--background-color);
     height: 55vh;
     text-align: center;

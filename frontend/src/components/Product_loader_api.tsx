@@ -19,7 +19,7 @@ export const Products = () => {
     const fetchProducts = async () => {
       try {
         setLoading(true);
-        const response = await fetch(API_PRODUCTS_URL);
+       const response = await fetch(API_PRODUCTS_URL);
         if (!response.ok) {
           throw new Error("Hiba az API hívásban");
         }

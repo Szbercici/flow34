@@ -68,7 +68,7 @@ const Account_orders = () => {
         ) : (
           <div className={styles.ordersGrid}>
             {orders.map((order) => (
-              <div key={order.orderId} className={styles.orderCard}>
+              <div key={order.orderId} onClick={() => navigate(`/account/orders/${order.orderId}`)} className={styles.orderCard}>
                 <div className={styles.orderHeader}>
                   <h3 className={styles.orderId}>Order #{order.orderId}</h3>
                   <span className={styles.orderStatus}>In progress</span>
@@ -92,7 +92,7 @@ const Account_orders = () => {
                   <div className={styles.detailRow}>
                     <span className={styles.detailLabel}>Total</span>
                     <span className={styles.totalAmount}>
-                      ${order.totalPrice?.toFixed(2)}
+                      {order.to}$
                     </span>
                   </div>
                 </div>

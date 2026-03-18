@@ -47,7 +47,7 @@ const Scroll_container: React.FC<ScrollContainerProps> = ({ products }) => {
         {products.map((product: Product) => (
           <SwiperSlide 
             key={product.id} 
-            style={{ width: 'auto' }} // Hogy a Product_show mérete érvényesüljön
+            style={{ width: 'auto', }} // Hogy a Product_show mérete érvényesüljön
           >
             <div className="flow-product-wrapper">
               <Product_show product={product} />

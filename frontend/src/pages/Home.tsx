@@ -25,7 +25,7 @@ const Home = () => {
         }}
         modules={[Autoplay, Navigation, Pagination]}
         className={styles.swiper}
-        spaceBetween={155} // 500 helyett legyen 20
+        spaceBetween={80} // 500 helyett legyen 20
         slidesPerView={1}
         onSlideChange={() => console.log("slide change")}
         onSwiper={(swiper) => console.log(swiper)}

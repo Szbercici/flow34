@@ -14,6 +14,7 @@ import NotFound from "./pages/NotFound";
 import {Toaster} from "sonner";
 import Checkout from "./pages/Checkout";
 import Products from "./pages/Produtcs_all";
+import OrderShow from "./components/Account_order_show";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
           <Route path="/product/:Product_name" element={<Product_page />} />
           <Route path="/products" element={<Products />} />
           <Route path="/account/orders" element={<Account_order />} />
+          <Route path="/account/orders/:orderId" element={<OrderShow />} />
           <Route path="/account/me" element={<Account_me />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -1,0 +1,44 @@
+.headerRow {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.orderTitle {
+  margin: 0;
+}
+
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border: 1px solid var(--primary-text-color);
+  border-radius: 14px;
+  background: var(--background-color);
+  color: var(--primary-text-color);
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.backButton:hover {
+  background: var(--hover-background-color);
+  border-color: var(--accent-color);
+}
+
+.backArrow {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.productLink {
+  text-decoration: none;
+  color: inherit;
+  transform: none;
+  text-transform: none;
+  display: block;
+}

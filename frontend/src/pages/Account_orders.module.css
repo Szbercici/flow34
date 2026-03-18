@@ -1,7 +1,8 @@
-/* Account Orders - Clean Slim Design */
+/* Account Orders - Clean Design with Gradient Border */
 
 .container {
-  max-width: 60vw;
+  width: 100%;
+  max-width: 980px;
   margin: 0 auto;
   padding: 1.5rem;
   font-family: 'Lexend Exa', sans-serif;
@@ -9,9 +10,8 @@
 }
 
 .header {
-  text-align: start;
+  text-align: left;
   margin-bottom: 2rem;
-  font-weight: bolder;
 }
 
 .header h1 {
@@ -21,30 +21,35 @@
   margin: 0;
 }
 
+/* --- GRID: Alapból 1 oszlop (Mobilon) --- */
 .ordersGrid {
-  display: flex;
-  gap: 1rem;
+  display: grid;
+  gap: 1.5rem;
   grid-template-columns: 1fr;
-  justify-content: center;
-  flex-wrap: wrap;
+  width: 100%;
 }
 
+/* --- GRID: 2 oszlop (Asztali gépen) --- */
 @media (min-width: 768px) {
   .ordersGrid {
-    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
+/* --- KÁRTYA --- */
 .orderCard {
   background: var(--background-color);
   border-radius: 12px;
-  padding: 1.25rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  position: relative;
-  transition: box-shadow 0.2s ease-in-out;
-  width: 80%;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px var(--shadow-color2);
+  position: relative; /* Kritikus a ::before gradient miatt! */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+  cursor: pointer; /* Hogy látszódjon, hogy kattintható */
 }
 
+/* --- VISSZATETT GRADIENT BORDER --- */
 .orderCard::before {
   content: '';
   position: absolute;
@@ -53,23 +58,28 @@
   right: 0;
   bottom: 0;
   border-radius: 12px;
-  padding: 2px;
+  padding: 2px; /* Keret vastagsága */
   background: linear-gradient(to bottom, var(--background-color), rgba(255, 255, 255, 0.3));
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask-composite: exclude;
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
+  pointer-events: none; /* Nem blokkolja az onClick eseményt */
 }
 
 .orderCard:hover {
-  box-shadow: 0 4px 8px var(--shadow-color2);
+  box-shadow: 0 8px 16px var(--shadow-color2, rgba(0, 0, 0, 0.08));
+  transform: translateY(-2px);
 }
 
+/* --- BELSŐ TARTALOM --- */
 .orderHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #f3f4f6;
 }
 
 .orderId {
@@ -80,19 +90,19 @@
 }
 
 .orderStatus {
-  padding: 0.25rem 0.5rem;
-  border-radius: 6px;
-  font-size: 0.7rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.025em;
+  letter-spacing: 0.05em;
   background-color: #dcfce7;
   color: #166534;
 }
 
 .orderDetails {
   display: grid;
-  gap: 0.5rem;
+  gap: 0.75rem;
 }
 
 .detailRow {
@@ -102,33 +112,37 @@
 }
 
 .detailLabel {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   color: var(--secondary-text-color);
-  font-weight: 500;
 }
 
 .detailValue {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: var(--primary-text-color);
   font-weight: 500;
 }
 
 .orderTotal {
-  border-top: 1px solid #f3f4f6;
-  padding-top: 0.75rem;
-  margin-top: 0.75rem;
+  border-top: 1px dashed #e5e7eb;
+  padding-top: 1rem;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .totalAmount {
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 1.1rem;
+  font-weight: 700;
   color: var(--accent-color);
 }
 
+/* --- ÜRES ÁLLAPOT --- */
 .emptyState {
   text-align: center;
-  padding: 3rem 2rem;
+  padding: 3rem 1rem;
   color: var(--secondary-text-color);
+  grid-column: 1 / -1;
 }
 
 .emptyState h2 {
@@ -139,40 +153,21 @@
 
 .emptyState p {
   font-size: 0.9rem;
-  margin: 0;
-  max-width: 400px;
   margin: 0 auto;
+  max-width: 400px;
 }
 
+/* --- MOBIL --- */
 @media (max-width: 640px) {
   .container {
     padding: 1rem;
   }
-
+  
   .header h1 {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
   }
 
   .orderCard {
-    padding: 1rem;
-    min-width: 250%;
-  }
-
-  .orderHeader {
-    gap: 0.5rem;
-  }
-  .container{
-    width: 50%;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin: 5%;
-    margin-left: 7.5%;
-  }
-  .ordersGrid{
-    width: 50%;
-    flex-direction:row;
-    flex-wrap: wrap;
-    
-    justify-content: start;
+    padding: 1.25rem;
   }
 }
