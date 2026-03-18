@@ -1,5 +1,6 @@
 package com.example.backend.service;
 
+import com.example.backend.dto.UpdateEmailResponse;
 import com.example.backend.dto.UserDto;
 import com.example.backend.model.User;
 import com.example.backend.repository.UserRepository;
@@ -114,6 +115,25 @@ public class UserService {
         userRepository.save(user);
 
         return user.getTheme().name();
+    }
+
+    @Transactional
+    public UpdateEmailResponse updateEmail(Long userId, String newEmail) {
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+
+        if (newEmail == null || !newEmail.contains("@")) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid email");
+        }
+
+        if (userRepository.existsByEmail(newEmail)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email already in use");
+        }
+
+        userRepository.save(user);
+
+        return new UpdateEmailResponse(true, newEmail);
     }
 
 

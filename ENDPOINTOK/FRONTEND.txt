@@ -122,6 +122,82 @@ AUTH FONTOS MEGJEGYZÉSEK:
 
 ------------------------------------
 
+!!!!!!!! RENDELÉSEK (ORDERS): !!!!!!!!
+
+Rendelés létrehozása:
+
+ENDPOINT - POST -> api/orders
+
+Feltétel:
+
+- Bejelentkezett felhasználó (cookie → access_token)
+
+{
+  "address": "string",
+  "items": [
+    {
+      "productId": number,
+      "quantity": number,
+      "price": number
+    }
+  ]
+}
+
+Válasz: 
+{
+  "success": true,
+  "orderId": number
+}
+
+------------------------------------
+
+Egy rendelés lekérése (frontend formátumban):
+
+ENDPOINT - GET -> api/orders/{orderId}
+
+Feltétel:
+
+- Bejelentkezett felhasználó
+- Csak a saját rendelés kérhető le
+
+JSON válasz:
+{
+  "firstName": "string",
+  "lastName": "string",
+  "email": "string",
+  "address": "string",
+  "items": [
+    {
+      "id": number,
+      "name": "string",
+      "img": "string",
+      "price": number,
+      "quantity": number,
+      "lineTotal": number
+    }
+  ]
+}
+
+------------------------------------
+
+Felhasználó rendeléseinek listája:
+
+ENDPOINT - GET -> api/orders
+
+-Feltétel:
+-Bejelentkezett felhasználó
+
+JSON válasz:
+[
+  {
+    "orderId": number,
+    "address": "string",
+    "createdAt": "2026-03-18T12:00:00"
+  }
+]
+
+------------------------------------
+
 HTTP VÁLASZOK:
 
 200 -> Sikeres
@@ -129,6 +205,7 @@ HTTP VÁLASZOK:
 400 -> Hibás input
 401 -> Hibás login
 403 -> Nincs jogosultság/token
+404 -> Rendelés nem található / nem a useré
 
 
 

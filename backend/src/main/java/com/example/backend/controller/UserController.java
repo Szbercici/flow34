@@ -1,5 +1,7 @@
 package com.example.backend.controller;
 
+import com.example.backend.dto.UpdateEmailRequest;
+import com.example.backend.dto.UpdateEmailResponse;
 import com.example.backend.dto.UpdateThemeRequest;
 import org.springframework.security.core.Authentication;
 import com.example.backend.service.UserService;
@@ -62,6 +64,17 @@ public class UserController {
         Long userId = userService.getUserId(auth);
         String theme = userService.updateMyTheme(userId, req.getTheme());
         return Map.of("theme", theme);
+    }
+
+    // EMAIL ÁTÍRÁSA
+
+    @PutMapping("/me/email")
+    public ResponseEntity<UpdateEmailResponse> updateEmail(
+            @RequestBody UpdateEmailRequest request,
+            Authentication auth
+    ) {
+        Long userId = userService.getUserId(auth);
+        return ResponseEntity.ok(userService.updateEmail(userId, request.getEmail()));
     }
 
 
