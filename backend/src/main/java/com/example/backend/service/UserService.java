@@ -119,21 +119,21 @@ public class UserService {
 
     @Transactional
     public UpdateEmailResponse updateEmail(Long userId, String newEmail) {
+        if (newEmail == null || newEmail.isBlank() || !newEmail.contains("@")) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid email");
+        }
 
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
 
-        if (newEmail == null || !newEmail.contains("@")) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid email");
-        }
-
-        if (userRepository.existsByEmail(newEmail)) {
+        if (userRepository.existsByEmail(newEmail) && !newEmail.equals(user.getEmail())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email already in use");
         }
 
-        userRepository.save(user);
+        user.setEmail(newEmail);
+        User savedUser = userRepository.save(user);
 
-        return new UpdateEmailResponse(true, newEmail);
+        return new UpdateEmailResponse(true, savedUser.getEmail());
     }
 
 
