@@ -1,11 +1,8 @@
 package com.example.backend.controller;
 
-import com.example.backend.dto.UpdateEmailRequest;
-import com.example.backend.dto.UpdateEmailResponse;
-import com.example.backend.dto.UpdateThemeRequest;
+import com.example.backend.dto.*;
 import org.springframework.security.core.Authentication;
 import com.example.backend.service.UserService;
-import com.example.backend.dto.UserDto;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
@@ -77,6 +74,14 @@ public class UserController {
         return ResponseEntity.ok(userService.updateEmail(userId, request.getEmail()));
     }
 
+    @PutMapping("/me/username")
+    public ResponseEntity<UpdateUsernameResponse> updateUsername(
+            @RequestBody UpdateUsernameRequest request,
+            Authentication auth
+    ) {
+        Long userId = userService.getUserId(auth);
+        return ResponseEntity.ok(userService.updateUsername(userId, request.getUsername()));
+    }
 
 
 

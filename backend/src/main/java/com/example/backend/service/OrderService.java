@@ -88,13 +88,24 @@ public class OrderService {
 
     @Transactional(readOnly = true)
     public List<OrderSimpleDto> getMyOrders(Long userId) {
-        return orderRepository.findAll().stream()
-                .filter(o -> o.getUserId().equals(userId))
-                .map(o -> new OrderSimpleDto(
-                        o.getId(),
-                        o.getAddress(),
-                        o.getCreatedAt()
-                ))
+        return orderRepository.findAllByUserIdOrderByCreatedAtDesc(userId).stream()
+                .map(order -> {
+                    int itemCount = order.getItems().stream()
+                            .mapToInt(OrderItem::getQuantity)
+                            .sum();
+
+                    BigDecimal totalPrice = order.getItems().stream()
+                            .map(item -> item.getPrice().multiply(BigDecimal.valueOf(item.getQuantity())))
+                            .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+                    return new OrderSimpleDto(
+                            order.getId(),
+                            order.getAddress(),
+                            order.getCreatedAt(),
+                            itemCount,
+                            totalPrice
+                    );
+                })
                 .toList();
     }
 }

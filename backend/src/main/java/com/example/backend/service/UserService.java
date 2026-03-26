@@ -1,6 +1,7 @@
 package com.example.backend.service;
 
 import com.example.backend.dto.UpdateEmailResponse;
+import com.example.backend.dto.UpdateUsernameResponse;
 import com.example.backend.dto.UserDto;
 import com.example.backend.model.User;
 import com.example.backend.repository.UserRepository;
@@ -136,5 +137,26 @@ public class UserService {
         return new UpdateEmailResponse(true, savedUser.getEmail());
     }
 
+    @Transactional
+    public UpdateUsernameResponse updateUsername(Long userId, String newUsername) {
+        if (newUsername == null || newUsername.isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username cannot be empty");
+        }
+
+        String cleanedUsername = newUsername.trim();
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+
+        if (userRepository.existsByUsername(cleanedUsername)
+                && !cleanedUsername.equals(user.getUsername())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username already in use");
+        }
+
+        user.setUsername(cleanedUsername);
+        User savedUser = userRepository.save(user);
+
+        return new UpdateUsernameResponse(true, savedUser.getUsername());
+    }
 
 }
