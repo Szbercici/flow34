@@ -52,7 +52,7 @@ const Home = () => {
       <div className="container">
         <h1>Drink form the flow.</h1>
       </div>
-      <Scroll_container 
+      <Scroll_container
         products={products.filter(
           (product) => product.category === "Water Bottles",
         )}

@@ -101,8 +101,14 @@
 
 .newsletter {
   display: flex;
-  gap: 0.5rem;
   margin-top: 0.5rem;
+}
+
+.newsletterForm {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  width: 99%;
 }
 
 .emailInput {
@@ -223,15 +229,28 @@
     flex-wrap: wrap;
   }
 
+  .newsletterForm {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+
   .emailInput {
-    align-self: center;
-    min-width: 90%;
+    align-self: stretch;
+    width: 100%;
+    min-width: unset;
+    flex: unset;
+    padding: 0.55rem 0.4rem;
+    font-size: 0.78rem;
+    height: 32px;
   }
 
   .subscribeBtn {
-    align-self: center;
-    margin-left: 1px;
-    min-width: 100%;
+    align-self: stretch;
+    width: 100%;
+    min-width: unset;
+    height: 42px;
+    padding: 0.55rem 1.2rem;
   }
 
   .column h4 {
@@ -264,7 +283,9 @@
 
   .emailInput,
   .subscribeBtn {
-    font-size: 0.85rem;
-    padding: 0.5rem 0.6rem;
+    font-size: 0.78rem;
+    padding: 0.55rem 0.4rem;
+    width: 100%;
+    height: 42px;
   }
 }

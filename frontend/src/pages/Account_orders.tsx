@@ -83,8 +83,8 @@ const Account_orders = () => {
                   <div className={styles.detailRow}>
                     <span className={styles.detailLabel}>Items</span>
                     <span className={styles.detailValue}>
-                      {order.items?.length || 0} item
-                      {(order.items?.length || 0) !== 1 ? "s" : ""}
+                      {order.itemCount || 0} item
+                      {(order.itemCount || 0) !== 1 ? "s" : ""}
                     </span>
                   </div>
                 </div>
@@ -92,7 +92,7 @@ const Account_orders = () => {
                   <div className={styles.detailRow}>
                     <span className={styles.detailLabel}>Total</span>
                     <span className={styles.totalAmount}>
-                      {order.to}$
+                      {order.totalPrice}$
                     </span>
                   </div>
                 </div>
