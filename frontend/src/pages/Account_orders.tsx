@@ -40,7 +40,6 @@ const Account_orders = () => {
     getOrders();
   }, []);
 
-  console.log("Fetched orders:", orders);
 
   if (loading) {
     return (

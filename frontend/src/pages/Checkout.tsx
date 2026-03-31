@@ -46,7 +46,7 @@ const Checkout = () => {
         }
       } catch (err) {
         setError("Network error, please try again later!");
-        console.log("Checkout error:", err);
+       
       } finally {
         setLoading(false);
       }

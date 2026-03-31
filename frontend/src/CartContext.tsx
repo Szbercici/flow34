@@ -81,8 +81,6 @@
         credentials: "include",
         body: JSON.stringify(payload),    
       });
-      console.log("Server items:", payload);
-      console.log("Sikeres szinkronizálás tiszta listaként.");
     } catch (error) {
       console.error("Szerver hiba:", error);
     }

@@ -44,7 +44,7 @@ const Account_me = () => {
   }, [user]);
 
   async function saveEmail() {
-        console.log(userApi.email);
+       
     try {
       const response = await fetch(`${API_BASE_URL}/api/users/me/email`, {
         method: "PUT",
@@ -88,6 +88,7 @@ const Account_me = () => {
       }
 
       toast.success("Username updated successfully!");
+      useAuth
       return true;
     } catch (error) {
       console.error("Error updating username:", error);

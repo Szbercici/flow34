@@ -52,49 +52,65 @@ const Account_order_show = () => {
           >
             <span className={styles.backArrow}>←</span>
           </button>
-          <h1 className={styles.orderTitle}>Order #{orderId} details</h1>
+          <h1 className={styles.orderTitle}>Order #{orderId}</h1>
         </div>
 
-        <div>
-          <h2>Information</h2>
-          <p>Address: {order?.address}</p>
+        <div className={styles.infoCard}>
+          <p className={styles.infoCardTitle}>Information</p>
+          <div className={styles.infoRow}>
+            <span className={styles.infoLabel}>Name</span>
+            <span className={styles.infoValue}>
+              {order?.firstName} {order?.lastName}
+            </span>
+          </div>
+          <div className={styles.infoRow}>
+            <span className={styles.infoLabel}>Address</span>
+            <span className={styles.infoValue}>{order?.address ?? "—"}</span>
+          </div>
+          <div className={styles.infoRow}>
+            <span className={styles.infoLabel}>Order email</span>
+            <span className={styles.infoValue}>{order?.email ?? "—"}</span>
+          </div>
         </div>
 
-        {order?.items.map((product) => (
-          <Link
-            key={product.id}
-            className={styles.productLink}
-            to={`/product/${product.name}`}
-          >
-            <div className={checkoutStyles["cart-item"]}>
-              <div className={checkoutStyles["cart-info"]}>
-                {product.img ? (
-                  <img
-                    src={`${API_BASE_URL}/${product.img}`}
-                    alt={product.name}
-                    className={checkoutStyles["cart-item-image"]}
-                  />
-                ) : (
-                  <div
-                    className={`${checkoutStyles["cart-item-image"]} ${checkoutStyles.placeholder}`}
-                  >
-                    No Image
+        <p className={styles.sectionTitle}>Order items</p>
+        <div className={styles.itemsWrapper}>
+          {order?.items.map((product) => (
+            <Link
+              key={product.id}
+              className={styles.productLink}
+              to={`/product/${product.name}`}
+            >
+              <div className={checkoutStyles["cart-item"]}>
+                <div className={checkoutStyles["cart-info"]}>
+                  {product.img ? (
+                    <img
+                      src={`${API_BASE_URL}/${product.img}`}
+                      alt={product.name}
+                      className={checkoutStyles["cart-item-image"]}
+                    />
+                  ) : (
+                    <div
+                      className={`${checkoutStyles["cart-item-image"]} ${checkoutStyles.placeholder}`}
+                    >
+                      No Image
+                    </div>
+                  )}
+                  <div>
+                    <h4>{product.name}</h4>
+                    <p className={checkoutStyles["item-price"]}>
+                      {(product.price ?? 0).toLocaleString()} € x{" "}
+                      {product.quantity ?? 1}
+                    </p>
                   </div>
-                )}
-                <div>
-                  <h4>{product.name}</h4>
-                  <p className={checkoutStyles["item-price"]}>
-                    {(product.price ?? 0).toLocaleString()} € x{" "}
-                    {product.quantity ?? 1}
-                  </p>
+                </div>
+                <div className={checkoutStyles["item-total"]}>
+                  {(product.price * (product.quantity || 1)).toLocaleString()} €
                 </div>
               </div>
-              <div className={checkoutStyles["item-total"]}>
-                {(product.price * (product.quantity || 1)).toLocaleString()} €
-              </div>
-            </div>
-          </Link>
-        ))}
+            </Link>
+          ))}
+        </div>
       </Account_page_menu>
     </>
   );

@@ -27,22 +27,19 @@ const Home = () => {
         className={styles.swiper}
         spaceBetween={80} // 500 helyett legyen 20
         slidesPerView={1}
-        onSlideChange={() => console.log("slide change")}
-        onSwiper={(swiper) => console.log(swiper)}
+        
       >
         <SwiperSlide className={styles.swiperSlide}>
           <Video_default />
         </SwiperSlide>
 
         <SwiperSlide className={styles.swiperSlide}>
-
           <img src={newImg} alt="Slide 2" />
         </SwiperSlide>
       </Swiper>
       <div className="container">
         <h1>Taste the freshness</h1>
       </div>
-
       <Scroll_container
         products={products.filter(
           (product) => product.category === "Microdrink",
