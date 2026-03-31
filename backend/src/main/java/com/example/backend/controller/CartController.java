@@ -45,4 +45,6 @@ public class CartController {
         Long userId = userService.getUserId(auth);
         return cartService.clearCart(userId);
     }
+
+
 }

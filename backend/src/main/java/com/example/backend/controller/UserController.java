@@ -21,7 +21,7 @@ public class UserController {
     }
 
     // Összes user
-    @GetMapping("/all")
+    @GetMapping("/admin/all")
     public List<UserDto> getAllUsers() {
         return userService.getAll()
                 .stream()
@@ -30,7 +30,7 @@ public class UserController {
     }
 
     // Egy user
-    @GetMapping("/u/{username}")
+    @GetMapping("/admin/{username}")
     public UserDto getUser(@PathVariable String username) {
         return userService.getUserDtoByUsername(username);
     }
