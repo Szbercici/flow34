@@ -41,8 +41,8 @@ public class UserController {
             return ResponseEntity.status(401).build();
         }
 
-        String username = authentication.getName();
-        return ResponseEntity.ok(userService.getMe(username));
+        Long userId = userService.getUserId(authentication);
+        return ResponseEntity.ok(userService.getMeByUserId(userId));
     }
 
     //USER THEME

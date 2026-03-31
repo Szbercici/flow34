@@ -49,7 +49,7 @@ public class  AuthController {
         User user = userService.authenticate(request.getUsername(), request.getPassword());
 
         String access = jwtService.generateAccessToken(user);
-        String refresh = jwtService.generateRefreshToken(user.getUsername());
+        String refresh = jwtService.generateRefreshToken(user);
 
         ResponseCookie accessCookie = ResponseCookie.from("access_token", access)
                 .httpOnly(true)

@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-
 import java.io.IOException;
 import java.util.List;
 
@@ -37,30 +36,21 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 && jwtService.isValid(token)
                 && SecurityContextHolder.getContext().getAuthentication() == null) {
 
-            String username = jwtService.extractUsername(token);
-            String role = jwtService.extractRole(token); // "ADMIN" vagy "USER"
+            Long userId = jwtService.extractUserId(token);
+            String role = jwtService.extractRole(token);
 
             List<SimpleGrantedAuthority> authorities = List.of(
                     new SimpleGrantedAuthority("ROLE_" + (role == null ? "USER" : role))
             );
 
             UsernamePasswordAuthenticationToken auth =
-                    new UsernamePasswordAuthenticationToken(username, null, authorities);
+                    new UsernamePasswordAuthenticationToken(String.valueOf(userId), null, authorities);
 
             auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
             SecurityContextHolder.getContext().setAuthentication(auth);
         }
 
         filterChain.doFilter(request, response);
-
-    }
-
-    private String resolveToken(HttpServletRequest request) {
-        String auth = request.getHeader("Authorization");
-        if (auth != null && auth.startsWith("Bearer ")) {
-            return auth.substring(7);
-        }
-        return readCookie(request, "access_token");
     }
 
     private String readCookie(HttpServletRequest request, String name) {
@@ -72,7 +62,4 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         }
         return null;
     }
-
-
-
 }

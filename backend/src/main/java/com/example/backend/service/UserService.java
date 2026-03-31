@@ -27,10 +27,22 @@ public class UserService {
     }
 
     public Long getUserId(Authentication auth) {
-        String username = auth.getName();
-        return userRepository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("User not found: " + username))
-                .getId();
+        if (auth == null || auth.getName() == null) {
+            throw new RuntimeException("Authentication not found");
+        }
+
+        try {
+            return Long.valueOf(auth.getName());
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("Invalid authenticated user id: " + auth.getName());
+        }
+    }
+
+    public UserDto getMeByUserId(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+
+        return new UserDto(user.getId(), user.getUsername(), user.getEmail());
     }
 
     // REGISZTRÁCIÓ
