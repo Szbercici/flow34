@@ -25,7 +25,7 @@ public class UserController {
     public List<UserDto> getAllUsers() {
         return userService.getAll()
                 .stream()
-                .map(u -> new UserDto(u.getId(), u.getUsername(), u.getEmail()))
+                .map(u -> new UserDto(u.getId(), u.getUsername(), u.getEmail(), u.getRole()))
                 .toList();
     }
 
