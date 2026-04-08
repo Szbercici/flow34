@@ -1,0 +1,18 @@
+
+.productsLayout {
+	margin-top: 1rem;
+	gap: 1.5rem;
+}
+
+.productPanel,
+.formPanel {
+	margin-bottom: 1rem;
+}
+
+@media (max-width: 760px) {
+	.productsLayout {
+		margin-top: 0;
+		gap: 1rem;
+	}
+}
+

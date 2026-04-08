@@ -13,6 +13,7 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { isAuthenticated, user } = useAuth();
   const location = useLocation();
+  const isAdmin = user?.role === "ADMIN";
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -45,6 +46,17 @@ const Navbar = () => {
           <li className={styles.desktopMenuItem}>
             <CustomLink to="/account/me" currentPath={location.pathname}>
               Hi, {user?.username}
+            </CustomLink>
+          </li>
+        )}
+        {isAdmin && (
+          <li className={styles.desktopMenuItem}>
+            <CustomLink
+              to="/adminpanel"
+              currentPath={location.pathname}
+              className={styles.adminLink}
+            >
+              Admin Panel
             </CustomLink>
           </li>
         )}
@@ -116,11 +128,27 @@ const Navbar = () => {
                   </CustomLink>
                 </li>
               )}
+              {isAdmin && (
+                <li className={styles.desktopMenuItem}>
+                  <CustomLink
+                    to="/adminpanel"
+                    currentPath={location.pathname}
+                    onClick={closeMenu}
+                    className={styles.adminLink}
+                  >
+                    Admin Panel
+                  </CustomLink>
+                </li>
+              )}
               <li className={styles.desktopMenuItem}>
-            <CustomLink onClick={closeMenu} to="/products" currentPath={location.pathname}>
-               Products
-            </CustomLink>
-            </li>
+                <CustomLink
+                  onClick={closeMenu}
+                  to="/products"
+                  currentPath={location.pathname}
+                >
+                  Products
+                </CustomLink>
+              </li>
             </ul>
           </div>
         </>

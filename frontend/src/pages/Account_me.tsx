@@ -44,7 +44,6 @@ const Account_me = () => {
   }, [user]);
 
   async function saveEmail() {
-       
     try {
       const response = await fetch(`${API_BASE_URL}/api/users/me/email`, {
         method: "PUT",
@@ -52,7 +51,7 @@ const Account_me = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        
+
         body: JSON.stringify({ email: userApi.email }),
       });
 
@@ -70,7 +69,7 @@ const Account_me = () => {
     }
   }
 
-    async function saveUsername() {
+  async function saveUsername() {
     try {
       const response = await fetch(`${API_BASE_URL}/api/users/me/username`, {
         method: "PUT",
@@ -78,7 +77,7 @@ const Account_me = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        
+
         body: JSON.stringify({ username: userApi.username }),
       });
 
@@ -88,7 +87,7 @@ const Account_me = () => {
       }
 
       toast.success("Username updated successfully!");
-      useAuth
+      useAuth;
       return true;
     } catch (error) {
       console.error("Error updating username:", error);
@@ -107,7 +106,6 @@ const Account_me = () => {
     if (!isEditingUsername) {
       setIsEditingUsername(true);
       return;
-      
     }
   }
   async function handleEmailButtonClick() {
@@ -120,12 +118,8 @@ const Account_me = () => {
     if (!isEditingEmail) {
       setIsEditingEmail(true);
       return;
-      
     }
   }
-
-  
-  
 
   if (!user) {
     navigate("/login");

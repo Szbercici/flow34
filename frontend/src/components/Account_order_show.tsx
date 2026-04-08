@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Account_page_menu from "../components/Account_page_menu";
 import { useAuth } from "../AuthContext";
 import { API_BASE_URL } from "../config/api";
@@ -8,37 +8,59 @@ import styles from "./Account_order_show.module.css";
 
 const Account_order_show = () => {
   const { user } = useAuth();
-  const [order, setOrder] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
+  const [order, setOrder] = useState<{
+    firstName?: string;
+    lastName?: string;
+    email?: string;
+    address?: string;
+    items: {
+      id: number;
+      name: string;
+      img?: string;
+      price: number;
+      quantity: number;
+    }[];
+  } | null>(null);
+
   const navigate = useNavigate();
   const orderId = useParams().orderId;
 
-  if (!user) {
-    navigate("/login");
-  }
-
   useEffect(() => {
+    if (!user) {
+      navigate("/login", { replace: true });
+      return;
+    }
+
+    if (!orderId) {
+      navigate("/account/orders", { replace: true });
+      return;
+    }
+
     async function getOrderById() {
       try {
-        setLoading(true);
         const response = await fetch(`${API_BASE_URL}/api/orders/${orderId}`, {
           credentials: "include",
         });
         if (!response.ok) {
-          throw new Error(`Response status: ${response.status}`);
+          navigate("/account/orders", { replace: true });
+          return;
         }
 
         const result = await response.json();
+        if (!result || !Array.isArray(result.items)) {
+          navigate("/account/orders", { replace: true });
+          return;
+        }
+
         setOrder(result);
       } catch (error) {
         console.error("Error fetching orders:", error);
-      } finally {
-        setLoading(false);
+        navigate("/account/orders", { replace: true });
       }
     }
 
     getOrderById();
-  }, [orderId]);
+  }, [orderId, navigate, user]);
 
   return (
     <>

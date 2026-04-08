@@ -1,22 +1,49 @@
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  type ReactNode,
+} from "react";
 import { API_BASE_URL } from "./config/api";
 
 export interface AuthUser {
   id: number;
   username: string;
-  email: string;
+  role: string;
 }
+
+type AuthUserPayload = {
+  id: number;
+  username: string;
+  role?: string;
+  ROLE?: string;
+  email?: string;
+};
 
 interface AuthContextType {
   user: AuthUser | null;
   isAuthenticated: boolean;
-  setUser: (user: AuthUser | null) => void;
+  setUser: (user: AuthUserPayload | null) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<AuthUser | null>(null);
+
+  const setNormalizedUser = (nextUser: AuthUserPayload | AuthUser | null) => {
+    if (!nextUser) {
+      setUser(null);
+      return;
+    }
+
+    setUser({
+      id: nextUser.id,
+      username: nextUser.username,
+      role: nextUser.role ?? nextUser.ROLE ?? "USER",
+    });
+  };
 
   // Egyszerű inicializálás: megpróbáljuk lekérni az aktuális usert
   useEffect(() => {
@@ -27,12 +54,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         });
         if (resp.ok) {
           const data = await resp.json();
-          setUser(data);
+          setNormalizedUser(data);
         } else {
-          setUser(null);
+          setNormalizedUser(null);
         }
       } catch {
-        setUser(null);
+        setNormalizedUser(null);
       }
     };
 
@@ -40,7 +67,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated: !!user, setUser }}>
+    <AuthContext.Provider
+      value={{ user, isAuthenticated: !!user, setUser: setNormalizedUser }}
+    >
       {children}
     </AuthContext.Provider>
   );
@@ -54,7 +83,9 @@ export const useAuth = () => {
   return ctx;
 };
 
-export const logout = async (setUser: (user: AuthUser | null) => void): Promise<boolean> => {
+export const logout = async (
+  setUser: (user: AuthUser | null) => void,
+): Promise<boolean> => {
   try {
     const resp = await fetch(`${API_BASE_URL}/api/auth/logout`, {
       method: "POST",
@@ -69,5 +100,3 @@ export const logout = async (setUser: (user: AuthUser | null) => void): Promise<
   }
   return false;
 };
-
-

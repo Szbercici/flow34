@@ -23,18 +23,18 @@ const Produtcs = () => {
     return (
       <div className={styles.productsPage}>
         <div className="container">
-          <h1>Termékek</h1>
-          <div className={styles.error}>Hiba történt: {error}</div>
+          <h1>Products</h1>
+          <div className={styles.error}>Error occurred: {error}</div>
         </div>
       </div>
     );
   }
 
-  // Sikeres betöltés
+  // Successful load
   return (
     <div className={styles.productsPage}>
       <div className="container">
-        <h1>Termékek</h1>
+        <h1>Products</h1>
         <div className={styles.productsGrid}>
           {products.map((product) => (
             /* Itt a Product_show komponensed fogja használni a .product-card stílusokat */
