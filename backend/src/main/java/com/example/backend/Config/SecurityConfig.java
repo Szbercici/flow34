@@ -37,6 +37,7 @@ public class SecurityConfig {
                         // GET "/{username}"
 
                         // USERS ORDERS:
+                        // GET "/users/orders" megkapod az összes létező rendelést
                         // GET "/users/{userId}/orders"
 
                         // PRODUCTS:
