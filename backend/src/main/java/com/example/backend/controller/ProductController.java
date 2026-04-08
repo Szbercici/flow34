@@ -38,12 +38,12 @@ public class ProductController {
     public ResponseEntity<Product> createProduct(@RequestBody Product product) {
         Product created = productService.create(product);
         return ResponseEntity
-                .created(URI.create("/api/products/" + created.getId()))
+                .created(URI.create("/api/admin/products/" + created.getId()))
                 .body(created);
     }
 
     // PUT /api/products/{id}
-    @PutMapping("/{id}")
+    @PutMapping("/admin/{id}")
     public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product product) {
         return productService.update(id, product)
                 .map(ResponseEntity::ok)
@@ -51,7 +51,7 @@ public class ProductController {
     }
 
     // DELETE /api/products/{id}
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/admin/{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
         boolean deleted = productService.delete(id);
         return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();

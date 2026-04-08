@@ -108,4 +108,40 @@ public class OrderService {
                 })
                 .toList();
     }
+
+    public List<OrderFrontendDto> getOrdersByUserIdForAdmin(Long userId) {
+
+        List<Order> orders = orderRepository.findByUserIdOrderByCreatedAtDesc(userId);
+
+        return orders.stream().map(order -> {
+
+            List<OrderItemFrontendDto> items = order.getItems().stream().map(item -> {
+
+                Product product = productRepository.findById(item.getProductId())
+                        .orElse(null);
+
+                String name = product != null ? product.getName() : "Törölt termék";
+                String img = product != null ? product.getImg() : null;
+
+                return new OrderItemFrontendDto(
+                        item.getProductId(),
+                        name,
+                        img,
+                        item.getPrice(),
+                        item.getQuantity(),
+                        item.getPrice().multiply(BigDecimal.valueOf(item.getQuantity()))
+                );
+
+            }).toList();
+
+            return new OrderFrontendDto(
+                    null,
+                    null,
+                    null,
+                    order.getAddress(),
+                    items
+            );
+
+        }).toList();
+    }
 }

@@ -70,7 +70,7 @@ public class  AuthController {
         return ResponseEntity.ok()
                 .header(org.springframework.http.HttpHeaders.SET_COOKIE, accessCookie.toString())
                 .header(org.springframework.http.HttpHeaders.SET_COOKIE, refreshCookie.toString())
-                .body(new UserDto(user.getId(), user.getUsername(), user.getEmail()));
+                .body(new UserDto(user.getId(), user.getUsername(), user.getEmail(), user.getRole()));
     }
 
 

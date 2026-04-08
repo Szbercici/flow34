@@ -21,16 +21,16 @@ public class UserController {
     }
 
     // Összes user
-    @GetMapping("/all")
+    @GetMapping("/admin/all")
     public List<UserDto> getAllUsers() {
         return userService.getAll()
                 .stream()
-                .map(u -> new UserDto(u.getId(), u.getUsername(), u.getEmail()))
+                .map(u -> new UserDto(u.getId(), u.getUsername(), u.getEmail(), u.getRole()))
                 .toList();
     }
 
     // Egy user
-    @GetMapping("/u/{username}")
+    @GetMapping("/admin/{username}")
     public UserDto getUser(@PathVariable String username) {
         return userService.getUserDtoByUsername(username);
     }

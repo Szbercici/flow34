@@ -42,7 +42,7 @@ public class UserService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
 
-        return new UserDto(user.getId(), user.getUsername(), user.getEmail());
+        return new UserDto(user.getId(), user.getUsername(), user.getEmail(), user.getRole());
     }
 
     // REGISZTRÁCIÓ
@@ -91,14 +91,14 @@ public class UserService {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
 
-        return new UserDto(user.getId(), user.getUsername(), user.getEmail());
+        return new UserDto(user.getId(), user.getUsername(), user.getEmail(), user.getRole());
     }
 
     public UserDto getUserDtoByUsername(String username) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found: " + username));
 
-        return new UserDto(user.getId(), user.getUsername(), user.getEmail());
+        return new UserDto(user.getId(), user.getUsername(), user.getEmail(), user.getRole());
     }
 
     //THEME ÁLLÍTÁSA

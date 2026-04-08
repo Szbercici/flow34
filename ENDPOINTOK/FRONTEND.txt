@@ -1,211 +1,218 @@
-!!!!!! FELHASZNÁLÓ KEZELÉS: !!!!!!!!
+Persze, itt van egyben, csak másold be 👇
+
+---------------------------------------------
+
+🔐 !!!!! AUTHENTIKÁCIÓ !!!!!
 
 Felhasználó regisztrálása:
-
 ENDPOINT - POST -> /api/auth/register
-JSON:	{
+JSON:
+{
+"username": "string",
+"email": "string",
+"password": "string"
+}
 
-	"username": "string",
-	"email": "string,
-	"password": "string"
-
-	}
-
------------------------------------------
+---------------------------------------------
 
 Felhasználó bejelentkezése:
-
-ENDPOINT - POST -> api/auth/login
-JSON:	{
-
-  	"username": "string",
- 	"password": "string"
-
-	}
+ENDPOINT - POST -> /api/auth/login
+JSON:
+{
+"username": "string",
+"password": "string"
+}
 
 Működés:
--Bejelentkezés után cookie-ba kerül:
-	access_token (rövid élettartam), refresh_token (hosszabb élettartam, kb. 14 nap)
+Bejelentkezés után cookie-ba kerül:
+access_token (rövid élettartam), refresh_token (hosszabb élettartam, kb. 14 nap)
 
-----------------------------------------
+---------------------------------------------
 
-Új ACCES token lekérése REFRESH tokentől:
+Új ACCESS token lekérése REFRESH tokentől:
+ENDPOINT - POST -> /api/auth/refresh
 
-ENDPOINT - POST -> api/auth/refresh
+Feltétel:
+érvényes refresh token
 
-Feltétel: érvényes refresh token
-
-----------------------------------------
+---------------------------------------------
 
 Felhasználó logout:
-
-ENDPOINT - POST -> api/auth/logout
+ENDPOINT - POST -> /api/auth/logout
 
 Feltétel:
-Érvényes Acces token
+érvényes access token
 
-----------------------------------------
+---------------------------------------------
 
-!!!!!!!! FELHASZNÁLÓ ADATOK LEKÉRÉSE: !!!!!!!!
+👤 !!!!! FELHASZNÁLÓK !!!!!
 
-Bejelentkezett felhasználók lekérése:
-ENDPOINT - GET ->  api/users/me
+Bejelentkezett felhasználó lekérése:
+ENDPOINT - GET -> /api/users/me
 
-JSON:	{
+Feltétel:
+bejelentkezett felhasználó
 
- 	"id": number,
-  	"username": "string",
-  	"email": "string"
+JSON:
+{
+"id": number,
+"username": "string",
+"email": "string"
+}
 
-	}
-Ha nincs tokenje, akkor 404 válasz.(magyarán nincs bejelentkezve)
+---------------------------------------------
 
---------------------------------------
+Felhasználó lekérése username alapján:
+ENDPOINT - GET -> /api/users/{username}
 
-Felhasználó lekérése username alapján: 
+---------------------------------------------
 
-ENDPOINT - GET -> api/users/{username}
+Összes felhasználó lekérése:
+ENDPOINT - GET -> /api/users/all
 
-JSON: 	{
+Feltétel:
+ADMIN
 
-  	"id": number,
-  	"username": "string",
-  	"email": "string"
+---------------------------------------------
 
-	}
+👑 !!!!! ADMIN ENDPOINTOK !!!!!
 
--------------------------------------
+Összes felhasználó lekérése (admin panelhez):
+ENDPOINT - GET -> /api/admin/users
 
-Összes felhasználó lekérése (jelenleg publikus / vagy belső használat):
+Feltétel:
+ADMIN
 
-ENDPOINT - GET -> api/users/all
+---------------------------------------------
 
-Válasz: UserDto lista (jelszavak kivételével!).
+Felhasználó rendeléseinek lekérése:
+ENDPOINT - GET -> /api/admin/users/{userId}/orders
 
--------------------------------------
+Feltétel:
+ADMIN
 
-!!!!!!!! TERMÉKEK: !!!!!!!!
+---------------------------------------------
 
-Összes termék lekérése: 
+🛒 !!!!! TERMÉKEK !!!!!
 
-ENDPOINT - GET -> api/products
+Összes termék lekérése:
+ENDPOINT - GET -> /api/products
 
-JSON VÁLASZ: 
-[
-  {
-    "id": number,
-    "title": "string",
-    "price": number,
-    "description": "string",
-    "category": "string",
-    "image": "string",
-    "rating": { "rate": number, "count": number }
-  }
-]
+PUBLIC
 
-Megjegyzés:
--Ameddig nincs kész a DB, addig in memory-ban / statikusan van eltárolva minden.(Koppány már igazán meegcsinálhatná)
+---------------------------------------------
 
-PRODUCT KÉP LEKÉRÉSE:
+Egy termék lekérése:
+ENDPOINT - GET -> /api/products/{id}
 
-ENDPOINT - GET -> images/img.png
+PUBLIC
 
-------------------------------------
+---------------------------------------------
 
-AUTH FONTOS MEGJEGYZÉSEK:
-- NEM KELL HEADER AUTH
--Nem kell token localStorage-ben
--Minden auth cookie alapú
--Fetch hívásoknál:
-	js:
-	- fetch(url, {credentials: "include"});
+Termék létrehozása:
+ENDPOINT - POST -> /api/products
 
-------------------------------------
+Feltétel:
+ADMIN
 
-!!!!!!!! RENDELÉSEK (ORDERS): !!!!!!!!
+------------------------------------------------
+Termék módosítása:
+ENDPOINT - PUT -> /api/products/{id}
+
+Feltétel:
+ADMIN
+
+---------------------------------------------
+
+Termék törlése:
+ENDPOINT - DELETE -> /api/products/{id}
+
+Feltétel:
+ADMIN
+
+---------------------------------------------
+
+Termék kép lekérése:
+ENDPOINT - GET -> /images/{filename}
+
+PUBLIC
+
+---------------------------------------------
+
+📦 !!!!! RENDELÉSEK !!!!!
 
 Rendelés létrehozása:
-
-ENDPOINT - POST -> api/orders
-
-Feltétel:
-
-- Bejelentkezett felhasználó (cookie → access_token)
-
-{
-  "address": "string",
-  "items": [
-    {
-      "productId": number,
-      "quantity": number,
-      "price": number
-    }
-  ]
-}
-
-Válasz: 
-{
-  "success": true,
-  "orderId": number
-}
-
-------------------------------------
-
-Egy rendelés lekérése (frontend formátumban):
-
-ENDPOINT - GET -> api/orders/{orderId}
+ENDPOINT - POST -> /api/orders
 
 Feltétel:
+bejelentkezett felhasználó
 
-- Bejelentkezett felhasználó
-- Csak a saját rendelés kérhető le
-
-JSON válasz:
+JSON:
 {
-  "firstName": "string",
-  "lastName": "string",
-  "email": "string",
-  "address": "string",
-  "items": [
-    {
-      "id": number,
-      "name": "string",
-      "img": "string",
-      "price": number,
-      "quantity": number,
-      "lineTotal": number
-    }
-  ]
+"address": "string",
+"items": [
+{
+"productId": number,
+"quantity": number,
+"price": number
+}
+]
 }
 
-------------------------------------
+Válasz:
+{
+"success": true,
+"orderId": number
+}
+
+---------------------------------------------
+
+Egy rendelés lekérése:
+ENDPOINT - GET -> /api/orders/{orderId}
+
+Feltétel:
+bejelentkezett felhasználó
+csak a saját rendelés kérhető le
+
+---------------------------------------------
 
 Felhasználó rendeléseinek listája:
+ENDPOINT - GET -> /api/orders
 
-ENDPOINT - GET -> api/orders
-
--Feltétel:
--Bejelentkezett felhasználó
+Feltétel:
+bejelentkezett felhasználó
 
 JSON válasz:
 [
-  {
-    "orderId": number,
-    "address": "string",
-    "createdAt": "2026-03-18T12:00:00"
-  }
+{
+"orderId": number,
+"address": "string",
+"createdAt": "2026-03-18T12:00:00"
+}
 ]
 
-------------------------------------
+---------------------------------------------
 
-HTTP VÁLASZOK:
+🔐 AUTH FONTOS MEGJEGYZÉSEK:
+
+NEM KELL Authorization header
+NEM kell token localStorage-ben
+Minden auth cookie alapú
+
+Frontend fetch:
+fetch(url, {
+credentials: "include"
+});
+
+---------------------------------------------
+
+❗ HTTP VÁLASZOK:
 
 200 -> Sikeres
 201 -> Létrehozva
 400 -> Hibás input
 401 -> Hibás login
 403 -> Nincs jogosultság/token
-404 -> Rendelés nem található / nem a useré
+404 -> Nem található
 
-
-
+---------------------------------------------

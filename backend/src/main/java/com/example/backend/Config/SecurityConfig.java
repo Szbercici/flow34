@@ -31,18 +31,26 @@ public class SecurityConfig {
 
                         // ADMIN ENGEDÉLY MINDENHEZ
 
+                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                        // USERS:
+                        // GET "/all"
+                        // GET "/{username}"
+
+                        // USERS ORDERS:
+                        // GET "/users/{userId}/orders"
+
+                        // PRODUCTS:
+                        // POST "/products"
+                        // PUT "/products"
+                        // DELETE "/products"
+
+
 
                         // PRODUCTS
                         .requestMatchers(HttpMethod.GET, "/api/products", "/api/products/**").permitAll()
 
-                        .requestMatchers(HttpMethod.POST, "/api/products/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT,  "/api/products/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE,"/api/products/**").hasRole("ADMIN")
-
                         // USERS
                         .requestMatchers(HttpMethod.GET, "/api/users/me").hasAnyRole("USER","ADMIN")
-                        .requestMatchers(HttpMethod.GET, "/api/users/all").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.GET, "/api/users/u/**").hasRole("ADMIN")
 
                         // THEME CHANGE
                         .requestMatchers(HttpMethod.GET, "/api/users/me/**").hasAnyRole("USER","ADMIN")
