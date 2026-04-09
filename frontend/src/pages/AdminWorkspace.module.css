@@ -18,13 +18,13 @@
 .heroFrame {
   margin-bottom: 1.5rem;
   padding: 1.35rem;
-  border: 1px solid rgba(0, 0, 0, 0.07);
+  border: 1px solid rgba(0, 0, 0, 0.085);
   border-radius: 26px;
   background:
     radial-gradient(circle at top right, rgba(245, 87, 66, 0.08), transparent 28%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 55%),
     var(--card-background-color);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
 }
 
 .hero {
@@ -35,7 +35,7 @@
   gap: 1.5rem;
   margin-bottom: 1rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.095);
 }
 
 .eyebrow {
@@ -158,10 +158,10 @@
 .productPanel {
   min-width: 0;
   padding: 1.35rem;
-  border: 1px solid rgba(0, 0, 0, 0.07);
+  border: 1px solid rgba(0, 0, 0, 0.085);
   border-radius: 22px;
   background: var(--card-background-color);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
 }
 
 .metricCard,
@@ -171,10 +171,10 @@
   align-content: start;
   gap: 0.45rem;
   padding: 1.2rem;
-  border: 1px solid rgba(0, 0, 0, 0.07);
+  border: 1px solid rgba(0, 0, 0, 0.085);
   border-radius: 20px;
   background: var(--card-background-color);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
 }
 
 .cardGrid {
@@ -248,7 +248,7 @@
   flex-wrap: wrap;
   gap: 1rem;
   padding: 0.95rem 0;
-  border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.19);
 }
 
 .orderItem > div:first-child,
