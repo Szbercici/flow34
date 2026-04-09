@@ -1,6 +1,7 @@
 import {
   useEffect,
   useMemo,
+  useRef,
   useState,
   type ChangeEvent,
   type FormEvent,
@@ -45,6 +46,7 @@ const AdminCatalogPage = () => {
     null,
   );
   const [form, setForm] = useState<ProductFormState>(emptyForm);
+  const formPanelRef = useRef<HTMLElement | null>(null);
 
   const loadProducts = async (selectedId?: number | null) => {
     setLoading(true);
@@ -65,7 +67,7 @@ const AdminCatalogPage = () => {
           (product) => product.id === selectedId,
         );
         if (selectedProduct) {
-          handleSelectProduct(selectedProduct);
+          handleSelectProduct(selectedProduct, { scrollToForm: false });
         }
       }
     } catch (loadError) {
@@ -94,7 +96,19 @@ const AdminCatalogPage = () => {
     [products, selectedProductId],
   );
 
-  const handleSelectProduct = (product: Product) => {
+  const scrollToForm = () => {
+    window.requestAnimationFrame(() => {
+      formPanelRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    });
+  };
+
+  const handleSelectProduct = (
+    product: Product,
+    options?: { scrollToForm?: boolean },
+  ) => {
     setSelectedProductId(product.id);
     setForm({
       name: product.name ?? "",
@@ -103,6 +117,10 @@ const AdminCatalogPage = () => {
       category: product.category ?? "",
       img: normalizeStoredImage(product.img ?? ""),
     });
+
+    if (options?.scrollToForm ?? true) {
+      scrollToForm();
+    }
   };
 
   const resetForm = () => {
@@ -357,7 +375,10 @@ const AdminCatalogPage = () => {
             </div>
           </article>
 
-          <article className={`${styles.formPanel} ${pageStyles.formPanel}`}>
+          <article
+            ref={formPanelRef}
+            className={`${styles.formPanel} ${pageStyles.formPanel}`}
+          >
             <div className={styles.toolbar}>
               <div>
                 <p className={styles.eyebrow}>Editor</p>

@@ -9,6 +9,10 @@
 	margin-bottom: 1rem;
 }
 
+.formPanel {
+	scroll-margin-top: 1.25rem;
+}
+
 @media (max-width: 760px) {
 	.productsLayout {
 		margin-top: 0;

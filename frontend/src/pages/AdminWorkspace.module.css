@@ -12,7 +12,7 @@
 
 .content {
   display: grid;
-  gap: 1.5rem;
+  gap: 1.75rem;
 }
 
 .heroFrame {
@@ -31,6 +31,7 @@
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 1.5rem;
   margin-bottom: 1rem;
   padding-bottom: 1rem;
@@ -58,10 +59,12 @@
   margin: 0.75rem 0 0;
   color: var(--secondary-text-color);
   line-height: 1.6;
+  text-wrap: balance;
 }
 
 .sectionMeta {
   margin: 0;
+  max-width: 40ch;
   color: var(--secondary-text-color);
   line-height: 1.6;
 }
@@ -71,10 +74,19 @@
   gap: 1rem;
 }
 
+.section > .panel,
+.section > .miniStatGrid,
+.section > .cardGrid,
+.section > .dashboardGrid,
+.section > .ordersGrid {
+  min-width: 0;
+}
+
 .sectionHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 1rem;
 }
 
@@ -87,6 +99,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 1rem;
 }
 
@@ -94,6 +107,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 1rem;
 }
 
@@ -112,6 +126,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 1rem;
 }
 
@@ -125,6 +140,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 1rem;
 }
 
@@ -132,6 +148,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 1rem;
 }
 
@@ -139,6 +156,7 @@
 .recordCard,
 .formPanel,
 .productPanel {
+  min-width: 0;
   padding: 1.35rem;
   border: 1px solid rgba(0, 0, 0, 0.07);
   border-radius: 22px;
@@ -149,7 +167,9 @@
 .metricCard,
 .miniStat {
   display: grid;
-  gap: 0.55rem;
+  min-width: 0;
+  align-content: start;
+  gap: 0.45rem;
   padding: 1.2rem;
   border: 1px solid rgba(0, 0, 0, 0.07);
   border-radius: 20px;
@@ -159,13 +179,13 @@
 
 .cardGrid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
   gap: 1rem;
 }
 
 .miniStatGrid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1rem;
 }
 
@@ -181,6 +201,12 @@
 .miniStat strong {
   color: var(--primary-text-color);
   font-size: clamp(1.35rem, 1.9vw, 2.1rem);
+  line-height: 1.1;
+}
+
+.metricCard p,
+.miniStat p {
+  margin: 0;
 }
 
 .ctaText,
@@ -195,15 +221,15 @@
 .dashboardGrid,
 .ordersGrid {
   display: grid;
-  grid-template-columns: 1.25fr 0.95fr;
-  gap: 1rem;
+  grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.95fr);
+  gap: 1.25rem;
 }
 
 .productsLayout {
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+  grid-template-columns: minmax(0, 1.05fr) minmax(340px, 0.95fr);
   align-items: start;
-  gap: 1rem;
+  gap: 1.25rem;
 }
 
 .orderList,
@@ -217,10 +243,25 @@
 .orderItem,
 .compactItem {
   display: flex;
+  align-items: flex-start;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 1rem;
   padding: 0.95rem 0;
   border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+}
+
+.orderItem > div:first-child,
+.compactItem > div:first-child,
+.recordHeader > div:first-child,
+.toolbar > div:first-child,
+.sectionHeader > div:first-child,
+.panelHeader > div:first-child,
+.tableHeader > strong,
+.tableHeader > span,
+.sectionMeta,
+.panelMeta {
+  min-width: 0;
 }
 
 .orderItem:last-child,
@@ -234,12 +275,14 @@
   margin: 0;
   color: var(--secondary-text-color);
   line-height: 1.6;
+  overflow-wrap: anywhere;
 }
 
 .orderSide {
   display: grid;
   justify-items: end;
   gap: 0.45rem;
+  text-align: right;
 }
 
 .statusBadge,
@@ -285,7 +328,9 @@
 
 .recordHeader {
   display: flex;
+  align-items: flex-start;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 1rem;
 }
 
@@ -293,13 +338,23 @@
   font-size: 0.85rem;
 }
 
+.recordCard p,
+.recordCard small,
+.recordCard strong,
+.tablePrimary,
+.tableSecondary {
+  overflow-wrap: anywhere;
+}
+
 .tableWrap {
+  width: 100%;
+  max-width: 100%;
   overflow-x: auto;
 }
 
 .table {
   width: 100%;
-  min-width: 640px;
+  min-width: 560px;
   border-collapse: collapse;
 }
 
@@ -310,6 +365,7 @@
   color: var(--primary-text-color);
   text-align: left;
   vertical-align: top;
+  overflow-wrap: anywhere;
 }
 
 .table th {
@@ -317,6 +373,10 @@
   font-size: 0.76rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
+}
+
+.table tbody tr:nth-child(even) {
+  background: rgba(148, 163, 184, 0.04);
 }
 
 .clickableRow {
@@ -402,6 +462,10 @@
   flex-wrap: wrap;
 }
 
+.helperRow > * {
+  flex: 1 1 220px;
+}
+
 .primaryButton,
 .secondaryButton,
 .dangerButton,
@@ -411,6 +475,7 @@
   align-items: center;
   justify-content: center;
   min-height: 44px;
+  max-width: 100%;
   padding: 0.75rem 1rem;
   border-radius: 999px;
   text-decoration: none;
@@ -472,16 +537,32 @@
 }
 
 @media (max-width: 1100px) {
-  .cardGrid,
-  .miniStatGrid,
   .dashboardGrid,
   .ordersGrid,
   .productsLayout {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 920px) {
+  .sectionHeader,
+  .sectionActions,
+  .tableHeader,
+  .panelHeader,
+  .toolbar,
+  .buttonRow,
+  .recordHeader,
+  .helperRow {
+    align-items: flex-start;
   }
 
-  .productsLayout {
-    grid-template-columns: 1fr;
+  .buttonRow > * {
+    flex: 1 1 220px;
+  }
+
+  .orderSide {
+    justify-items: start;
+    text-align: left;
   }
 }
 
@@ -493,6 +574,10 @@
   .heroFrame {
     padding: 1rem;
     border-radius: 20px;
+  }
+
+  .content {
+    gap: 1.25rem;
   }
 
   .hero,
@@ -516,6 +601,10 @@
     grid-template-columns: 1fr;
   }
 
+  .table {
+    min-width: 520px;
+  }
+
   .orderItem,
   .compactItem {
     flex-direction: column;
@@ -523,6 +612,7 @@
 
   .orderSide {
     justify-items: start;
+    text-align: left;
   }
 
   .panel,
@@ -532,5 +622,29 @@
   .metricCard,
   .miniStat {
     border-radius: 18px;
+  }
+
+  .buttonRow {
+    width: 100%;
+  }
+
+  .buttonRow > * ,
+  .sectionActions > *,
+  .toolbar > * {
+    width: 100%;
+  }
+
+  .modifyButton,
+  .ghostButton,
+  .primaryButton,
+  .secondaryButton,
+  .dangerButton {
+    width: 100%;
+  }
+}
+
+@media (max-width: 520px) {
+  .table {
+    min-width: 460px;
   }
 }
