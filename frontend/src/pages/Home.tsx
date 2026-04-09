@@ -63,11 +63,11 @@ const Home = () => {
         <h1>Drink form the flow.</h1>
       </div>
       <div ref={dailyScoopSectionRef}>
-          <Scroll_container
-        products={products.filter(
-          (product) => product.category === "Water Bottles",
-        )}
-      />
+        <Scroll_container
+          products={products.filter(
+            (product) => product.category === "Water Bottles",
+          )}
+        />
       </div>
       <div className="container">
         <h1>DAILY SCOOP FLOWED IN</h1>
