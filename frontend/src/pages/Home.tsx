@@ -47,7 +47,12 @@ const Home = () => {
         </SwiperSlide>
 
         <SwiperSlide className={styles.swiperSlide}>
-          <img src={newImg} onClick={scrollToDailyScoopSection} alt="Slide 2" />
+          <img
+            className={styles.clickableSlideImage}
+            src={newImg}
+            onClick={scrollToDailyScoopSection}
+            alt="Slide 2"
+          />
         </SwiperSlide>
       </Swiper>
       <div className="container">

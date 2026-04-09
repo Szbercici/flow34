@@ -233,13 +233,18 @@ const AdminOrdersPage = () => {
                 <div className={styles.compactItem}>
                   <div>
                     <strong>Source</strong>
-                    <p>Global admin orders endpoint with direct order records.</p>
+                    <p>
+                      Global admin orders endpoint with direct order records.
+                    </p>
                   </div>
                 </div>
                 <div className={styles.compactItem}>
                   <div>
                     <strong>Available fields</strong>
-                    <p>Order id, timestamp, buyer identity and line items are available.</p>
+                    <p>
+                      Order id, timestamp, buyer identity and line items are
+                      available.
+                    </p>
                   </div>
                 </div>
                 <div className={styles.compactItem}>

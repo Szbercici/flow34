@@ -131,6 +131,9 @@ const Account_me = () => {
         <div className={styles.container}>
           <div className={styles.header}>
             <h1 className={styles.h1}>My Account</h1>
+            <p className={styles.subtitle}>
+              Check and modify your account data.
+            </p>
           </div>
 
           {userApi ? (

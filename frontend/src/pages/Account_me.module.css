@@ -18,6 +18,13 @@
   margin: 0;
 }
 
+.subtitle {
+  margin: 0.45rem 0 0;
+  font-size: 0.95rem;
+  color: var(--secondary-text-color);
+  opacity: 0.78;
+}
+
 .card {
   display: flex;
   flex-direction: row;
@@ -131,6 +138,11 @@
   .h1 {
     font-size: 1.5rem;
   }
+
+  .subtitle {
+    font-size: 0.9rem;
+  }
+
   .card {
     
     width: 90%;
