@@ -9,8 +9,11 @@ import com.example.backend.repository.OrderRepository;
 import com.example.backend.repository.ProductRepository;
 import com.example.backend.repository.UserRepository;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
@@ -144,4 +147,57 @@ public class OrderService {
 
         }).toList();
     }
+
+    public List<AdminOrderDto> getAllOrdersForAdmin() {
+        List<Order> orders = orderRepository.findAllByOrderByCreatedAtDesc();
+
+        return orders.stream().map(order -> {
+            User user = userRepository.findById(order.getUserId()).orElse(null);
+
+            String username = user != null ? user.getUsername() : "Ismeretlen user";
+            String email = user != null ? user.getEmail() : null;
+
+            List<OrderItemFrontendDto> items = order.getItems().stream().map(item -> {
+                Product product = productRepository.findById(item.getProductId()).orElse(null);
+
+                String name = product != null ? product.getName() : "Törölt termék";
+                String img = product != null ? product.getImg() : null;
+
+                return new OrderItemFrontendDto(
+                        item.getProductId(),
+                        name,
+                        img,
+                        item.getPrice(),
+                        item.getQuantity(),
+                        item.getPrice().multiply(BigDecimal.valueOf(item.getQuantity()))
+                );
+            }).toList();
+
+            int totalItems = order.getItems().stream()
+                    .mapToInt(item -> item.getQuantity())
+                    .sum();
+
+            return new AdminOrderDto(
+                    order.getId(),
+                    order.getUserId(),
+                    username,
+                    email,
+                    order.getAddress(),
+                    order.getCreatedAt(),
+                    totalItems,
+                    items
+            );
+        }).toList();
+    }
+
+    @Transactional
+    public boolean deleteOrderForAdmin(Long orderId) {
+        if (!orderRepository.existsById(orderId)) {
+            return false;
+        }
+
+        orderRepository.deleteById(orderId);
+        return true;
+    }
+
 }

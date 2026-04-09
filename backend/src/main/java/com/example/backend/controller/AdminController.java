@@ -1,12 +1,10 @@
 package com.example.backend.controller;
 
+import com.example.backend.dto.AdminOrderDto;
 import com.example.backend.dto.OrderFrontendDto;
 import com.example.backend.service.OrderService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,5 +21,21 @@ public class AdminController {
     @GetMapping("/users/{userId}/orders")
     public ResponseEntity<List<OrderFrontendDto>> getUserOrders(@PathVariable Long userId) {
         return ResponseEntity.ok(orderService.getOrdersByUserIdForAdmin(userId));
+    }
+
+    @GetMapping("/orders")
+    public ResponseEntity<List<AdminOrderDto>> getAllOrders() {
+        return ResponseEntity.ok(orderService.getAllOrdersForAdmin());
+    }
+
+    @DeleteMapping("/orders/{orderId}")
+    public ResponseEntity<Void> deleteOrder(@PathVariable Long orderId) {
+        boolean deleted = orderService.deleteOrderForAdmin(orderId);
+
+        if (!deleted) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.noContent().build();
     }
 }
