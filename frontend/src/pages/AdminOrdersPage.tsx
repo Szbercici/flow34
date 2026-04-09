@@ -9,6 +9,12 @@ import {
   numberFormatter,
 } from "./adminData";
 
+const dateFormatter = new Intl.DateTimeFormat("en-US", {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+});
+
 const AdminOrdersPage = () => {
   const [snapshot, setSnapshot] = useState(emptyAdminSnapshot);
   const [loading, setLoading] = useState(true);
@@ -94,11 +100,11 @@ const AdminOrdersPage = () => {
       <div className={styles.shell}>
         <AdminPageHeader
           title="Orders overview"
-          description="Admin orders are aggregated from current store data by combining the admin user directory with each user order stream."
+          description="Admin orders are loaded directly from the admin order stream, then combined with user and catalog data for summary metrics."
           meta={
             loading
               ? "Loading order activity..."
-              : `${numberFormatter.format(orders.length)} order batches aggregated`
+              : `${numberFormatter.format(orders.length)} orders available for review`
           }
         />
 
@@ -108,7 +114,7 @@ const AdminOrdersPage = () => {
           <article className={styles.metricCard}>
             <span>Orders</span>
             <strong>{numberFormatter.format(orders.length)}</strong>
-            <p>Aggregated order batches available for review.</p>
+            <p>Direct admin order records available for review.</p>
           </article>
 
           <article className={styles.metricCard}>
@@ -142,16 +148,18 @@ const AdminOrdersPage = () => {
 
             <div className={styles.recordList}>
               {rankedOrders.length > 0 ? (
-                rankedOrders.map((order, index) => (
+                rankedOrders.map((order) => (
                   <article key={order.id} className={styles.recordCard}>
                     <div className={styles.recordHeader}>
                       <div>
                         <strong>{order.username}</strong>
-                        <p className={styles.recordMeta}>{order.email}</p>
+                        <p className={styles.recordMeta}>
+                          Order #{order.orderId} • {order.email}
+                        </p>
                       </div>
                       <div className={styles.orderSide}>
                         <span className={styles.statusBadge}>
-                          Batch {index + 1}
+                          {dateFormatter.format(new Date(order.createdAt))}
                         </span>
                         <small>
                           {currencyFormatter.format(order.totalRevenue)}
@@ -225,20 +233,20 @@ const AdminOrdersPage = () => {
                 <div className={styles.compactItem}>
                   <div>
                     <strong>Source</strong>
-                    <p>Admin users plus per-user order endpoint aggregation.</p>
+                    <p>Global admin orders endpoint with direct order records.</p>
                   </div>
                 </div>
                 <div className={styles.compactItem}>
                   <div>
-                    <strong>Missing fields</strong>
-                    <p>No global admin order id or timestamp is exposed yet.</p>
+                    <strong>Available fields</strong>
+                    <p>Order id, timestamp, buyer identity and line items are available.</p>
                   </div>
                 </div>
                 <div className={styles.compactItem}>
                   <div>
                     <strong>Use case</strong>
                     <p>
-                      This view is optimized for customer value and basket
+                      This view is optimized for customer value and real order
                       review.
                     </p>
                   </div>

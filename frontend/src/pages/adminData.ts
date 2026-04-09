@@ -34,6 +34,17 @@ export type UserOrder = {
   items: OrderItem[];
 };
 
+export type AdminOrderApiRecord = {
+  orderId: number;
+  userId: number;
+  username: string;
+  email: string | null;
+  address: string;
+  createdAt: string;
+  totalItems: number;
+  items: OrderItem[];
+};
+
 export type UserOrderSummary = {
   userId: number;
   username: string;
@@ -46,11 +57,13 @@ export type UserOrderSummary = {
 };
 
 export type AdminOrderRecord = {
-  id: string;
+  id: number;
+  orderId: number;
   userId: number;
   username: string;
   email: string;
   address: string;
+  createdAt: string;
   itemCount: number;
   totalRevenue: number;
   items: OrderItem[];
@@ -119,11 +132,14 @@ export const resolveProductImage = (value?: string) => {
 };
 
 export const fetchAdminSnapshot = async (): Promise<AdminSnapshot> => {
-  const [usersResponse, productsResponse] = await Promise.all([
+  const [usersResponse, productsResponse, ordersResponse] = await Promise.all([
     fetch(`${API_BASE_URL}/api/users/admin/all`, {
       credentials: "include",
     }),
     fetch(`${API_BASE_URL}/api/products`),
+    fetch(`${API_BASE_URL}/api/admin/orders`, {
+      credentials: "include",
+    }),
   ]);
 
   if (!usersResponse.ok) {
@@ -134,35 +150,54 @@ export const fetchAdminSnapshot = async (): Promise<AdminSnapshot> => {
     throw new Error("Products could not be loaded.");
   }
 
-  const [users, products] = await Promise.all([
+  if (!ordersResponse.ok) {
+    throw new Error("Orders could not be loaded.");
+  }
+
+  const [users, products, adminOrders] = await Promise.all([
     usersResponse.json() as Promise<AdminUser[]>,
     productsResponse.json() as Promise<Product[]>,
+    ordersResponse.json() as Promise<AdminOrderApiRecord[]>,
   ]);
 
-  const ordersByUser = await Promise.all(
-    users.map(async (user) => {
-      const response = await fetch(`${API_BASE_URL}/api/admin/users/${user.id}/orders`, {
-        credentials: "include",
-      });
+  const orders = adminOrders.map((order) => ({
+    id: order.orderId,
+    orderId: order.orderId,
+    userId: order.userId,
+    username: order.username,
+    email: order.email ?? "No email",
+    address: order.address,
+    createdAt: order.createdAt,
+    itemCount: order.totalItems,
+    totalRevenue: order.items.reduce(
+      (sum, item) => sum + toNumber(item.lineTotal ?? item.price),
+      0,
+    ),
+    items: order.items,
+  }));
 
-      if (!response.ok) {
-        return [] as UserOrder[];
+  const ordersByUser = orders.reduce<Record<number, AdminOrderRecord[]>>(
+    (accumulator, order) => {
+      if (!accumulator[order.userId]) {
+        accumulator[order.userId] = [];
       }
 
-      return (await response.json()) as UserOrder[];
-    }),
+      accumulator[order.userId].push(order);
+      return accumulator;
+    },
+    {},
   );
 
-  const orderSummaries = users.map((user, index) => {
+  const orderSummaries = users.map((user) => {
     const role = user.role ?? user.ROLE ?? "USER";
-    const orders = ordersByUser[index] ?? [];
-    const itemsSold = orders.reduce(
+    const userOrders = ordersByUser[user.id] ?? [];
+    const itemsSold = userOrders.reduce(
       (sum, order) =>
         sum +
         order.items.reduce((itemSum, item) => itemSum + toNumber(item.quantity), 0),
       0,
     );
-    const totalRevenue = orders.reduce(
+    const totalRevenue = userOrders.reduce(
       (sum, order) =>
         sum +
         order.items.reduce(
@@ -177,32 +212,11 @@ export const fetchAdminSnapshot = async (): Promise<AdminSnapshot> => {
       username: user.username,
       email: user.email,
       role,
-      orderCount: orders.length,
+      orderCount: userOrders.length,
       itemsSold,
       totalRevenue,
-      primaryAddress: orders[0]?.address || "No orders yet",
+      primaryAddress: userOrders[0]?.address || "No orders yet",
     };
-  });
-
-  const orders = users.flatMap((user, userIndex) => {
-    const userOrders = ordersByUser[userIndex] ?? [];
-
-    return userOrders.map((order, orderIndex) => ({
-      id: `${user.id}-${orderIndex + 1}`,
-      userId: user.id,
-      username: user.username,
-      email: order.email ?? user.email,
-      address: order.address,
-      itemCount: order.items.reduce(
-        (sum, item) => sum + toNumber(item.quantity),
-        0,
-      ),
-      totalRevenue: order.items.reduce(
-        (sum, item) => sum + toNumber(item.lineTotal ?? item.price),
-        0,
-      ),
-      items: order.items,
-    }));
   });
 
   return {
