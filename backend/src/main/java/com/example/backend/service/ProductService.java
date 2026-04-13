@@ -1,7 +1,6 @@
 package com.example.backend.service;
 
 import com.example.backend.model.Product;
-import com.example.backend.model.Rating;
 import com.example.backend.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
@@ -26,9 +25,6 @@ public class ProductService {
     }
 
     public Product create(Product product) {
-        if (product.getRating() == null) {
-            product.setRating(new Rating(0.0, 0));
-        }
         return productRepository.save(product);
     }
 
@@ -36,9 +32,6 @@ public class ProductService {
         return productRepository.findById(id).map(existing -> {
             updated.setId(id);
 
-            if (updated.getRating() == null) {
-                updated.setRating(existing.getRating());
-            }
 
             return productRepository.save(updated);
         });

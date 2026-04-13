@@ -16,21 +16,18 @@ public class Product {
     private String description;
     private String category;
     private String img;
-    @Embedded
-    private Rating rating;
 
     public Product() {
     }
 
     public Product(Long id, String name, BigDecimal price, String description,
-                   String category, String img, Rating rating) {
+                   String category, String img) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.description = description;
         this.category = category;
         this.img = img;
-        this.rating = rating;
     }
 
     public Long getId() { return id; }
@@ -51,6 +48,4 @@ public class Product {
     public String getImg() { return img; }
     public void setImg(String img) { this.img = img; }
 
-    public Rating getRating() { return rating; }
-    public void setRating(Rating rating) { this.rating = rating; }
 }
