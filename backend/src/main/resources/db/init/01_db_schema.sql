@@ -41,6 +41,16 @@ CREATE TABLE IF NOT EXISTS public.products (
     CONSTRAINT fk_product_contains FOREIGN KEY (contains_id) REFERENCES public.contains(id)
 );
 
+CREATE TABLE IF NOT EXISTS public.description_table (
+    id bigint NOT NULL GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    product_id bigint NOT NULL,
+    description text,
+    ingridient_name character varying(100),
+    ingridient_amount character varying(100),
+    ingridient_text text,
+    CONSTRAINT fk_description_product FOREIGN KEY (product_id) REFERENCES public.products(id) ON DELETE CASCADE
+    );
+
 CREATE TABLE IF NOT EXISTS public.cart (
     id bigint NOT NULL GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     user_id bigint NOT NULL UNIQUE,
@@ -104,6 +114,7 @@ CREATE INDEX IF NOT EXISTS idx_cart_items_cart_id ON public.cart_items (cart_id)
 CREATE INDEX IF NOT EXISTS idx_delivery_user_id ON public.delivery_address (user_id);
 CREATE INDEX IF NOT EXISTS idx_order_user_id ON public.order_table (user_id);
 CREATE INDEX IF NOT EXISTS idx_products_contains_id ON public.products (contains_id);
+CREATE INDEX IF NOT EXISTS idx_description_product_id ON public.description_table (product_id);
 
 --ALTER TABLE
 DO $$ BEGIN
