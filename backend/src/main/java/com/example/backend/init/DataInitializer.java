@@ -1,7 +1,6 @@
 package com.example.backend.init;
 
 import com.example.backend.model.Product;
-import com.example.backend.model.Rating;
 import com.example.backend.model.Role;
 import com.example.backend.model.User;
 import com.example.backend.repository.ProductRepository;
@@ -210,7 +209,6 @@ public class DataInitializer implements CommandLineRunner {
         p.setImg(img);
 
 
-        p.setRating(new Rating(0, 0));
 
         productRepository.save(p);
         System.out.println(" :)Seeded product: " + name);
