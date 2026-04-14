@@ -1,24 +1,38 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Account_page_menu from "../components/Account_page_menu";
 import { useAuth } from "../AuthContext";
 import { API_BASE_URL } from "../config/api";
 import styles from "./Account_orders.module.css";
 import { useNavigate } from "react-router-dom";
 
+interface OrderSummary {
+  orderId: number;
+  createdAt: string;
+  itemCount?: number;
+  totalPrice: number;
+}
+
 
 
 const Account_orders = () => {
   const { user } = useAuth();
-  const [orders, setOrders] = useState<any[]>([]);
+  const [orders, setOrders] = useState<OrderSummary[]>([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  if(!user){
-    navigate("/login")
-  }
+  useEffect(() => {
+    if (!user) {
+      navigate("/login", { replace: true });
+    }
+  }, [navigate, user]);
 
   useEffect(() => {
     async function getOrders() {
+      if (!user) {
+        setLoading(false);
+        return;
+      }
+
       try {
         setLoading(true);
         const response = await fetch(`${API_BASE_URL}/api/orders`, {
@@ -28,8 +42,8 @@ const Account_orders = () => {
           throw new Error(`Response status: ${response.status}`);
         }
 
-        const result = await response.json();
-        setOrders(result);
+        const result = (await response.json()) as OrderSummary[];
+        setOrders(Array.isArray(result) ? result : []);
       } catch (error) {
         console.error("Error fetching orders:", error);
       } finally {
@@ -38,7 +52,7 @@ const Account_orders = () => {
     }
 
     getOrders();
-  }, []);
+  }, [user]);
 
 
   if (loading) {

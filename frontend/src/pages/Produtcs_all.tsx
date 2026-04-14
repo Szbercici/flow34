@@ -1,4 +1,3 @@
-import React from "react";
 import Product_show from "../components/Product_show";
 import { Products } from "../components/Product_loader_api";
 import styles from "./Produtcs_all.module.css";

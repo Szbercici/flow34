@@ -1,7 +1,5 @@
-import React from 'react';
 // Ha a videó az 'src/assets' mappában van:
 import waterVideo from '../assets/flow_water_promo.mp4'; 
-import { FileX } from 'lucide-react';
 
 const Video_default = () => {
   return (

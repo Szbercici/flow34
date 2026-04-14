@@ -1,8 +1,12 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { API_BASE_URL } from "../config/api";
+import type { Product } from "./Product_loader_api";
  
-const Product_show = ({ product }) => {
+interface ProductShowProps {
+  product: Product;
+}
+
+const Product_show = ({ product }: ProductShowProps) => {
   return (
     <Link className="product-card" to={`/product/${product.name}`}>
       <img

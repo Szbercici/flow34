@@ -1,11 +1,7 @@
-import React from "react";
-import Wave from "../assets/Wave";
-import Wave_end from "../assets/Wave_end";
-import Blob from "../assets/Blob";
 import { Link } from "react-router-dom";
 import styles from "./NotFound.module.css";
 
-const NotFound: React.FC = () => {
+const NotFound = () => {
   return (
     <>
       <div className="container">

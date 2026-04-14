@@ -5,6 +5,7 @@ import { CartContext } from "../CartContext";
 import { API_BASE_URL } from "../config/api";
 import { useContext } from "react";
 import { toast } from "sonner";
+import type { CartItem } from "../CartContext";
 
 const Product_page = () => {
   const { products } = Products();
@@ -31,7 +32,12 @@ const Product_page = () => {
           <button
             className="add-to-cart"
             onClick={() => {
-              addToCart(currentProduct!);
+              if (!currentProduct) {
+                return;
+              }
+
+              const cartItem: CartItem = { ...currentProduct, quantity: 1 };
+              addToCart(cartItem);
               toast.success("Product added to cart!");
             }}
           >

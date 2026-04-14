@@ -6,12 +6,17 @@ import { API_BASE_URL } from "../config/api";
 import styles from "./Account_me.module.css";
 import { toast } from "sonner";
 
+interface AccountUser {
+  username?: string;
+  email?: string;
+}
+
 const Account_me = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
 
   // 1. Hook-ok MINDIG legfelül!
-  const [userApi, setUserApi] = useState<any>(null);
+  const [userApi, setUserApi] = useState<AccountUser | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isEditingUsername, setIsEditingUsername] = useState(false);
   const [isEditingEmail, setIsEditingEmail] = useState(false);
@@ -28,7 +33,7 @@ const Account_me = () => {
           throw new Error(`Response status: ${response.status}`);
         }
 
-        const data = await response.json();
+      const data = (await response.json()) as AccountUser;
         setUserApi(data);
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -44,6 +49,10 @@ const Account_me = () => {
   }, [user]);
 
   async function saveEmail() {
+    if (!userApi) {
+      return false;
+    }
+
     try {
       const response = await fetch(`${API_BASE_URL}/api/users/me/email`, {
         method: "PUT",
@@ -70,6 +79,10 @@ const Account_me = () => {
   }
 
   async function saveUsername() {
+    if (!userApi) {
+      return false;
+    }
+
     try {
       const response = await fetch(`${API_BASE_URL}/api/users/me/username`, {
         method: "PUT",
@@ -87,7 +100,6 @@ const Account_me = () => {
       }
 
       toast.success("Username updated successfully!");
-      useAuth;
       return true;
     } catch (error) {
       console.error("Error updating username:", error);
@@ -121,9 +133,11 @@ const Account_me = () => {
     }
   }
 
-  if (!user) {
-    navigate("/login");
-  }
+  useEffect(() => {
+    if (!user) {
+      navigate("/login", { replace: true });
+    }
+  }, [navigate, user]);
 
   return (
     <>

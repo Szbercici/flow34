@@ -1,9 +1,9 @@
 import "./Login.css";
-import React, { useState } from "react"; // Hozzáadtuk a useState-et
+import { useState } from "react"; // Hozzáadtuk a useState-et
 import { API_BASE_URL } from "../config/api";
 import { useAuth } from "../AuthContext";
 import Eye from "../assets/Eye";
-import { Toaster, toast } from "sonner";
+import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {

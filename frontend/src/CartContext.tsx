@@ -1,7 +1,7 @@
-  import React, { useState, createContext, ReactNode, useContext, useEffect} from "react";
+import { useState, createContext, useContext, useEffect } from "react";
+import type { ReactNode } from "react";
   import { API_BASE_URL } from "./config/api";
   import { useAuth } from "./AuthContext";
-  import { toast } from "sonner";
   export const CartContext = createContext<ContextType | undefined>(undefined);
 
   export interface CartItem {

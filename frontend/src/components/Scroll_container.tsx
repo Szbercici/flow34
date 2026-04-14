@@ -1,4 +1,3 @@
-import React from "react";
 import type { Product } from "./Product_loader_api";
 import Product_show from "./Product_show";
 
@@ -8,8 +7,6 @@ import { FreeMode, Scrollbar } from "swiper/modules";
 
 // Alapértelmezett Swiper stílusok (ezek kellenek a működéshez!)
 import "swiper/css";
-import "swiper/css/free-mode";
-import "swiper/css/scrollbar";
 
 // A saját CSS-edet megtarthatod a finomhangoláshoz
 import "./Scroll_container.css";
