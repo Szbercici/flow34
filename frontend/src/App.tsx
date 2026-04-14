@@ -18,6 +18,7 @@ import OrderShow from "./components/Account_order_show";
 import AdminPanel from "./pages/AdminPanel";
 import AdminCatalogPage from "./pages/AdminCatalogPage";
 import AdminOrdersPage from "./pages/AdminOrdersPage";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
       <Navbar />
       <Toaster position="top-center" richColors closeButton />
       <ScrollToTop />
+      <SpeedInsights />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
