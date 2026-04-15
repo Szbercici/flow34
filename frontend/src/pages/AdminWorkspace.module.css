@@ -453,6 +453,7 @@
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 18px;
   background: rgba(148, 163, 184, 0.1);
+  margin-top: 0.8rem;
 }
 
 .helperRow {
@@ -460,10 +461,12 @@
   justify-content: space-between;
   gap: 1rem;
   flex-wrap: wrap;
+  margin-top: 0.85rem;
 }
 
 .helperRow > * {
   flex: 1 1 220px;
+  min-width: 0;
 }
 
 .primaryButton,
@@ -474,9 +477,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 44px;
+  min-height: 42px;
   max-width: 100%;
-  padding: 0.75rem 1rem;
+  padding: 0.7rem 0.95rem;
   border-radius: 999px;
   text-decoration: none;
   font: inherit;
@@ -626,12 +629,23 @@
 
   .buttonRow {
     width: 100%;
+    justify-content: center;
   }
 
   .buttonRow > * ,
   .sectionActions > *,
   .toolbar > * {
     width: 100%;
+    max-width: 100%;
+  }
+
+  .buttonRow > * {
+    width: 90%;
+    max-width: 90%;
+    min-width: 0;
+    flex: 1 1 auto;
+    margin: 0 auto;
+    align-self: center;
   }
 
   .modifyButton,
@@ -639,7 +653,12 @@
   .primaryButton,
   .secondaryButton,
   .dangerButton {
+    width: auto;
+  }
+
+  .helperRow > * {
     width: 100%;
+    flex: 1 1 100%;
   }
 }
 

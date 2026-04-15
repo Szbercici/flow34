@@ -17,12 +17,15 @@ const Product_page = () => {
     <>
       {/* 2. VÁLTOZÁS: styles.container használata */}
       <div className="container, product-container">
-    
         <div className="left-column">
-          <img
-            src={`${API_BASE_URL}/${currentProduct?.img}`}
-            alt={currentProduct?.name}
-          />
+          {currentProduct?.img ? (
+            <img
+              src={`${API_BASE_URL}/${currentProduct.img}`}
+              alt={currentProduct.name}
+            />
+          ) : (
+            <div className="product-image placeholder">No image</div>
+          )}
         </div>
 
         <div className="right-column">
