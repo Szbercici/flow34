@@ -18,6 +18,7 @@ import OrderShow from "./components/Account_order_show";
 import AdminPanel from "./pages/AdminPanel";
 import AdminCatalogPage from "./pages/AdminCatalogPage";
 import AdminOrdersPage from "./pages/AdminOrdersPage";
+import Privacy from "./pages/Privacy";
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
         <Route path="/account/orders" element={<Account_order />} />
         <Route path="/account/orders/:orderId" element={<OrderShow />} />
         <Route path="/account/me" element={<Account_me />} />
+        <Route path="/privacy" element={<Privacy />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

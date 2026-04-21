@@ -84,6 +84,7 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    margin: 0;
 }
 
 .textContent p {
@@ -233,6 +234,7 @@
 
 .intro .storyText {
     font-size: 2.6rem;
+    margin-top: -10px;
 }
 
 /* When a story section becomes active, prevent vertical scrolling inside the centered content */

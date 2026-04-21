@@ -18,9 +18,17 @@ const Register = () => {
     // 1. Adatok kiszedése
     const formData = new FormData(event.currentTarget);
     const data = Object.fromEntries(formData.entries());
+    const password = String(data.password);
+    const passwordAgain = String(data.password_again);
 
-    // 2. Kliens oldali validáció (Jelszó egyezés)
-    if (data.password !== data.password_again) {
+    // 2. Kliens oldali validáció (Jelszó hossz és egyezés)
+    if (password.length < 8) {
+      toast.error("Password must be at least 8 characters long.");
+      setLoading(false);
+      return;
+    }
+
+    if (password !== passwordAgain) {
       toast.error("Passwords do not match.");
       setLoading(false);
       return;
@@ -100,6 +108,7 @@ const Register = () => {
               placeholder="Password"
               type={showPassword ? "text" : "password"}
               name="password"
+              minLength={8}
               required
             />
             <div
@@ -116,6 +125,7 @@ const Register = () => {
               placeholder="Password again"
               type={showPasswordAgain ? "text" : "password"}
               name="password_again"
+              minLength={8}
               required
             />
             <div

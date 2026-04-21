@@ -99,9 +99,7 @@ const Footer = () => {
           &copy; {currentYear} Flow All rights reserved.
         </p>
         <div className={styles.bottomLinks}>
-          <a href="#privacy">Privacy</a>
-          <a href="#terms">Terms</a>
-          <a href="#cookies">Cookies</a>
+          <Link to="/privacy">Privacy Policy</Link>
         </div>
       </div>
     </footer>
