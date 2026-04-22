@@ -55,7 +55,7 @@ public class  AuthController {
 
         ResponseCookie accessCookie = ResponseCookie.from("access_token", access)
                 .httpOnly(true)
-                .secure(true) // localhoston false, élesben true
+                .secure(false) // localhoston false, élesben true
                 .sameSite("Lax")
                 .path("/")
                 .maxAge(Duration.ofHours(1))
@@ -63,7 +63,7 @@ public class  AuthController {
 
         ResponseCookie refreshCookie = ResponseCookie.from("refresh_token", refresh)
                 .httpOnly(true)
-                .secure(true)
+                .secure(false)
                 .sameSite("Lax")
                 .path("/api/auth/refresh")
                 .maxAge(Duration.ofDays(14))
@@ -97,7 +97,7 @@ public class  AuthController {
 
         ResponseCookie accessCookie = ResponseCookie.from("access_token", newAccess)
                 .httpOnly(true)
-                .secure(true)
+                .secure(false)
                 .sameSite("Lax")
                 .path("/")
                 .maxAge(Duration.ofHours(1))
@@ -112,11 +112,11 @@ public class  AuthController {
     @PostMapping("/logout")
     public ResponseEntity<?> logout() {
         ResponseCookie accessCookie = ResponseCookie.from("access_token", "")
-                .httpOnly(true).secure(false).sameSite("Lax")
+                .httpOnly(true).secure(true).sameSite("Lax")
                 .path("/").maxAge(0).build();
 
         ResponseCookie refreshCookie = ResponseCookie.from("refresh_token", "")
-                .httpOnly(true).secure(false).sameSite("Lax")
+                .httpOnly(true).secure(true).sameSite("Lax")
                 .path("/api/auth/refresh").maxAge(0).build();
 
         return ResponseEntity.ok()

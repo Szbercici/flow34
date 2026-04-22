@@ -28,7 +28,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/uploads/images/**").permitAll()
                         .requestMatchers("/images/**").permitAll()
-
+			.requestMatchers("/error").permitAll()
                         // ADMIN ENGEDÉLY MINDENHEZ
 
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
@@ -85,7 +85,7 @@ public org.springframework.web.cors.CorsConfigurationSource corsConfigurationSou
     config.setAllowCredentials(true);
     config.setAllowedOriginPatterns(List.of(
             "http://localhost:5173",
-            "http://51.20.12.185:5173"
+            "http://51.20.31.211:5173"
     ));
     config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
     config.setAllowedHeaders(List.of("*"));

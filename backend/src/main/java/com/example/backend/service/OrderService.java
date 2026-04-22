@@ -37,6 +37,7 @@ public class OrderService {
 
     @Transactional
     public CreateOrderResponse createOrder(Long userId, CreateOrderRequest req) {
+	System.out.println("ELJUT IDE");
         Order order = new Order();
         order.setUserId(userId);
         order.setAddress(req.getAddress());

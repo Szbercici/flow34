@@ -24,7 +24,7 @@ import java.nio.file.Files;
 @RequestMapping("/api/uploads")
 public class UploadController {
 
-    private static final Path IMAGE_DIR = Paths.get("uploads", "images");
+    private static final Path IMAGE_DIR = Paths.get("/app/uploads/images").normalize();
     private static final Set<String> ALLOWED_EXT = Set.of("jpg", "jpeg", "png", "webp");
 
     //Create
@@ -58,7 +58,7 @@ public class UploadController {
         // mentés (felülírás tiltás)
         Files.copy(file.getInputStream(), target, StandardCopyOption.REPLACE_EXISTING);
         // URL amit a frontend eltárol a product.image mezőbe
-        String publicUrl = "http://localhost:8080/images/" + filename;
+        String publicUrl = "/images/" + filename;
         return ResponseEntity.ok(publicUrl);
     }
 

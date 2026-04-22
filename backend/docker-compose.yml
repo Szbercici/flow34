@@ -19,6 +19,8 @@ services:
       - db
     ports:
       - "8080:8080"
+    volumes:
+      - ./uploads/images:/app/uploads/images
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/flow
       SPRING_DATASOURCE_USERNAME: postgres
