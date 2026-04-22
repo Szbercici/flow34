@@ -17,7 +17,6 @@ import java.time.Duration;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "*")  // FRONTENDNEK KELL!!
 public class  AuthController {
 
     private final UserService userService;
@@ -46,6 +45,9 @@ public class  AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+
+	System.out.println("LOGIN HIT");
+
         User user = userService.authenticate(request.getUsername(), request.getPassword());
 
         String access = jwtService.generateAccessToken(user);
@@ -53,7 +55,7 @@ public class  AuthController {
 
         ResponseCookie accessCookie = ResponseCookie.from("access_token", access)
                 .httpOnly(true)
-                .secure(false) // localhoston false, élesben true
+                .secure(true) // localhoston false, élesben true
                 .sameSite("Lax")
                 .path("/")
                 .maxAge(Duration.ofHours(1))
@@ -61,7 +63,7 @@ public class  AuthController {
 
         ResponseCookie refreshCookie = ResponseCookie.from("refresh_token", refresh)
                 .httpOnly(true)
-                .secure(false)
+                .secure(true)
                 .sameSite("Lax")
                 .path("/api/auth/refresh")
                 .maxAge(Duration.ofDays(14))
@@ -95,7 +97,7 @@ public class  AuthController {
 
         ResponseCookie accessCookie = ResponseCookie.from("access_token", newAccess)
                 .httpOnly(true)
-                .secure(false)
+                .secure(true)
                 .sameSite("Lax")
                 .path("/")
                 .maxAge(Duration.ofHours(1))

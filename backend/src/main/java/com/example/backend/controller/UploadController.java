@@ -22,7 +22,6 @@ import java.nio.file.Files;
 
 @RestController
 @RequestMapping("/api/uploads")
-@CrossOrigin(origins = "*")
 public class UploadController {
 
     private static final Path IMAGE_DIR = Paths.get("uploads", "images");

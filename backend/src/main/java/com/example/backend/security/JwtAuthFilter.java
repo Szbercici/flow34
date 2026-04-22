@@ -1,3 +1,4 @@
+
 package com.example.backend.security;
 
 import jakarta.servlet.FilterChain;
@@ -31,6 +32,13 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
 
         String token = readCookie(request, "access_token");
+
+	String path = request.getServletPath();
+
+	if (path.startsWith("/api/auth/")) {
+    		filterChain.doFilter(request, response);
+    	return;
+	}
 
         if (token != null
                 && jwtService.isValid(token)

@@ -23,6 +23,17 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/flow
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: 123
+      
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8888:8080
+
+  frontend:
+    build: ../frontend
+    depends_on:
+      - backend
 
 volumes:
   postgres_data:

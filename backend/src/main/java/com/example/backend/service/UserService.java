@@ -71,6 +71,9 @@ public class UserService {
 
     // USER LEKÉRÉSE NÉV ALAPJÁN (login)
     public User authenticate(String username, String password) {
+
+	System.out.println("LOGIN HIT");
+
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid username or password"));
 
