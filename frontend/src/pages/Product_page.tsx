@@ -12,6 +12,12 @@ const Product_page = () => {
   const name = useParams().Product_name;
   const currentProduct = products.find((p) => p.name === name);
   const { addToCart } = useContext(CartContext)!;
+  const descriptionParts = currentProduct?.description
+    ?.split(":")
+    .map((part) => part.trim())
+    .filter((part) => part.length > 0);
+  const primaryDescription = descriptionParts?.[0];
+  const secondaryDescriptionParts = descriptionParts?.slice(1) ?? [];
 
   return (
     <>
@@ -30,7 +36,13 @@ const Product_page = () => {
 
         <div className="right-column">
           <h1>{name}</h1>
-          <p>{currentProduct?.description}</p>
+          {secondaryDescriptionParts.length > 0 && (
+            <div className="product-description-top">
+              {secondaryDescriptionParts.map((part, index) => (
+                <p key={`${part}-${index}`}>{part}</p>
+              ))}
+            </div>
+          )}
           <p>Price: {currentProduct?.price} €</p>
           <button
             className="add-to-cart"
@@ -46,6 +58,9 @@ const Product_page = () => {
           >
             Add to Cart
           </button>
+          {primaryDescription && (
+            <p className="product-description-bottom">{primaryDescription}</p>
+          )}
         </div>
       </div>
     </>

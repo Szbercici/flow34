@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { API_BASE_URL } from "../config/api";
 import type { Product } from "./Product_loader_api";
+import "./Product_show.css";
 
 interface ProductShowProps {
   product: Product;
