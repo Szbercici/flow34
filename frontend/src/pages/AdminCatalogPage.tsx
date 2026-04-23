@@ -146,7 +146,7 @@ const AdminCatalogPage = () => {
     }
 
     const uploadFormData = new FormData();
-    uploadFormData.append("file", file);
+    uploadFormData.append("image", file);
 
     setUploading(true);
 
@@ -154,14 +154,16 @@ const AdminCatalogPage = () => {
       const response = await fetch(`${API_BASE_URL}/api/uploads/images`, {
         method: "POST",
         body: uploadFormData,
-	credentials: "include",
+        credentials: "include",
       });
 
       if (!response.ok) {
         throw new Error("Image upload failed.");
       }
 
-      const uploadedUrl = await response.text();
+      const result = await response.json();
+      const uploadedUrl =
+        result.url || result.imageUrl || result.path || result;
       setForm((currentForm) => ({
         ...currentForm,
         img: normalizeStoredImage(uploadedUrl),
