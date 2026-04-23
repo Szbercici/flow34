@@ -62,7 +62,7 @@ public class DataInitializer implements CommandLineRunner {
                 BigDecimal.valueOf(12.99),
                 "flow. MICRODRINK is a hydration cube designed to transform plain water into an enjoyable, flavorful experience. These zero-sugar cubes provide \"tasty hydration made simple\" by combining fruit and plant extracts with a targeted blend of essential vitamins and minerals; flow. MICRODRINK – Watermelon: A light, summery profile featuring the refreshing and crisp taste of sun-ripened watermelon.",
                 "Microdrink",
-                "images/microdrink-melon.png"
+                "images/microdrink-melon.webp"
         );
 
         seedProductIfMissing(
@@ -70,7 +70,7 @@ public class DataInitializer implements CommandLineRunner {
                 BigDecimal.valueOf(14.99),
                 "flow. MICRODRINK is a hydration cube designed to transform plain water into an enjoyable, flavorful experience. These zero-sugar cubes provide \"tasty hydration made simple\" by combining fruit and plant extracts with a targeted blend of essential vitamins and minerals; flow. MICRODRINK – Energy: A high-performance cube featuring a direct caffeine kick, specifically engineered to provide an immediate energy spike and mental clarity. ",
                 "Microdrink",
-                "images/microdrink-energy.png"
+                "images/microdrink-energy.webp"
         );
 
 
@@ -79,7 +79,7 @@ public class DataInitializer implements CommandLineRunner {
                 BigDecimal.valueOf(12.99),
                 "flow. MICRODRINK is a hydration cube designed to transform plain water into an enjoyable, flavorful experience. These zero-sugar cubes provide \"tasty hydration made simple\" by combining fruit and plant extracts with a targeted blend of essential vitamins and minerals; flow. MICRODRINK – Forest Fruit: A sophisticated berry medley that balances the sweetness of raspberries with the tart notes of blackcurrant. ",
                 "Microdrink",
-                "images/microdrink-forest-fruit.png"
+                "images/microdrink-forest-fruit.webp"
         );
 
         seedProductIfMissing(
@@ -87,7 +87,7 @@ public class DataInitializer implements CommandLineRunner {
                 BigDecimal.valueOf(12.99),
                 "flow. MICRODRINK is a hydration cube designed to transform plain water into an enjoyable, flavorful experience. These zero-sugar cubes provide \"tasty hydration made simple\" by combining fruit and plant extracts with a targeted blend of essential vitamins and minerals; flow. MICRODRINK – Lemon: A sharp and invigorating citrus profile featuring zesty lemon notes for maximum refreshment and a clean finish. ",
                 "Microdrink",
-                "images/microdrink-lemon.png"
+                "images/microdrink-lemon.webp"
         );
 
         seedProductIfMissing(
@@ -95,7 +95,7 @@ public class DataInitializer implements CommandLineRunner {
                 BigDecimal.valueOf(16.99),
                 "flow. MICRODRINK is a hydration cube designed to transform plain water into an enjoyable, flavorful experience. These zero-sugar cubes provide \"tasty hydration made simple\" by combining fruit and plant extracts with a targeted blend of essential vitamins and minerals; flow. MICRODRINK – Green Electrolyte: It pairs a clean cucumber-mint taste with Magnesium and Potassium to replenish vital salts, designed for rapid hydration. ",
                 "Microdrink",
-                "images/microdrink-cucumber.png"
+                "images/microdrink-cucumber.webp"
         );
 
         seedProductIfMissing(
@@ -103,7 +103,7 @@ public class DataInitializer implements CommandLineRunner {
                 BigDecimal.valueOf(12.99),
                 "flow. MICRODRINK is a hydration cube designed to transform plain water into an enjoyable, flavorful experience. These zero-sugar cubes provide \"tasty hydration made simple\" by combining fruit and plant extracts with a targeted blend of essential vitamins and minerals; flow. MICRODRINK – Cola: A familiar, spice-infused blend that delivers the classic cola experience with zero sugar and a metabolic vitamin boost.",
                 "Microdrink",
-                "images/microdrink-cola.png"
+                "images/microdrink-cola.webp"
         );
 
         seedProductIfMissing(
@@ -111,7 +111,7 @@ public class DataInitializer implements CommandLineRunner {
                 BigDecimal.valueOf(12.99),
                 "Our metal bottles are crafted from high-grade, non-corrosive stainless steel. The steel interior does not leach flavors or odors into your drink, keeping your water tasting exactly as it should.  ",
                 "Water Bottles",
-                "images/metal-water-bottle.png"
+                "images/metal-water-bottle.webp"
         );
 
         seedProductIfMissing(
@@ -119,7 +119,7 @@ public class DataInitializer implements CommandLineRunner {
                 BigDecimal.valueOf(8.99),
                 "Our plastic bottles are made exclusively from high-quality, BPA-free (Bisphenol-A free) materials. This ensures that no endocrine-disrupting chemicals migrate into your beverage. ",
                 "Water Bottles",
-                "images/blue-water-bottle.png"
+                "images/blue-water-bottle.webp"
         );
 
         seedProductIfMissing(
@@ -127,7 +127,7 @@ public class DataInitializer implements CommandLineRunner {
                 BigDecimal.valueOf(12.99),
                 "Our plastic bottles are made exclusively from high-quality, BPA-free (Bisphenol-A free) materials. This ensures that no endocrine-disrupting chemicals migrate into your beverage. ",
                 "Water Bottles",
-                "images/purple-water-bottle.png"
+                "images/purple-water-bottle.webp"
         );
 
         seedProductIfMissing(
@@ -135,63 +135,63 @@ public class DataInitializer implements CommandLineRunner {
                 BigDecimal.valueOf(10.99),
                 "Our plastic bottles are made exclusively from high-quality, BPA-free (Bisphenol-A free) materials. This ensures that no endocrine-disrupting chemicals migrate into your beverage. ",
                 "Water Bottles",
-                "images/red-water-bottle.png"
+                "images/red-water-bottle.webp"
         );
         seedProductIfMissing(
                 "Daily Scoop Cactus",
                 BigDecimal.valueOf(12.99),
                 "flow. DAILY SCOOP is a comprehensive all-in-one daily supplement designed to simplify your wellness routine by combining essential vitamins, high-quality muscle support into a single tasty scoop.For best results, it is recommended to consume one serving per day; flow. DAILY SCOOP – Cactus: A unique, exotic flavor that is light, refreshing, and subtly sweet—perfect for those who want something different from standard fruit flavors. ",
                 "Daily Scoop",
-                "images/daily-scoop-cactus.png"
+                "images/daily-scoop-cactus.webp"
         );
         seedProductIfMissing(
                 "Daily Scoop Lemon",
                 BigDecimal.valueOf(12.99),
                 "flow. DAILY SCOOP is a comprehensive all-in-one daily supplement designed to simplify your wellness routine by combining essential vitamins, high-quality muscle support into a single tasty scoop.For best results, it is recommended to consume one serving per day; flow. DAILY SCOOP – Lemon: A zesty and invigorating citrus profile that offers a crisp, clean taste for a morning or afternoon pick-me-up. ",
                 "Daily Scoop",
-                "images/daily-scoop-lemon.png"
+                "images/daily-scoop-lemon.webp"
         );
         seedProductIfMissing(
                 "Daily Scoop Punch",
                 BigDecimal.valueOf(12.99),
                 "flow. DAILY SCOOP is a comprehensive all-in-one daily supplement designed to simplify your wellness routine by combining essential vitamins, high-quality muscle support into a single tasty scoop.For best results, it is recommended to consume one serving per day; flow. DAILY SCOOP – Punch: A bold and nostalgic fruit medley, bursting with classic tropical and berry notes. ",
                 "Daily Scoop",
-                "images/daily-scoop-punch.png"
+                "images/daily-scoop-punch.webp"
         );
         seedProductIfMissing(
                 "Daily Scoop Unflavored",
                 BigDecimal.valueOf(10.99),
                 "flow. DAILY SCOOP is a comprehensive all-in-one daily supplement designed to simplify your wellness routine by combining essential vitamins, high-quality muscle support into a single tasty scoop.For best results, it is recommended to consume one serving per day; flow. DAILY SCOOP – Unflavored: A versatile, neutral option designed to be easily stacked with other supplements or mixed into your favorite smoothie without altering the taste. ",
                 "Daily Scoop",
-                "images/daily-scoop-unflavored.png"
+                "images/daily-scoop-unflavored.webp"
         );
         seedProductIfMissing(
                 "Runner Berry",
                 BigDecimal.valueOf(11.99),
                 "flow. RUNNER is a premium endurance pre-workout line for athletes, designed to support hydration and delay muscle fatigue. It is not recommended to exceed one serving per day; flow. RUNNER – Berry: A refreshing blend of forest fruits with a balanced sweet and tart profile. ",
                 "Runner",
-                "images/runner-berry.png"
+                "images/runner-berry.webp"
         );
         seedProductIfMissing(
                 "Runner Citrus",
                 BigDecimal.valueOf(11.99),
                 "flow. RUNNER is a premium endurance pre-workout line for athletes, designed to support hydration and delay muscle fatigue. It is not recommended to exceed one serving per day; flow. RUNNER – Citrus: A bright, zesty profile featuring sharp lemon and lime notes for maximum refreshment. ",
                 "Runner",
-                "images/runner-citrus.png"
+                "images/runner-citrus.webp"
         );
         seedProductIfMissing(
                 "Runner Orange",
                 BigDecimal.valueOf(11.99),
                 "flow. RUNNER is a premium endurance pre-workout line for athletes, designed to support hydration and delay muscle fatigue. It is not recommended to exceed one serving per day; flow. RUNNER – Orange: A classic, crisp citrus flavor reminiscent of fresh-pressed oranges. ",
                 "Runner",
-                "images/runner-orange.png"
+                "images/runner-orange.webp"
         );
         seedProductIfMissing(
                 "Runner Tutti Frutty",
                 BigDecimal.valueOf(12.50),
                 "flow. RUNNER is a premium endurance pre-workout line for athletes, designed to support hydration and delay muscle fatigue. It is not recommended to exceed one serving per day; flow. RUNNER – Tutti Frutti: A playful, multi-fruit blend offering a sweet and nostalgic tropical candy taste. ",
                 "Runner",
-                "images/runner-tuttifrutty.png"
+                "images/runner-tuttifrutty.webp"
         );
     }
 
