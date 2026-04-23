@@ -154,6 +154,7 @@ const AdminCatalogPage = () => {
       const response = await fetch(`${API_BASE_URL}/api/uploads/images`, {
         method: "POST",
         body: uploadFormData,
+	credentials: "include",
       });
 
       if (!response.ok) {
