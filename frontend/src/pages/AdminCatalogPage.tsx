@@ -146,7 +146,7 @@ const AdminCatalogPage = () => {
     }
 
     const uploadFormData = new FormData();
-    uploadFormData.append("image", file);
+    uploadFormData.append("file", file);
 
     setUploading(true);
 
@@ -161,9 +161,8 @@ const AdminCatalogPage = () => {
         throw new Error("Image upload failed.");
       }
 
-      const result = await response.json();
-      const uploadedUrl =
-        result.url || result.imageUrl || result.path || result;
+      const uploadedUrl = await response.text();
+      
       setForm((currentForm) => ({
         ...currentForm,
         img: normalizeStoredImage(uploadedUrl),
